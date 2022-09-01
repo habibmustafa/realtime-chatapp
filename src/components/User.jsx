@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setChatUser } from "../store/userSlice";
 import { setConnectionId } from "../store/messageSlice";
 import { setShow } from "../store/animSlice";
 
 export const User = ({ cUser, hidden = false }) => {
-   const [activeUser, setActiveUser] = useState(false)
-   const { user, allUsers, chatUser } = useSelector((state) => state.user);
+   const { user, chatUser } = useSelector((state) => state.user);
    const dispatch = useDispatch();
 
    const handleClick = () => {
       dispatch(setShow(true));
-      dispatch(setChatUser(allUsers.find(item => item.uid === cUser.uid)));
+      dispatch(setChatUser(cUser))
 
       if (user.uid < cUser.uid) {
          dispatch(setConnectionId(`${user.uid}${cUser.uid}`));
@@ -19,6 +18,12 @@ export const User = ({ cUser, hidden = false }) => {
          dispatch(setConnectionId(`${cUser.uid}${user.uid}`));
       }
    };
+
+   useEffect(() => {
+      if(chatUser) {
+         dispatch(setChatUser(cUser))
+      }
+   }, [cUser.isActive])
 
    return (
       <div
@@ -38,13 +43,13 @@ export const User = ({ cUser, hidden = false }) => {
             <h5 className="font-semibold text-[15px] text-[#495057] leading-[18px] mb-1">
                {cUser.username}
             </h5>
-            <p className="text-sm leading-5">
-               {hidden || cUser.lastMessage.text}
-            </p>
+            <p className="text-sm leading-5">{cUser.lastMessage}</p>
          </div>
          <div className="text-[11px] leading-4 h-full flex flex-col justify-center items-center gap-0.5 w-5">
-            <span >{hidden || cUser.lastTime}</span>
-            <span className="text-sm text-green-500">{chatUser.isActive && "Online"}</span>
+            <span>{hidden || cUser.lastTime}</span>
+            <span className="text-sm text-green-500">
+               {cUser.isActive && "Online"}
+            </span>
          </div>
       </div>
    );

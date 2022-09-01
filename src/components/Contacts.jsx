@@ -1,34 +1,30 @@
-import React, { useEffect, useState } from "react";
-import { usersDB } from "../firebaseCongif/usersDB";
-import { ref, onValue } from "firebase/database";
-// import { User } from "./User";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import ContactItem from "./ContactItem";
 
 
 const Contacts = () => {
-   const [allUsers, setAllUsers] = useState([]);
    const [search, setSearch] = useState("");
+   const {allUsers} = useSelector(state => state.user)
 
-   useEffect(() => {
-      onValue(ref(usersDB, "users/"), (snapshot) => {
-         const data = snapshot.val();
-         if (data !== null) {
-            // helelik
-            setAllUsers(
-               Object.values(data)
-                  .filter(
-                     (item) => item.uid !== JSON.parse(localStorage.user).uid
-                  )
-                  .sort((a, b) => a.createdAt - b.createdAt)
-            );
-         }
-      });
-      return () => {
-         setAllUsers([]);
-      };
-   }, []);
-
-   console.log(allUsers);
+   // useEffect(() => {
+   //    onValue(ref(usersDB, "users/"), (snapshot) => {
+   //       const data = snapshot.val();
+   //       if (data !== null) {
+   //          // helelik
+   //          setAllUsers(
+   //             Object.values(data)
+   //                .filter(
+   //                   (item) => item.uid !== JSON.parse(localStorage.user).uid
+   //                )
+   //                .sort((a, b) => a.createdAt - b.createdAt)
+   //          );
+   //       }
+   //    });
+   //    return () => {
+   //       setAllUsers([]);
+   //    };
+   // }, []);
 
    return (
       <div className="contact py-6 px-7">

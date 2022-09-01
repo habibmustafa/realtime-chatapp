@@ -4,21 +4,47 @@ import { useSelector } from "react-redux/es/exports";
 
 export const Chats = () => {
    const [search, setSearch] = useState("");
-   const [allUsers, setAllUsers] = useState([]);
    const [recentUsers, setRecentUsers] = useState([]);
-   const { user } = useSelector((state) => state.user);
+   const { user, allUsers } = useSelector((state) => state.user);
    const { messages, connectionId } = useSelector((state) => state.message);
 
    useEffect(() => {
-      setRecentUsers(messages.filter(item => item.connectionId.indexOf(user.uid) !== -1).map(item => {
-         return {
-            ...item.recent, 
-            uid: item.users.user1Id===user.uid ? item.users.user2Id : item.users.user1Id,
-            username: item.users.user1Name===user.username ? item.users.user2Name : item.users.user1Name,
-         }
-      }));
+      // setRecentUsers(
+      //    messages
+      //       .filter((item) => item.connectionId.indexOf(user.uid) !== -1)
+      //       .map((item) => {
+      //          return {
+      //             ...item.recent,
+      //             uid:
+      //                item.users.user1Id === user.uid
+      //                   ? item.users.user2Id
+      //                   : item.users.user1Id,
+      //             username:
+      //                item.users.user1Name === user.username
+      //                   ? item.users.user2Name
+      //                   : item.users.user1Name,
+      //          };
+      //       })
+      // );
 
-   }, [messages, user])
+      const newArray = [];
+      allUsers &&
+         allUsers?.forEach((User) => {
+         const aa = messages?.filter(
+               (item) =>
+                  item.connectionId.indexOf(User.uid) !== -1 &&
+                  item.connectionId.indexOf(user.uid) !== -1
+            )
+            .map((item) => {
+               return {
+                  ...item.recent,
+                  ...User,
+               };
+            })[0]
+            aa && newArray.push(aa);
+         });
+      setRecentUsers(newArray);
+   }, [messages, user, connectionId, allUsers]);
 
    return (
       <div className="chats">
@@ -51,7 +77,7 @@ export const Chats = () => {
                Recent
             </h5>
             <div className="users max-h-[665px] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 tablet:max-h-[620px]">
-               {recentUsers ? (
+               {recentUsers !==undefined ? (
                   recentUsers
                      .filter(
                         (name) =>
@@ -59,7 +85,7 @@ export const Chats = () => {
                               .toLowerCase()
                               .indexOf(search.toLowerCase()) || search === ""
                      )
-                     .map((cUser, index) => (
+                     .map((cUser) => (
                         <User key={cUser.uid} cUser={cUser} />
                      ))
                ) : (

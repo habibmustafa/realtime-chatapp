@@ -32,17 +32,16 @@ export const ChatContainer = () => {
       onValue(ref(messagesDB, `connection`), (snapshot) => {
          const data = snapshot.val();
          if (data !== null) {
-            // console.log(Object.values(data).map((item) => item));
             dispatch(setMessages(Object.values(data).map((item) => item)));
          }
       });
-   }, []);
+   }, [dispatch]);
 
    useEffect(() => {
       messages &&
          setThisMessages(
             messages
-               .filter((item) => item.connectionId == connectionId)
+               .filter((item) => item.connectionId === connectionId)
                .map((item) =>
                   Object.values(item.messages).sort(
                      (a, b) => a.createdAt - b.createdAt
@@ -56,7 +55,6 @@ export const ChatContainer = () => {
       scrollRef.current?.scrollIntoView();
    }, [thisMessages, chatUser]);
 
-   console.log(chatUser);
    // receive messages
    return (
       <div

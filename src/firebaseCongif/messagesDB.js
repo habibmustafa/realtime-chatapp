@@ -16,18 +16,18 @@ export const addMessage = (connectionId, uuid, value, userId, username, chatUser
       user2Name: chatUserUsername
    });
 
-   set(ref(messagesDB, `connection/${connectionId}/recent`), {
-      lastMessage: { text: value },
-      createdAt: new Date().getTime(),
-      lastTime: new Date().toTimeString().substring(0,5),
-   });
-
    set(ref(messagesDB, `connection/${connectionId}/messages/${uuid}`), {
       uuid,
       sender: userId,
       message: { text: value },
       createdAt: new Date().getTime(),
       time: new Date().toTimeString().substring(0,5),
+   });
+   
+   set(ref(messagesDB, `connection/${connectionId}/recent`), {
+      lastMessage: value,
+      createdAt: new Date().getTime(),
+      lastTime: new Date().toTimeString().substring(0,5),
    });
 };
 

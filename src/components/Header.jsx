@@ -21,6 +21,7 @@ export const Header = () => {
       };
    }, [backBtn]);
 
+
    return (
       <div className="header p-6 border-b border-zinc-100 text-[#495057] text-[15px] leading-[22.5px] flex justify-between tablet:p-4">
          {/* name */}
@@ -42,11 +43,11 @@ export const Header = () => {
                   alt=""
                />
             </div>
-            <div>
+            <div className="flex flex-col">
                <p className="cursor-pointer font-semibold leading-5">
                   {chatUser.username}
                </p>
-               <span className="text-sm text-green-500">{chatUser.isActive && "Online"}</span>
+               {chatUser.isActive && <span className="text-sm text-green-500">Online</span>}
             </div>
          </div>
 
