@@ -28,7 +28,7 @@ export const Header = () => {
          <div className="flex items-center gap-3.5">
             {backBtn && (
                <div
-                  className="flex items-center"
+                  className="flex items-center cursor-pointer"
                   onClick={() => {
                      dispatch(setShow(false));
                   }}
