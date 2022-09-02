@@ -4,7 +4,7 @@ import { getDatabase, ref, set } from "firebase/database";
 export const messagesDB = getDatabase(app);
 
 // dataWrite
-export const addMessage = (connectionId, uuid, value, userId, username, chatUserId, chatUserUsername) => {
+export const addMessage = (connectionId, uuid, value, userId, username, chatUserId, chatUserUsername, time=new Date().toTimeString()) => {
    set(ref(messagesDB, `connection/${connectionId}/connectionId`),
       connectionId
    );
@@ -21,7 +21,7 @@ export const addMessage = (connectionId, uuid, value, userId, username, chatUser
       sender: userId,
       message: { text: value },
       createdAt: new Date().getTime(),
-      time: new Date().toTimeString().substring(0,5),
+      time: time.substring(0,5)
    });
    
    set(ref(messagesDB, `connection/${connectionId}/recent`), {
@@ -29,7 +29,8 @@ export const addMessage = (connectionId, uuid, value, userId, username, chatUser
       sender: userId,
       seen: false,
       createdAt: new Date().getTime(),
-      lastTime: new Date().toTimeString().substring(0,5),
+      lastTime: time.substring(0,5) 
+      // toUTCString()
    });
 };
 

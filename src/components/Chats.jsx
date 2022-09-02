@@ -4,29 +4,11 @@ import { useSelector } from "react-redux/es/exports";
 
 export const Chats = () => {
    const [search, setSearch] = useState("");
-   const [recentUsers, setRecentUsers] = useState([]);
+   const [recentUsers, setRecentUsers] = useState(false);
    const { user, allUsers } = useSelector((state) => state.user);
    const { messages, connectionId } = useSelector((state) => state.message);
 
    useEffect(() => {
-      // setRecentUsers(
-      //    messages
-      //       .filter((item) => item.connectionId.indexOf(user.uid) !== -1)
-      //       .map((item) => {
-      //          return {
-      //             ...item.recent,
-      //             uid:
-      //                item.users.user1Id === user.uid
-      //                   ? item.users.user2Id
-      //                   : item.users.user1Id,
-      //             username:
-      //                item.users.user1Name === user.username
-      //                   ? item.users.user2Name
-      //                   : item.users.user1Name,
-      //          };
-      //       })
-      // );
-
       const newArray = [];
       allUsers &&
          allUsers?.forEach((User) => {
@@ -71,16 +53,13 @@ export const Chats = () => {
             </div>
          </div>
 
-         {/* online check */}
-         {/* later */}
-
          {/* recent */}
          <div className="recent px-3">
             <h5 className="text-[#495057] font-semibold leading-5 mb-4">
                Recent
             </h5>
             <div className="users max-h-[665px] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 tablet:max-h-[620px]">
-               {recentUsers !== undefined ? (
+               {recentUsers ? (
                   recentUsers
                      .filter(
                         (name) =>
@@ -90,7 +69,7 @@ export const Chats = () => {
                      )
                      .map((cUser) => <User key={cUser.uid} cUser={cUser} />)
                ) : (
-                  <div className="flex justify-center items-center h-[665px]">
+                  <div className="flex justify-center items-center h-[665px] tablet:h-[620px]">
                      Loading...
                   </div>
                )}

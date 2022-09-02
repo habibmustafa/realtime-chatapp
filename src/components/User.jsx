@@ -29,8 +29,6 @@ export const User = ({ cUser, hidden = false }) => {
       }
    };
 
-   console.log(connectionId);
-
    useEffect(() => {
       if (chatUser) {
          dispatch(setChatUser(cUser));
@@ -80,7 +78,7 @@ export const User = ({ cUser, hidden = false }) => {
                </p>
             </div>
          </div>
-         <div className="text-[11px] leading-4 h-full flex flex-col justify-center items-center gap-0.5 w-5">
+         <div className="text-[11px] leading-4 h-full flex flex-col justify-start items-center gap-0.5 w-18">
             <span>{hidden || cUser.lastTime}</span>
             {!cUser.seen && cUser.sender !== user.uid ? (
                <span className="w-[18px] h-[21px] bg-[#ef476f2e] text-[#ef476f] text-[10px] rounded-[800px] font-semibold leading-4 py-[2.5px] px-1.5 text-center">

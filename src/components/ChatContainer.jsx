@@ -7,12 +7,13 @@ import { Welcome } from "../components/Welcome";
 import { uid } from "uid";
 import { useEffect, useState, useRef } from "react";
 import { setMessages } from "../store/messageSlice";
+import AnimatedDropdown from "./AnimatedDropdown";
 
 export const ChatContainer = () => {
    const [thisMessages, setThisMessages] = useState([]);
    const { user, chatUser } = useSelector((state) => state.user);
    const { messages, connectionId } = useSelector((state) => state.message);
-   const {show} = useSelector(state => state.anim)
+   const { show } = useSelector((state) => state.anim);
    const dispatch = useDispatch();
    const scrollRef = useRef();
 
@@ -24,7 +25,15 @@ export const ChatContainer = () => {
       const uuid = uid();
 
       if (connectionId) {
-         addMessage(connectionId, uuid, value, user.uid, user.username, chatUser.uid, chatUser.username);
+         addMessage(
+            connectionId,
+            uuid,
+            value,
+            user.uid,
+            user.username,
+            chatUser.uid,
+            chatUser.username
+         );
       }
    };
 
@@ -97,9 +106,10 @@ export const ChatContainer = () => {
                                  {/* flex-row-reverse */}
 
                                  {/* icon */}
-                                 <span className="w-[15px] h-[15px] text-[#6159cb] text-[15px] leading-6 text-right inline-block">
-                                    <i className="ri-more-2-fill"></i>
-                                 </span>
+                                 <div className="w-[15px] h-[15px] text-[#6159cb] text-[15px] leading-6 text-right inline-block">
+                                    {/* <i className="ri-more-2-fill"></i> */}
+                                    <AnimatedDropdown message={message} align={message.sender === chatUser.uid ? "LEFT" : "RIGHT"} />
+                                 </div>
 
                                  {/* content */}
                                  <div
