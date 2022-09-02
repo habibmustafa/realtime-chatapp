@@ -51,11 +51,13 @@ export const ChatContainer = () => {
          setThisMessages(
             messages
                .filter((item) => item.connectionId === connectionId)
-               .map((item) =>
-                  Object.values(item.messages).sort(
-                     (a, b) => a.createdAt - b.createdAt
-                  )
-               )[0]
+               .map((item) => {
+                  if (item.messages)
+                     return Object.values(item.messages).sort(
+                        (a, b) => a.createdAt - b.createdAt
+                     );
+                  else return false;
+               })[0]
          );
    }, [connectionId, messages]);
 
@@ -106,9 +108,16 @@ export const ChatContainer = () => {
                                  {/* flex-row-reverse */}
 
                                  {/* icon */}
-                                 <div className="w-[15px] h-[15px] text-[#6159cb] text-[15px] leading-6 text-right inline-block">
+                                 <div className="w-4 h-[15px] text-[#6159cb] relative text-[15px] leading-6 text-right inline-block">
                                     {/* <i className="ri-more-2-fill"></i> */}
-                                    <AnimatedDropdown message={message} align={message.sender === chatUser.uid ? "LEFT" : "RIGHT"} />
+                                    <AnimatedDropdown
+                                       message={message}
+                                       align={
+                                          message.sender === chatUser.uid
+                                             ? "left-0"
+                                             : "right-0"
+                                       }
+                                    />
                                  </div>
 
                                  {/* content */}

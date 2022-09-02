@@ -19,14 +19,20 @@ export const Chats = () => {
                      item.connectionId.indexOf(user.uid) !== -1
                )
                .map((item) => {
-                  return {
-                     ...item.recent,
-                     ...User
-                  };
+                  if(item.messages) {
+                     return {
+                        seen: item.recent.seen,
+                        ...User,
+                        ...Object.values(item.messages).sort(
+                           (a, b) => a.createdAt - b.createdAt
+                        )[Object.values(item.messages).length - 1],
+                     };
+                  }
+                  return false
                })[0];
             aa && newArray.push(aa);
          });
-      setRecentUsers(newArray);
+      setRecentUsers(newArray.sort((a,b) => b.createdAt-a.createdAt));
    }, [messages, user, connectionId, allUsers]);
 
    console.log(recentUsers);
