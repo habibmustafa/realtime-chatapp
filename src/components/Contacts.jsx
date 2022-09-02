@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ContactItem from "./ContactItem";
 
-
 const Contacts = () => {
    const [search, setSearch] = useState("");
    const {allUsers} = useSelector(state => state.user)
@@ -36,7 +35,7 @@ const Contacts = () => {
                </span>
             </div>
             {/* search */}
-            <div className="w-[333px] h-11 bg-[#e6ebf5] flex items-center gap-4 rounded-[6.4px] mb-6 tablet:w-full">
+            <div className="w-[333px] h-11 bg-[#e6ebf5] flex items-center rounded-[6.4px] mb-6 tablet:w-full">
                <span className="flex items-center justify-center ml-2 w-9 h-full">
                   <i className="ri-search-line search-icon text-lg leading-7 text-[#7a7f9a]"></i>
                </span>
@@ -57,6 +56,7 @@ const Contacts = () => {
             allUsers.map((cUser) => (
                <ContactItem key={cUser.uid} cUser={cUser} />
             ))}
+
          </div>
       </div>
    );

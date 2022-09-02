@@ -30,21 +30,24 @@ export const Chats = () => {
       const newArray = [];
       allUsers &&
          allUsers?.forEach((User) => {
-         const aa = messages?.filter(
-               (item) =>
-                  item.connectionId.indexOf(User.uid) !== -1 &&
-                  item.connectionId.indexOf(user.uid) !== -1
-            )
-            .map((item) => {
-               return {
-                  ...item.recent,
-                  ...User,
-               };
-            })[0]
+            const aa = messages
+               ?.filter(
+                  (item) =>
+                     item.connectionId.indexOf(User.uid) !== -1 &&
+                     item.connectionId.indexOf(user.uid) !== -1
+               )
+               .map((item) => {
+                  return {
+                     ...item.recent,
+                     ...User
+                  };
+               })[0];
             aa && newArray.push(aa);
          });
       setRecentUsers(newArray);
    }, [messages, user, connectionId, allUsers]);
+
+   console.log(recentUsers);
 
    return (
       <div className="chats">
@@ -62,7 +65,7 @@ export const Chats = () => {
                      setSearch(e.target.value);
                   }}
                   value={search}
-                  placeholder="Search messages or users"
+                  placeholder="Search messages or users.."
                   className="w-full h-full bg-inherit text-[#495057] py-2 font-medium px-3 text-sm leading-5 rounded-[6.4px] outline-none"
                />
             </div>
@@ -77,7 +80,7 @@ export const Chats = () => {
                Recent
             </h5>
             <div className="users max-h-[665px] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 tablet:max-h-[620px]">
-               {recentUsers !==undefined ? (
+               {recentUsers !== undefined ? (
                   recentUsers
                      .filter(
                         (name) =>
@@ -85,9 +88,7 @@ export const Chats = () => {
                               .toLowerCase()
                               .indexOf(search.toLowerCase()) || search === ""
                      )
-                     .map((cUser) => (
-                        <User key={cUser.uid} cUser={cUser} />
-                     ))
+                     .map((cUser) => <User key={cUser.uid} cUser={cUser} />)
                ) : (
                   <div className="flex justify-center items-center h-[665px]">
                      Loading...
