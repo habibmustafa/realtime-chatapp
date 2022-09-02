@@ -16,7 +16,7 @@ const AnimatedDropdown = ({ message, align }) => {
    };
 
    const handleDelete = () => {
-      setOpen(false)
+      setOpen(false);
       message.sender === user.uid &&
          remove(
             ref(
@@ -44,7 +44,8 @@ const AnimatedDropdown = ({ message, align }) => {
             <i className="ri-more-2-fill"></i>
          </button>
          {open && (
-            <ul ref={animRef}
+            <ul
+               ref={animRef}
                className={`w-[150px] select-none absolute z-10 bg-white text-[15px] rounded py-2 mt-1 mx-1.5 box-shadow text-[#212529] clear-both font-medium ${align}
              ${open ? "openAnimation" : " closeAnimation"}
          `}
