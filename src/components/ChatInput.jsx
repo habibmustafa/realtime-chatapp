@@ -30,7 +30,7 @@ export const ChatInput = ({ sendMessage }) => {
             createdAt: new Date().getTime(),
             
          });
-         setTimeout(timeOut, 1500)
+         setTimeout(timeOut, 3000)
       }
       else {
          timeOut()
