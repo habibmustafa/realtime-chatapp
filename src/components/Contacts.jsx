@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { setChatUser } from "../store/userSlice";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
 import ContactItem from "./ContactItem";
 
 const Contacts = () => {
    const [search, setSearch] = useState("");
    const { allUsers } = useSelector((state) => state.user);
-   const dispatch = useDispatch();
 
    // helelik
    // useEffect(() => {

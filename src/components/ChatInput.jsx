@@ -1,9 +1,15 @@
+import { ref, remove, set } from "firebase/database";
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { messagesDB } from "../firebaseCongif/messagesDB";
 
 export const ChatInput = ({ sendMessage }) => {
    const [value, setValue] = useState("");
-   
+   const { connectionId } = useSelector((state) => state.message);
+   const {user} = useSelector(state => state.user)
+
    const handleSubmit = (e) => {
       e.preventDefault();
       if (value) {
@@ -11,6 +17,35 @@ export const ChatInput = ({ sendMessage }) => {
          setValue("");
       }
    };
+
+   useEffect(() => {
+      const timeOut = () => {
+         remove(ref(messagesDB, `connection/${connectionId}/messages/writing`))
+      }
+      if (value) {
+         set(ref(messagesDB, `connection/${connectionId}/messages/writing`), {
+            uuid: "writing",
+            sender: user.uid,
+            message: { text: "typing..." },
+            createdAt: new Date().getTime(),
+            
+         });
+         setTimeout(timeOut, 1500)
+      }
+      else {
+         timeOut()
+      }
+      return () => {
+         clearTimeout(timeOut)
+      }
+      
+   }, [value]);
+
+   useEffect(() => {
+      return () => {
+         setValue('')
+      }
+   },[])
 
    return (
       <form

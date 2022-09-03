@@ -24,12 +24,10 @@ export const addMessage = (connectionId, uuid, value, userId, username, chatUser
       time: time
    });
    
-   set(ref(messagesDB, `connection/${connectionId}/recent`), {
-      lastMessage: value,
+   set(ref(messagesDB, `connection/${connectionId}/options`), {
       sender: userId,
       seen: false,
-      createdAt: new Date().getTime(),
-      lastTime: time.substring(0,5)
+      writing: false,
    });
 };
 

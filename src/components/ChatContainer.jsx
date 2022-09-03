@@ -82,23 +82,23 @@ export const ChatContainer = () => {
                <Header />
 
                {/* messages container */}
-               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-y-auto overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 tablet:px-4">
+               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 tablet:px-4">
                   {/* message */}
                   {thisMessages &&
                      thisMessages.map((message, i) => (
-                        <div key={i}>
+                        <div ref={scrollRef} key={i}>
                            
                            {/* timer */}
-                           {!i && (
+                           {(!i && message.time ) && (
                               <div className="w-full h-[1px] bg-[#f0eff5] text-[15px] text-center mb-14 relative tablet:mb-12">
                                  <span className="bg-[#f0eff5] rounded-md text-[13px] leading-5 py-1.5 px-3 text-center text-[#495057] absolute -top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                 {new Date().toString().substring(4,15) === message.time.substring(4, 15) ? `Today` : `${message.time.substring(8, 11)} ${message.time.substring(4, 7)}, ${message.time.substring(11, 15)}`}
+                                    {new Date().toString().substring(4,15) === message.time.substring(4, 15) ? `Today` : `${message.time.substring(8, 11)} ${message.time.substring(4, 7)}, ${message.time.substring(11, 15)}`}
                                  </span>
                               </div>
                            )}
-                           {i > 0 &&
-                              thisMessages[i - 1].time.substring(0, 15) !==
-                                 message.time.substring(0, 15) && (
+                           {(i > 0 && message.time &&
+                              thisMessages[i - 1].time?.substring(0, 15) !==
+                                 message.time?.substring(0, 15)) && (
                                  <div className="w-full border-b text-[#495057] text-[15px] leading-[22.5px] text-center mb-14 mt-11 relative tablet:mb-12">
                                     <span className="bg-[#f0eff5] rounded-md text-[13px] leading-5 py-1.5 px-3 text-center text-[#495057] absolute -top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                                        {new Date().toString().substring(4,15) === message.time.substring(4, 15) ? `bugün` : `${message.time.substring(8, 11)} ${message.time.substring(4, 7)}, ${message.time.substring(11, 15)}`}
@@ -107,8 +107,8 @@ export const ChatContainer = () => {
                               )}
 
                               {/* message */}
-                           <div
-                              ref={scrollRef}
+                           {
+                              (message.uuid === 'writing' && message.sender !== chatUser.uid ) || <div
                               className={`flex items-end justify-end gap-2.5 mt-7 tablet:gap-0 tablet:mt-5 ${
                                  message.sender === chatUser.uid &&
                                  "flex-row-reverse"
@@ -146,22 +146,24 @@ export const ChatContainer = () => {
 
                                     {/* content */}
                                     <div
-                                       className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col items-start bg-[#7269ef] text-white ${
-                                          message.sender === chatUser.uid &&
-                                          "items-end !bg-[#f5f7fb] !text-[#212529]"
+                                       className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col ${
+                                          message.sender === chatUser.uid ?
+                                          "items-end bg-[#f5f7fb] text-[#212529] rounded-bl-none" : 
+                                          "bg-[#7269ef] text-white items-start rounded-br-none"
                                        }`}
                                     >
                                        <p className="text-[15px] leading-6 font-medium break-all">
                                           {message.message.text}
                                        </p>
-                                       <span
-                                          className={`w-full text-[#ffffff80] text-xs leading-[18px] inline-block ${
+                                       {message.time && <span
+                                          className={`w-full text-[#ffffff80] text-xs leading-[18px] flex items-center gap-1 ${
                                              message.sender === chatUser.uid &&
                                              "!text-[#7a7f9a] text-right"
                                           }`}
                                        >
+                                          <i className="ri-time-line align-middle"></i>
                                           {message.time.substring(16,21)}
-                                       </span>
+                                       </span>}
                                     </div>
                                  </div>
                                  {(thisMessages.length-1 !== i && thisMessages[i+1].sender === message.sender) || <p className="text-[#495057] text-sm leading-5 font-medium tablet:mx-2 tablet:text-xs">
@@ -180,7 +182,9 @@ export const ChatContainer = () => {
                                        alt=""
                                     />}
                               </div>
+                              {/* {messages.find((item) => item.connectionId === connectionId).options.writing && <p>yaziyor..</p>} */}
                            </div>
+                           }
                         </div>
                      ))}
                </div>

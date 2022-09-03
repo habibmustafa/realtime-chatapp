@@ -26,7 +26,9 @@ const Dashboard = () => {
                dispatch(setUser(data[user.uid]));
                dispatch(
                   setAllUsers(
-                     Object.values(data).filter(item => item.uid !== user.uid).sort((a, b) => a.createdAt - b.createdAt)
+                     Object.values(data)
+                        .filter((item) => item.uid !== user.uid)
+                        .sort((a, b) => a.createdAt - b.createdAt)
                   )
                );
                localStorage.setItem("user", JSON.stringify(data[user.uid]));
@@ -44,7 +46,7 @@ const Dashboard = () => {
       }
 
       return () => {
-         dispatch(setMessages([]))
+         dispatch(setMessages([]));
          if (user) {
             userOnlineCheck(user.uid, false);
             window.addEventListener("unload", () => {

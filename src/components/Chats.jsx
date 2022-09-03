@@ -20,7 +20,8 @@ export const Chats = () => {
                .map((item) => {
                   if(item.messages) {
                      return {
-                        seen: item.recent.seen,
+                        writing: item.options.writing,
+                        seen: item.options.seen,
                         ...User,
                         ...Object.values(item.messages).sort(
                            (a, b) => a.createdAt - b.createdAt
