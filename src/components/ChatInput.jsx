@@ -15,7 +15,7 @@ export const ChatInput = ({ sendMessage }) => {
    return (
       <form
          onSubmit={handleSubmit}
-         className="chatinput flex items-center border-t border-zinc-100 p-6 tablet:py-4"
+         className="chatinput flex items-center border-t border-zinc-100 p-6 tablet:py-4 tablet:px-4"
       >
          {/* message input */}
          <div className="w-full h-11 bg-[#e6ebf5] flex items-center rounded-[6.4px]">

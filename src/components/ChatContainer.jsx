@@ -78,83 +78,104 @@ export const ChatContainer = () => {
                <Header />
 
                {/* messages container */}
-               <div className="messages flex-1 flex flex-col p-6 pb-1 gap-7 overflow-y-auto overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300">
+               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-y-auto overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 tablet:px-4">
                   {/* message */}
                   {thisMessages &&
                      thisMessages.map((message, i) => (
-                        <div
-                           key={i}
-                           ref={scrollRef}
-                           className={`flex items-end justify-end gap-2.5 ${
-                              message.sender === chatUser.uid &&
-                              "flex-row-reverse"
-                           }`}
-                        >
-                           {/*  flex-row-reverse */}
-                           <div
-                              className={`flex flex-col gap-4 ${
-                                 message.sender === chatUser.uid
-                                    ? "items-start"
-                                    : "items-end"
-                              }`}
-                           >
-                              {/* items-start */}
-                              <div
-                                 className={`flex ${
-                                    message.sender === chatUser.uid &&
-                                    "flex-row-reverse"
-                                 }`}
-                              >
-                                 {/* flex-row-reverse */}
-
-                                 {/* icon */}
-                                 <div className="w-4 h-[15px] text-[#6159cb] relative text-[15px] leading-6 text-right inline-block">
-                                    {/* <i className="ri-more-2-fill"></i> */}
-                                    <AnimatedDropdown
-                                       message={message}
-                                       align={
-                                          message.sender === chatUser.uid
-                                             ? "left-0"
-                                             : "right-0"
-                                       }
-                                    />
-                                 </div>
-
-                                 {/* content */}
-                                 <div
-                                    className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col items-start bg-[#7269ef] text-white ${
-                                       message.sender === chatUser.uid &&
-                                       "items-end !bg-[#f5f7fb] !text-[#212529]"
-                                    }`}
-                                 >
-                                    <p className="text-[15px] leading-6 font-medium break-all">
-                                       {message.message.text}
-                                    </p>
-                                    <span
-                                       className={`w-full text-[#ffffff80] text-xs leading-[18px] inline-block ${
-                                          message.sender === chatUser.uid &&
-                                          "!text-[#7a7f9a] text-right"
-                                       }`}
-                                    >
-                                       {message.time}
+                        <div key={i}>
+                           
+                           {/* timer */}
+                           {!i && (
+                              <div className="w-full h-[1px] bg-[#f0eff5] text-[15px] text-center mb-14 relative tablet:mb-12">
+                                 <span className="bg-[#f0eff5] rounded-md text-[13px] leading-5 py-1.5 px-3 text-center text-[#495057] absolute -top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                 {new Date().toString().substring(4,15) === message.time.substring(4, 15) ? `bugün` : `${message.time.substring(8, 11)} ${message.time.substring(4, 7)}, ${message.time.substring(11, 15)}`}
+                                 </span>
+                              </div>
+                           )}
+                           {i > 0 &&
+                              thisMessages[i - 1].time.substring(0, 15) !==
+                                 message.time.substring(0, 15) && (
+                                 <div className="w-full border-b text-[#495057] text-[15px] leading-[22.5px] text-center mb-14 mt-11 relative tablet:mb-12">
+                                    <span className="bg-[#f0eff5] rounded-md text-[13px] leading-5 py-1.5 px-3 text-center text-[#495057] absolute -top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                       {new Date().toString().substring(4,15) === message.time.substring(4, 15) ? `bugün` : `${message.time.substring(8, 11)} ${message.time.substring(4, 7)}, ${message.time.substring(11, 15)}`}
                                     </span>
                                  </div>
-                              </div>
-                              <p className="text-[#495057] text-sm leading-5 font-medium">
-                                 {/* text-left */}
-                                 {message.sender === user.uid
-                                    ? user.username
-                                    : chatUser.username}
-                              </p>
-                           </div>
+                              )}
 
-                           {/* profile */}
-                           <div className="flex items-end rounded-full w-[35px] h-[35px] bg-cover text-right">
-                              <img
-                                 className="rounded-full "
-                                 src="https://image.shutterstock.com/image-vector/profile-blank-icon-empty-photo-260nw-535853269.jpg"
-                                 alt=""
-                              />
+                              {/* message */}
+                           <div
+                              ref={scrollRef}
+                              className={`flex items-end justify-end gap-2.5 mt-7 tablet:gap-0 tablet:mt-5 ${
+                                 message.sender === chatUser.uid &&
+                                 "flex-row-reverse"
+                              }`}
+                           >
+                              {/*  flex-row-reverse */}
+                              <div
+                                 className={`flex flex-col gap-4 ${
+                                    message.sender === chatUser.uid
+                                       ? "items-start"
+                                       : "items-end"
+                                 }`}
+                              >
+                                 {/* items-start */}
+                                 <div
+                                    className={`flex ${
+                                       message.sender === chatUser.uid &&
+                                       "flex-row-reverse"
+                                    }`}
+                                 >
+                                    {/* flex-row-reverse */}
+
+                                    {/* icon */}
+                                    <div className="w-4 h-[15px] text-[#6159cb] relative text-[15px] leading-6 text-right inline-block">
+                                       {/* <i className="ri-more-2-fill"></i> */}
+                                       <AnimatedDropdown
+                                          message={message}
+                                          align={
+                                             message.sender === chatUser.uid
+                                                ? "left-0"
+                                                : "right-0"
+                                          }
+                                       />
+                                    </div>
+
+                                    {/* content */}
+                                    <div
+                                       className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col items-start bg-[#7269ef] text-white ${
+                                          message.sender === chatUser.uid &&
+                                          "items-end !bg-[#f5f7fb] !text-[#212529]"
+                                       }`}
+                                    >
+                                       <p className="text-[15px] leading-6 font-medium break-all">
+                                          {message.message.text}
+                                       </p>
+                                       <span
+                                          className={`w-full text-[#ffffff80] text-xs leading-[18px] inline-block ${
+                                             message.sender === chatUser.uid &&
+                                             "!text-[#7a7f9a] text-right"
+                                          }`}
+                                       >
+                                          {message.time.substring(16,21)}
+                                       </span>
+                                    </div>
+                                 </div>
+                                 {(thisMessages.length-1 !== i && thisMessages[i+1].sender === message.sender) || <p className="text-[#495057] text-sm leading-5 font-medium tablet:mx-2">
+                                    {/* text-left */}
+                                    {message.sender === user.uid
+                                       ? user.username
+                                       : chatUser.username}
+                                 </p>}
+                              </div>
+
+                              {/* profile */}
+                                 <div className="flex items-end rounded-full w-[35px] h-[35px] bg-cover text-right tablet:w-7 tablet:h-7">
+                                 {(thisMessages.length-1 !== i && thisMessages[i+1].sender === message.sender) || <img
+                                       className="rounded-full "
+                                       src="https://image.shutterstock.com/image-vector/profile-blank-icon-empty-photo-260nw-535853269.jpg"
+                                       alt=""
+                                    />}
+                              </div>
                            </div>
                         </div>
                      ))}

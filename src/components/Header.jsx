@@ -23,12 +23,12 @@ export const Header = () => {
 
 
    return (
-      <div className="header p-6 border-b border-zinc-100 text-[#495057] text-[15px] leading-[22.5px] flex justify-between tablet:p-4">
+      <div className="header p-6 border-b border-zinc-100 text-[#495057] text-[15px] leading-[22.5px] flex justify-between tablet:py-4 tablet:px-3">
          {/* name */}
          <div className="flex items-center gap-3.5">
             {backBtn && (
                <div
-                  className="flex items-center cursor-pointer"
+                  className="flex items-center cursor-pointer h-full"
                   onClick={() => {
                      dispatch(setShow(false));
                   }}
