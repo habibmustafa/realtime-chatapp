@@ -6,9 +6,10 @@ import { setShow } from "../store/animSlice";
 import { ref, set } from "firebase/database";
 import { messagesDB } from "../firebaseCongif/messagesDB";
 
-export const User = ({ cUser, hidden = false }) => {
+export const User = ({ cUser }) => {
    const { user, chatUser } = useSelector((state) => state.user);
    const { connectionId } = useSelector((state) => state.message);
+   const { show } = useSelector((state) => state.anim);
    const dispatch = useDispatch();
 
    const handleClick = () => {
@@ -29,6 +30,7 @@ export const User = ({ cUser, hidden = false }) => {
       }
    };
 
+   // helelik
    useEffect(() => {
       if (chatUser) {
          dispatch(setChatUser(cUser));
@@ -36,7 +38,12 @@ export const User = ({ cUser, hidden = false }) => {
    }, [cUser.isActive]);
 
    useEffect(() => {
-      if (!cUser.seen && connectionId && cUser.sender === cUser.uid) {
+      if (
+         show &&
+         !cUser.seen &&
+         connectionId &&
+         cUser.sender === cUser.uid
+      ) {
          set(ref(messagesDB, `connection/${connectionId}/recent/seen`), true);
       }
    }, [cUser.seen]);
@@ -45,7 +52,7 @@ export const User = ({ cUser, hidden = false }) => {
       <div
          onClick={handleClick}
          className={`cursor-pointer h-[74px] overflow-hidden whitespace-normal text-ellipsis rounded-1 text-[15px] text-[#7a7f9a] leading-[22.5px] py-4 px-5 mb-0.5 flex justify-between gap-4 transition-all duration-200 hover:bg-[#e6ebf5] ${
-            1 === 2 && "bg-[#e6ebf5]"
+            chatUser.uid === cUser.uid && "bg-[#e6ebf5]"
          } `}
       >
          <div
@@ -79,7 +86,7 @@ export const User = ({ cUser, hidden = false }) => {
             </div>
          </div>
          <div className="text-[11px] leading-4 h-full flex flex-col justify-start items-center gap-0.5 w-10">
-            <span>{cUser.time.substring(16,21)}</span>
+            <span>{cUser.time.substring(16, 21)}</span>
             {!cUser.seen && cUser.sender !== user.uid ? (
                <span className="w-[18px] h-[21px] bg-[#ef476f2e] text-[#ef476f] text-[10px] rounded-[800px] font-semibold leading-4 py-[2.5px] px-1.5 text-center">
                   1

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { User } from "./User";
 import { useSelector } from "react-redux/es/exports";
-
 export const Chats = () => {
    const [search, setSearch] = useState("");
    const [recentUsers, setRecentUsers] = useState(false);

@@ -20,6 +20,7 @@ export const ChatInput = ({ sendMessage }) => {
          {/* message input */}
          <div className="w-full h-11 bg-[#e6ebf5] flex items-center rounded-[6.4px]">
             <input
+               autoFocus={true}
                value={value}
                onChange={(e) => setValue(e.target.value)}
                type="text"

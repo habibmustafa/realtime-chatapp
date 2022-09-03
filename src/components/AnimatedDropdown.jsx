@@ -50,27 +50,17 @@ const AnimatedDropdown = ({ message, align }) => {
              ${open ? "openAnimation" : " closeAnimation"}
          `}
             >
-               <li
-                  tabIndex="1"
-                  className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]"
-               >
+               <li className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]">
                   Copy <i className="ri-file-copy-line text-[#7a7f9a]"></i>
                </li>
-               <li
-                  tabIndex="1"
-                  className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]"
-               >
+               <li className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]">
                   Save <i className="ri-save-line text-[#7a7f9a]"></i>
                </li>
-               <li
-                  tabIndex="1"
-                  className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]"
-               >
+               <li className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]">
                   Forward{" "}
                   <i className="ri-chat-forward-line text-[#7a7f9a]"></i>
                </li>
                <li
-                  tabIndex="1"
                   onClick={handleDelete}
                   className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]"
                >

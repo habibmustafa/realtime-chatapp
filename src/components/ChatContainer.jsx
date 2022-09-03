@@ -59,12 +59,18 @@ export const ChatContainer = () => {
                   else return false;
                })[0]
          );
+
+         return () => {
+            setThisMessages([])
+         }
    }, [connectionId, messages]);
 
    // scroll down
    useEffect(() => {
       scrollRef.current?.scrollIntoView();
    }, [thisMessages, chatUser]);
+
+   console.log(chatUser);
 
    // receive messages
    return (
@@ -88,7 +94,7 @@ export const ChatContainer = () => {
                            {!i && (
                               <div className="w-full h-[1px] bg-[#f0eff5] text-[15px] text-center mb-14 relative tablet:mb-12">
                                  <span className="bg-[#f0eff5] rounded-md text-[13px] leading-5 py-1.5 px-3 text-center text-[#495057] absolute -top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                 {new Date().toString().substring(4,15) === message.time.substring(4, 15) ? `bugün` : `${message.time.substring(8, 11)} ${message.time.substring(4, 7)}, ${message.time.substring(11, 15)}`}
+                                 {new Date().toString().substring(4,15) === message.time.substring(4, 15) ? `Today` : `${message.time.substring(8, 11)} ${message.time.substring(4, 7)}, ${message.time.substring(11, 15)}`}
                                  </span>
                               </div>
                            )}
@@ -160,7 +166,7 @@ export const ChatContainer = () => {
                                        </span>
                                     </div>
                                  </div>
-                                 {(thisMessages.length-1 !== i && thisMessages[i+1].sender === message.sender) || <p className="text-[#495057] text-sm leading-5 font-medium tablet:mx-2">
+                                 {(thisMessages.length-1 !== i && thisMessages[i+1].sender === message.sender) || <p className="text-[#495057] text-sm leading-5 font-medium tablet:mx-2 tablet:text-xs">
                                     {/* text-left */}
                                     {message.sender === user.uid
                                        ? user.username

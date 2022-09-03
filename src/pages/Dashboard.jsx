@@ -8,6 +8,7 @@ import { auth } from "../firebaseCongif/auth";
 import { ref, onValue } from "firebase/database";
 import { usersDB, userOnlineCheck } from "../firebaseCongif/usersDB";
 import { setAllUsers, setUser } from "../store/userSlice";
+import { setMessages } from "../store/messageSlice";
 
 const Dashboard = () => {
    const [user, loading] = useAuthState(auth);
@@ -43,6 +44,7 @@ const Dashboard = () => {
       }
 
       return () => {
+         dispatch(setMessages([]))
          if (user) {
             userOnlineCheck(user.uid, false);
             window.addEventListener("unload", () => {

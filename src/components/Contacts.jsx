@@ -1,30 +1,21 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setChatUser } from "../store/userSlice";
 import ContactItem from "./ContactItem";
 
 const Contacts = () => {
    const [search, setSearch] = useState("");
    const { allUsers } = useSelector((state) => state.user);
+   const dispatch = useDispatch();
 
-   // useEffect(() => {
-   //    onValue(ref(usersDB, "users/"), (snapshot) => {
-   //       const data = snapshot.val();
-   //       if (data !== null) {
-   //          // helelik
-   //          setAllUsers(
-   //             Object.values(data)
-   //                .filter(
-   //                   (item) => item.uid !== JSON.parse(localStorage.user).uid
-   //                )
-   //                .sort((a, b) => a.createdAt - b.createdAt)
-   //          );
-   //       }
-   //    });
-   //    return () => {
-   //       setAllUsers([]);
-   //    };
-   // }, []);
+   // helelik
+   useEffect(() => {
+      return () => {
+         dispatch(setChatUser(false));
+      };
+   }, []);
 
+   console.log(allUsers);
    return (
       <div className="contact py-6 px-7">
          <div className="mb-12">

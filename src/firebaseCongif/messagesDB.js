@@ -29,8 +29,7 @@ export const addMessage = (connectionId, uuid, value, userId, username, chatUser
       sender: userId,
       seen: false,
       createdAt: new Date().getTime(),
-      lastTime: time.substring(0,5) 
-      // toUTCString()
+      lastTime: time.substring(0,5)
    });
 };
 
