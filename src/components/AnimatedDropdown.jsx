@@ -2,6 +2,7 @@ import { ref, remove } from "firebase/database";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { messagesDB } from "../firebaseCongif/messagesDB";
 
@@ -50,7 +51,14 @@ const AnimatedDropdown = ({ message, align }) => {
              ${open ? "openAnimation" : " closeAnimation"}
          `}
             >
-               <li className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]">
+               <li
+                  onClick={() => {
+                     navigator.clipboard.writeText(message.message.text);
+                     setOpen(false);
+                     toast.success("Successfully Copied!");
+                  }}
+                  className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]"
+               >
                   Copy <i className="ri-file-copy-line text-[#7a7f9a]"></i>
                </li>
                <li className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]">
@@ -62,7 +70,9 @@ const AnimatedDropdown = ({ message, align }) => {
                </li>
                <li
                   onClick={handleDelete}
-                  className="flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff]"
+                  className={`flex justify-between items-center px-6 py-2 cursor-pointer hover:bg-[#f7f7ff] ${
+                     message.sender !== user.uid && "opacity-50"
+                  }`}
                >
                   Delete <i className="ri-delete-bin-line text-[#7a7f9a]"></i>
                </li>

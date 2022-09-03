@@ -9,13 +9,12 @@ const Contacts = () => {
    const dispatch = useDispatch();
 
    // helelik
-   useEffect(() => {
-      return () => {
-         dispatch(setChatUser(false));
-      };
-   }, []);
+   // useEffect(() => {
+   //    return () => {
+   //       dispatch(setChatUser(false));
+   //    };
+   // }, []);
 
-   console.log(allUsers);
    return (
       <div className="contact py-6 px-7">
          <div className="mb-12">

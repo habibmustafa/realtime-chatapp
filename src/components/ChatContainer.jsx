@@ -70,8 +70,6 @@ export const ChatContainer = () => {
       scrollRef.current?.scrollIntoView();
    }, [thisMessages, chatUser]);
 
-   console.log(chatUser);
-
    // receive messages
    return (
       <div

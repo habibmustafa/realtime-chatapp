@@ -11,7 +11,7 @@ const App = () => {
    return (
       <Provider store={store}>
          <BrowserRouter>
-            <Toaster position="top-right" />
+            <Toaster position="top-center" />
             <Routing />
          </BrowserRouter>
       </Provider>

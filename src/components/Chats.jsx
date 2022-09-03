@@ -34,8 +34,6 @@ export const Chats = () => {
       setRecentUsers(newArray.sort((a,b) => b.createdAt-a.createdAt));
    }, [messages, user, connectionId, allUsers]);
 
-   console.log(recentUsers);
-
    return (
       <div className="chats">
          <div className="py-6 px-7">

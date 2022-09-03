@@ -31,11 +31,11 @@ export const User = ({ cUser }) => {
    };
 
    // helelik
-   useEffect(() => {
-      if (chatUser) {
-         dispatch(setChatUser(cUser));
-      }
-   }, [cUser.isActive]);
+   // useEffect(() => {
+   //    if (chatUser) {
+   //       dispatch(setChatUser(cUser));
+   //    }
+   // }, [cUser.isActive]);
 
    useEffect(() => {
       if (
@@ -51,8 +51,8 @@ export const User = ({ cUser }) => {
    return (
       <div
          onClick={handleClick}
-         className={`cursor-pointer h-[74px] overflow-hidden whitespace-normal text-ellipsis rounded-1 text-[15px] text-[#7a7f9a] leading-[22.5px] py-4 px-5 mb-0.5 flex justify-between gap-4 transition-all duration-200 hover:bg-[#e6ebf5] ${
-            chatUser.uid === cUser.uid && "bg-[#e6ebf5]"
+         className={`cursor-pointer h-[74px] overflow-hidden whitespace-normal text-ellipsis rounded-1 text-[15px] text-[#7a7f9a] leading-[22.5px] py-4 px-5 mb-0.5 flex justify-between gap-4 transition duration-300 hover:bg-[#e6ebf5] ${
+            (window.innerWidth > 991 && chatUser.uid === cUser.uid) && "bg-[#e6ebf5]"
          } `}
       >
          <div
