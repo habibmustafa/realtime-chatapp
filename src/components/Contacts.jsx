@@ -4,7 +4,7 @@ import ContactItem from "./ContactItem";
 
 const Contacts = () => {
    const [search, setSearch] = useState("");
-   const {allUsers} = useSelector(state => state.user)
+   const { allUsers } = useSelector((state) => state.user);
 
    // useEffect(() => {
    //    onValue(ref(usersDB, "users/"), (snapshot) => {
@@ -27,7 +27,7 @@ const Contacts = () => {
 
    return (
       <div className="contact py-6 px-7">
-         <div className="mb-16">
+         <div className="mb-12">
             <div className="flex justify-between items-start">
                <h4 className="h4-size  mb-6">Contacts</h4>
                <span className="flex items-center text-[#7a7f9a] text-[18px] leading-7 text-center px-4">
@@ -53,10 +53,16 @@ const Contacts = () => {
 
          <div className="all-users">
             {allUsers &&
-            allUsers.map((cUser) => (
-               <ContactItem key={cUser.uid} cUser={cUser} />
-            ))}
-
+               allUsers
+                  .filter(
+                     (name) =>
+                        !name.username
+                           .toLowerCase()
+                           .indexOf(search.toLowerCase()) || search === ""
+                  )
+                  .map((cUser, index) => (
+                     <ContactItem key={cUser.uid} cUser={cUser} index={index} />
+                  ))}
          </div>
       </div>
    );

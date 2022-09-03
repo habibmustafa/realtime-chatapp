@@ -1,12 +1,12 @@
 import React from "react";
-import {useSelector, useDispatch} from "react-redux"
+import { useSelector, useDispatch } from "react-redux";
 import { setChatUser } from "../store/userSlice";
 import { setConnectionId } from "../store/messageSlice";
 import { setShow } from "../store/animSlice";
 
-const ContactItem = ({cUser}) => {
-   const { user } = useSelector((state) => state.user);
-   const dispatch = useDispatch()  
+const ContactItem = ({ cUser, index }) => {
+   const { user, allUsers } = useSelector((state) => state.user);
+   const dispatch = useDispatch();
 
    const handleClick = () => {
       dispatch(setShow(true));
@@ -20,11 +20,22 @@ const ContactItem = ({cUser}) => {
 
    return (
       <ul>
+         {!index && (
+            <div className="p-4 text-[15px] font-semibold text-[#7269ef] uppercase leading[22.5px] underline">
+               {cUser.username[0]}
+            </div>
+         )}
+         {index > 0 &&
+            allUsers[index - 1].username[0] !== cUser.username[0] && (
+               <div className="p-4 text-[15px] font-semibold text-[#7269ef] uppercase leading[22.5px] mt-5 underline">
+                  {cUser.username[0]}
+               </div>
+            )}
          <li
             onClick={handleClick}
-            className="flex justify-between items-center py-2 px-5 cursor-pointer"
+            className="flex justify-between items-center py-2.5 px-5 opacity-90 cursor-pointer"
          >
-            <p className="text-base font-semibold text-left text-[#495057]">
+            <p className="text-sm font-semibold text-left text-[#495057]">
                {cUser.username}
             </p>
             <span className="text-[#7a7f9a]">
