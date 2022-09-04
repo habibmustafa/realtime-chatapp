@@ -34,12 +34,12 @@ const ContactItem = ({ cUser, index }) => {
             )}
          <li
             onClick={handleClick}
-            className="flex justify-between items-center py-2.5 px-5 opacity-90 cursor-pointer"
+            className="flex justify-between items-center py-2.5 px-5 opacity-90 dark:opacity-100 cursor-pointer"
          >
-            <p className="text-sm font-semibold text-left text-[#495057]">
+            <p className="text-sm font-semibold text-left text-[#495057] dark:text-[#e1e9f1] tracking-wide transition-colors duration-300">
                {cUser.username}
             </p>
-            <span className="text-[#7a7f9a]">
+            <span className="text-[#7a7f9a] dark:text-[#9aa1b9] transition-colors duration-150">
                <i className="ri-more-2-fill"></i>
             </span>
          </li>

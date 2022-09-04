@@ -5,6 +5,7 @@ import { logOut } from "../firebaseCongif/auth";
 import Contacts from "./Contacts";
 
 export const SideBar = () => {
+   const [darkMode, setDarkMode] = useState(localStorage.theme === "dark" ? true : false)
    const [button, setButton] = useState({
       item: [
          {
@@ -27,16 +28,27 @@ export const SideBar = () => {
       active: 2,
    });
 
-   const handleClick = async () => {
+   const handleChangeTheme = () => {
+      setDarkMode(!darkMode)
+      if (localStorage.theme === "light") {
+         document.querySelector("html").classList.add("dark");
+         localStorage.setItem("theme", "dark");
+      } else {
+         document.querySelector("html").classList.remove("dark");
+         localStorage.setItem("theme", "light");
+      }
+   };
+
+   const handleLogOut = async () => {
       await logOut();
    };
 
    return (
       <div className="sidebar flex h-full tablet:flex-col-reverse tablet:w-full">
          {/* sidemenu */}
-         <div className="sidemenu box-shadow relative z-20 max-w-[75px] h-screen flex flex-col justify-between items-center p-4 tablet:max-w-full tablet:p-1 tablet:flex-1 tablet:flex-row">
+         <div className="sidemenu bg-white dark:bg-[#36404A] box-shadow transition-colors duration-300 relative z-20 max-w-[75px] h-screen flex flex-col justify-between items-center p-4 tablet:max-w-full tablet:p-1 tablet:flex-1 tablet:flex-row">
             {/* logo */}
-            <div className="flex items-center gap-1 text-3xl text-[#7269ef] cursor-pointer tablet:hidden">
+            <div className="flex items-center gap-1 text-3xl text-[#7269ef] dark:text-[#6159cb] cursor-pointer tablet:hidden">
                <i className="ri-chat-smile-2-fill"></i>
             </div>
 
@@ -48,35 +60,42 @@ export const SideBar = () => {
                      onClick={() => {
                         setButton({ ...button, active: icon.id });
                      }}
-                     className={`text-2xl text-[#878a82] px-4 inline-block rounded-lg py-3 cursor-pointer tablet:text-xl tablet:px-7 tablet:py-2.5 ${
+                     className={`text-2xl text-[#878a82] dark:text-[#a6b0cf] transition-colors duration-200 px-4 inline-block rounded-lg py-3 cursor-pointer tablet:text-xl tablet:px-7 tablet:py-2.5 ${
                         icon.id === button.active &&
-                        "bg-[#f7f7ff] !text-[#7269ef]"
+                        "bg-[#f7f7ff] !text-[#7269ef] dark:bg-[#3e4a56]"
                      }`}
                   >
                      <i className={icon.name}></i>
                   </button>
                ))}
                <button
-                  onClick={handleClick}
-                  className="text-2xl opacity-50 px-4 inline-block rounded-lg py-2 cursor-pointer tablet:text-xl tablet:px-3.5 tablet:py-2.5"
+                  onClick={handleLogOut}
+                  className="text-2xl px-4 hidden rounded-lg py-2 cursor-pointer text-[#878a82] dark:text-[#a6b0cf] tablet:text-xl tablet:px-3.5 tablet:py-2.5 tablet:inline-block"
                >
                   <i className="ri-logout-box-line"></i>
                </button>
             </div>
 
             {/* bottom nav */}
-            <button
-               to="/login"
-               onClick={handleClick}
-               className="text-2xl opacity-50 px-4 inline-block rounded-lg py-2 my-2 cursor-pointer tablet:hidden"
-            >
-               <i className="ri-logout-box-line"></i>
-            </button>
+            <div className="tablet:hidden">
+               <button
+                  title="Dark / Light Mode"
+                  onClick={handleChangeTheme}
+                  className="text-2xl px-4 inline-block rounded-lg py-2 my-2 text-[#878a82] dark:text-[#a6b0cf] cursor-pointer tablet:text-xl tablet:px-7 tablet:my-0 tablet:py-2.5"
+               >
+                  <i className={`${darkMode ? "ri-sun-line" : "ri-moon-line"}`}></i>
+               </button>
+               <button
+                  onClick={handleLogOut}
+                  className="text-2xl tablet:hidden px-4 inline-block rounded-lg py-2 my-2 text-[#878a82] dark:text-[#a6b0cf] cursor-pointer"
+               >
+                  <i className="ri-logout-box-line"></i>
+               </button>
+            </div>
          </div>
 
          {/* sidechange */}
          <div className="sidechange w-96 bg-[#f5f7fb] tablet:w-full tablet:h-full">
-
             {button.active === 2 && <Chats />}
             {button.active === 3 && <Contacts />}
          </div>

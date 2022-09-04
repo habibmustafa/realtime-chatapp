@@ -73,7 +73,7 @@ export const ChatContainer = () => {
    // receive messages
    return (
       <div
-         className={`chatcontainer flex-1 bg-white mr-0.5 transition-all duration-500 h-full tablet:absolute tablet:z-20 tablet:w-full ${
+         className={`chatcontainer flex-1 bg-white dark:bg-[#262E35] transition-all duration-[400ms] pr-0.5 h-full tablet:absolute tablet:z-20 tablet:w-full ${
             !show ? "tablet:-left-full" : "tablet:left-0"
          }`}
       >
@@ -82,7 +82,7 @@ export const ChatContainer = () => {
                <Header />
 
                {/* messages container */}
-               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 tablet:px-4">
+               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:px-4">
                   {/* message */}
                   {thisMessages &&
                      thisMessages.map((message, i) => (
@@ -90,8 +90,8 @@ export const ChatContainer = () => {
                            
                            {/* timer */}
                            {(!i && message.time ) && (
-                              <div className="w-full h-[1px] bg-[#f0eff5] text-[15px] text-center mb-14 relative tablet:mb-12">
-                                 <span className="bg-[#f0eff5] rounded-md text-[13px] leading-5 py-1.5 px-3 text-center text-[#495057] absolute -top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                              <div className="w-full h-[1px] bg-[#f0eff5] dark:bg-[#36404a] transition-colors duration-[350ms] text-[15px] text-center mb-14 relative tablet:mb-12">
+                                 <span className="bg-[#f0eff5] transition-colors duration-[350ms] dark:bg-[#36404a] rounded-md text-[13px] leading-5 py-1.5 px-3 text-center text-[#495057] dark:text-[#a6b0cf] absolute -top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
                                     {new Date().toString().substring(4,15) === message.time.substring(4, 15) ? `Today` : `${message.time.substring(8, 11)} ${message.time.substring(4, 7)}, ${message.time.substring(11, 15)}`}
                                  </span>
                               </div>
@@ -99,9 +99,9 @@ export const ChatContainer = () => {
                            {(i > 0 && message.time &&
                               thisMessages[i - 1].time?.substring(0, 15) !==
                                  message.time?.substring(0, 15)) && (
-                                 <div className="w-full border-b text-[#495057] text-[15px] leading-[22.5px] text-center mb-14 mt-11 relative tablet:mb-12">
-                                    <span className="bg-[#f0eff5] rounded-md text-[13px] leading-5 py-1.5 px-3 text-center text-[#495057] absolute -top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                                       {new Date().toString().substring(4,15) === message.time.substring(4, 15) ? `bugün` : `${message.time.substring(8, 11)} ${message.time.substring(4, 7)}, ${message.time.substring(11, 15)}`}
+                                 <div className="w-full h-[1px] bg-[#f0eff5] dark:bg-[#36404a] transition-colors duration-[350ms] leading-[22.5px] text-center mb-14 mt-11 relative tablet:mb-12">
+                                    <span className="bg-[#f0eff5] transition-colors duration-[350ms] dark:bg-[#36404a] rounded-md text-[13px] leading-5 py-1.5 px-3 text-center text-[#495057] dark:text-[#a6b0cf] absolute -top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                                       {new Date().toString().substring(4,15) === message.time.substring(4, 15) ? `Today` : `${message.time.substring(8, 11)} ${message.time.substring(4, 7)}, ${message.time.substring(11, 15)}`}
                                     </span>
                                  </div>
                               )}
@@ -132,7 +132,6 @@ export const ChatContainer = () => {
 
                                     {/* icon */}
                                     <div className="w-4 h-[15px] text-[#6159cb] relative text-[15px] leading-6 text-right inline-block">
-                                       {/* <i className="ri-more-2-fill"></i> */}
                                        <AnimatedDropdown
                                           message={message}
                                           align={
@@ -145,9 +144,9 @@ export const ChatContainer = () => {
 
                                     {/* content */}
                                     <div
-                                       className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col ${
+                                       className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col transition-colors duration-[350ms] ${
                                           message.sender === chatUser.uid ?
-                                          "items-end bg-[#f5f7fb] text-[#212529] rounded-bl-none" : 
+                                          "items-end bg-[#f5f7fb] text-[#212529] dark:bg-[#36404a] dark:text-[#eff2f7] rounded-bl-none" : 
                                           "bg-[#7269ef] text-white items-start rounded-br-none"
                                        }`}
                                     >
@@ -155,17 +154,16 @@ export const ChatContainer = () => {
                                           {message.message.text}
                                        </p>
                                        <span
-                                          className={`w-full text-[#ffffff80] text-xs leading-[18px] flex items-center gap-1 ${
+                                          className={`w-full text-[#ffffff80] dark:text-[#B9B4F7] text-xs leading-[18px] ${
                                              message.sender === chatUser.uid &&
-                                             "!text-[#7a7f9a] text-right"
+                                             "!text-[#7a7f9a] dark:text-[#abb4d2] text-right"
                                           }`}
                                        >
-                                          <i className="ri-time-line align-middle"></i>
                                           {message.time.substring(16,21)}
                                        </span>
                                     </div>
                                  </div>
-                                 {(thisMessages.length-1 !== i && thisMessages[i+1].sender === message.sender) || <p className="text-[#495057] text-sm leading-5 font-medium tablet:mx-2 tablet:text-xs">
+                                 {(thisMessages.length-1 !== i && thisMessages[i+1].sender === message.sender) || <p className="text-[#495057] dark:text-[#a6b0cf] transition-colors duration-[350ms] text-sm leading-5 font-medium tablet:mx-2 tablet:text-xs">
                                     {/* text-left */}
                                     {message.sender === user.uid
                                        ? user.username
@@ -176,13 +174,14 @@ export const ChatContainer = () => {
                               {/* profile */}
                                  <div className="flex items-end rounded-full w-[35px] h-[35px] bg-cover text-right tablet:w-7 tablet:h-7">
                                  {(thisMessages.length-1 !== i && thisMessages[i+1].sender === message.sender) || <img
-                                       className="rounded-full "
-                                       src="https://image.shutterstock.com/image-vector/profile-blank-icon-empty-photo-260nw-535853269.jpg"
-                                       alt=""
-                                    />}
+                                    className="rounded-full "
+                                    src="https://image.shutterstock.com/image-vector/profile-blank-icon-empty-photo-260nw-535853269.jpg"
+                                    alt=""
+                                 />}
+                                    
                               </div>
                               {/* {messages.find((item) => item.connectionId === connectionId).options.writing && <p>yaziyor..</p>} */}
-                           </div>
+                           </div>   
                         </div>
                      ))}
                </div>

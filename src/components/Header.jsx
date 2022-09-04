@@ -23,7 +23,7 @@ export const Header = () => {
 
 
    return (
-      <div className="header p-6 border-b border-zinc-100 text-[#495057] text-[15px] leading-[22.5px] flex justify-between tablet:py-4 tablet:px-3">
+      <div className="header p-6 border-b border-[#f0eff5] dark:border-[#36404a] transition-colors duration-[350ms] text-[#495057] dark:text-[#e1e9f1] text-[15px] leading-[22.5px] flex justify-between tablet:py-4 tablet:px-3">
          {/* name */}
          <div className="flex items-center gap-3.5">
             {backBtn && (
@@ -44,7 +44,7 @@ export const Header = () => {
                />
             </div>
             <div className="flex flex-col">
-               <p className="cursor-pointer font-semibold leading-5">
+               <p className="cursor-pointer font-semibold leading-5 tracking-wide">
                   {chatUser.username}
                </p>
                {chatUser.isActive && <span className="text-sm text-green-500">Online</span>}
@@ -52,7 +52,7 @@ export const Header = () => {
          </div>
 
          {/* right icons */}
-         <div className="text-xl text-[#7a7f9a] text-center flex items-center gap-2">
+         <div className="text-xl text-[#7a7f9a] dark:text-[#abb4d2] transition-colors duration-[350ms] text-center flex items-center gap-2">
             <button className="w-10 h-10 leading-10 hover:scale-110">
                <i className="ri-search-line"></i>
             </button>

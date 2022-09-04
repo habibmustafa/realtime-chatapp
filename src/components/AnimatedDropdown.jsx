@@ -2,7 +2,7 @@ import { ref, remove } from "firebase/database";
 import { useEffect } from "react";
 import { useRef } from "react";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { messagesDB } from "../firebaseCongif/messagesDB";
 

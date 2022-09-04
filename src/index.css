@@ -8,6 +8,7 @@
    #root {
       @apply h-full;
       font-family: sans-serif;
+      transition: background-color 1s;
    }
    .wrapper {
       max-width: 1140px;
@@ -32,6 +33,10 @@
 
    .box-shadow {
       box-shadow: 0 2px 4px rgb(15 34 58 / 12%);
+   }
+
+   .box-shadow-dark {
+      box-shadow: #0f223a 0px 2px 4px 0px;
    }
 
 

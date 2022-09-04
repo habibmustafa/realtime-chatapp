@@ -14,7 +14,7 @@ export const User = ({ cUser }) => {
 
    const handleClick = () => {
       dispatch(setShow(true));
-      dispatch(setChatUserId(cUser.uid))
+      dispatch(setChatUserId(cUser.uid));
 
       let id = null;
       if (user.uid < cUser.uid) {
@@ -30,22 +30,8 @@ export const User = ({ cUser }) => {
       }
    };
 
-
-
-   // helelik
-   // useEffect(() => {
-   //    if (chatUser) {
-   //       dispatch(setChatUser(cUser));
-   //    }
-   // }, [cUser.isActive]);
-
    useEffect(() => {
-      if (
-         show &&
-         !cUser.seen &&
-         connectionId &&
-         cUser.sender === cUser.uid
-      ) {
+      if (show && !cUser.seen && connectionId && cUser.sender === cUser.uid) {
          set(ref(messagesDB, `connection/${connectionId}/options/seen`), true);
       }
    }, [cUser.seen]);
@@ -53,28 +39,31 @@ export const User = ({ cUser }) => {
    return (
       <div
          onClick={handleClick}
-         className={`cursor-pointer h-[74px] overflow-hidden whitespace-normal text-ellipsis rounded-1 text-[15px] text-[#7a7f9a] leading-[22.5px] py-4 px-5 mb-0.5 flex justify-between gap-4 transition duration-300 hover:bg-[#e6ebf5] ${
-            (window.innerWidth > 991 && chatUser.uid === cUser.uid) && "bg-[#e6ebf5]"
+         className={`cursor-pointer h-[74px] overflow-hidden whitespace-normal text-ellipsis rounded-1 text-[15px] text-[#7a7f9a] leading-[22.5px] py-4 px-5 mb-0.5 flex justify-between gap-4 transition-colors duration-300 hover:bg-[#e6ebf5] dark:hover:bg-[#36404a] ${
+            window.innerWidth > 991 &&
+            chatUser.uid === cUser.uid &&
+            "bg-[#e6ebf5] dark:bg-[#36404a]"
          } `}
       >
          <div
-            className={`rounded-full w-[35px] h-[35px] bg-cover box-content overflow-hidden text-left shadow-sm ${
-               cUser.isActive && "border-2 border-green-600"
+            className={`rounded-full w-[35px] h-[35px] bg-cover box-content overflow-hidden text-left shadow-sm dark:shadow-lg ${
+               cUser.isActive &&
+               "border-2 border-green-600 dark:border-green-500"
             }`}
          >
             <img
                className="rounded-full"
                src="https://image.shutterstock.com/image-vector/profile-blank-icon-empty-photo-260nw-535853269.jpg"
-               alt="profil"
+               alt="profile-light"
             />
          </div>
          <div className="flex-1 w-10">
-            <h5 className="font-semibold text-[15px] text-[#495057] leading-[18px] mb-1">
+            <h5 className="font-semibold text-[15px] text-[#495057] dark:text-[#e1e9f1] transition-colors duration-300 tracking-wide leading-[18px] mb-1">
                {cUser.username}
             </h5>
 
             {/* text */}
-            <div className="flex items-start gap-1 text-sm">
+            <div className="flex items-start gap-1 text-sm dark:text-[#abb4d2] transition-colors duration-300">
                {cUser.sender === user.uid && (
                   <span className="font-semibold">You:</span>
                )}
@@ -88,7 +77,9 @@ export const User = ({ cUser }) => {
             </div>
          </div>
          <div className="text-[11px] leading-4 h-full flex flex-col justify-start items-center gap-0.5 w-10">
-            <span>{cUser.time.substring(16, 21)}</span>
+            <span className="dark:text-[#abb4d2] transition-colors duration-300">
+               {cUser.time.substring(16, 21)}
+            </span>
             {!cUser.seen && cUser.sender !== user.uid ? (
                <span className="w-[18px] h-[21px] bg-[#ef476f2e] text-[#ef476f] text-[10px] rounded-[800px] font-semibold leading-4 py-[2.5px] px-1.5 text-center">
                   1
