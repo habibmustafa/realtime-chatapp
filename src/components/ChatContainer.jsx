@@ -175,7 +175,7 @@ export const ChatContainer = () => {
                                  <div className="flex items-end rounded-full w-[35px] h-[35px] bg-cover text-right tablet:w-7 tablet:h-7">
                                  {(thisMessages.length-1 !== i && thisMessages[i+1].sender === message.sender) || <img
                                     className="rounded-full "
-                                    src="https://image.shutterstock.com/image-vector/profile-blank-icon-empty-photo-260nw-535853269.jpg"
+                                    src={message.sender === user.uid ? user.avatar : chatUser.avatar}
                                     alt=""
                                  />}
                                     

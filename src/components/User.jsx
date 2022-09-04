@@ -39,21 +39,21 @@ export const User = ({ cUser }) => {
    return (
       <div
          onClick={handleClick}
-         className={`cursor-pointer h-[74px] overflow-hidden whitespace-normal text-ellipsis rounded-1 text-[15px] text-[#7a7f9a] leading-[22.5px] py-4 px-5 mb-0.5 flex justify-between gap-4 transition-colors duration-300 hover:bg-[#e6ebf5] dark:hover:bg-[#36404a] ${
+         className={`cursor-pointer h-[74px] overflow-hidden whitespace-normal text-ellipsis rounded-1 text-[15px] text-[#7a7f9a] leading-[22.5px] py-4 px-5 mb-0.5 flex justify-between gap-3 transition-colors duration-300 hover:bg-[#e6ebf5] dark:hover:bg-[#36404a] ${
             window.innerWidth > 991 &&
             chatUser.uid === cUser.uid &&
             "bg-[#e6ebf5] dark:bg-[#36404a]"
          } `}
       >
          <div
-            className={`rounded-full w-[35px] h-[35px] bg-cover box-content overflow-hidden text-left shadow-sm dark:shadow-lg ${
-               cUser.isActive &&
+            className={`rounded-full w-[35px] h-[35px] bg-cover box-content overflow-hidden text-left mr-1 shadow-sm dark:shadow-lg ${
+               cUser.isActive.status &&
                "border-2 border-green-600 dark:border-green-500"
             }`}
          >
             <img
                className="rounded-full"
-               src="https://image.shutterstock.com/image-vector/profile-blank-icon-empty-photo-260nw-535853269.jpg"
+               src={cUser.avatar}
                alt="profile-light"
             />
          </div>
@@ -76,7 +76,7 @@ export const User = ({ cUser }) => {
                </p>
             </div>
          </div>
-         <div className="text-[11px] leading-4 h-full flex flex-col justify-start items-center gap-0.5 w-10">
+         <div className="text-[11px] leading-4 h-full flex flex-col  justify-start items-center gap-0.5 w-10">
             <span className="dark:text-[#abb4d2] transition-colors duration-300">
                {cUser.time.substring(16, 21)}
             </span>
@@ -85,8 +85,8 @@ export const User = ({ cUser }) => {
                   1
                </span>
             ) : (
-               cUser.isActive && (
-                  <span className="text-sm text-green-500">Online</span>
+               cUser.isActive.status && (
+                  <span className="text-sm text-green-500">{cUser.isActive.content}</span>
                )
             )}
          </div>

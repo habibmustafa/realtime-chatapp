@@ -12,7 +12,8 @@ import { setMessages } from "../store/messageSlice";
 
 const Dashboard = () => {
    const [user, loading] = useAuthState(auth);
-   const { chatUserId } = useSelector((state) => state.user);
+   const { chatUserId, chatUser } = useSelector((state) => state.user);
+   const { connectionId } = useSelector((state) => state.message);
    const navigate = useNavigate();
    const dispatch = useDispatch();
 
@@ -28,7 +29,7 @@ const Dashboard = () => {
                dispatch(
                   setAllUsers(
                      Object.values(data)
-                        .filter((item) => item.uid !== user.uid)
+                        ?.filter((item) => item.uid !== user.uid)
                         .sort((a, b) => a.createdAt - b.createdAt)
                   )
                );
@@ -44,32 +45,25 @@ const Dashboard = () => {
          if (data !== null) {
             dispatch(setChatUser(data));
          }
+      console.log(1);
+
       });
    }, [chatUserId]);
 
    useEffect(() => {
       if (user) {
-         // userOnlineCheck(user.uid, true);
-         // window.addEventListener("unload", () => {
-         //    userOnlineCheck(user.uid, false);
-         // });
          onValue(ref(usersDB, ".info/connected"), (snap) => {
-            if (snap.val() === true) {
+            if (snap.val() !== null) {
                // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
-               // const con = push(myConnectionsRef);
-               userOnlineCheck(user.uid, true);
+               userOnlineCheck(user.uid, true, "Online");
 
                // When I disconnect, remove this device
-               onDisconnect(ref(usersDB, `users/${user.uid}/isActive`)).set(
-                  false
-               );
-
-               // Add this device to my connections list
-               // this value could contain info about the device or a timestamp too
-               // set(con, true);
-
-               // When I disconnect, update the last time I was seen online
-               // onDisconnect(lastOnlineRef).set(serverTimestamp());
+               onDisconnect(ref(usersDB, `users/${user.uid}/isActive`)).set({
+                  status: false,
+                  content: `Last seen: ${new Date()
+                     .toString()
+                     .substring(4, 21)}`,
+               });
             }
          });
       }
@@ -78,15 +72,8 @@ const Dashboard = () => {
       };
    }, [user]);
 
-   useEffect(() => {
-      if (localStorage.theme === "dark") {
-         document.querySelector("html").classList.add("dark");
-      } else if (localStorage.theme === "light") {
-         document.querySelector("html").classList.remove("dark");
-      } else {
-         localStorage.setItem("theme", "light")
-      }
-   }, []);
+   console.log(chatUser);
+   console.log(chatUserId);
 
    return (
       <div className="chat flex h-full min-w-[280px] tablet:w-full ">

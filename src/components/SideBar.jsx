@@ -3,6 +3,9 @@ import { Chats } from "./Chats";
 import { useState } from "react";
 import { logOut } from "../firebaseCongif/auth";
 import Contacts from "./Contacts";
+import { set, ref } from "firebase/database";
+import { usersDB } from "../firebaseCongif/usersDB";
+import { useSelector } from "react-redux";
 
 export const SideBar = () => {
    const [darkMode, setDarkMode] = useState(localStorage.theme === "dark" ? true : false)
@@ -27,6 +30,7 @@ export const SideBar = () => {
       ],
       active: 2,
    });
+   const {user} = useSelector(state => state.user)
 
    const handleChangeTheme = () => {
       setDarkMode(!darkMode)
@@ -41,6 +45,12 @@ export const SideBar = () => {
 
    const handleLogOut = async () => {
       await logOut();
+      set(ref(usersDB, `users/${user.uid}/isActive`),{
+         status: false,
+         content: `Last seen: ${new Date()
+            .toString()
+            .substring(4, 21)}`,
+      });
    };
 
    return (
@@ -60,7 +70,7 @@ export const SideBar = () => {
                      onClick={() => {
                         setButton({ ...button, active: icon.id });
                      }}
-                     className={`text-2xl text-[#878a82] dark:text-[#a6b0cf] transition-colors duration-200 px-4 inline-block rounded-lg py-3 cursor-pointer tablet:text-xl tablet:px-4 tablet:py-2.5 ${
+                     className={`text-2xl text-[#878a82] dark:text-[#a6b0cf] transition-colors duration-[250ms] px-4 inline-block rounded-lg py-3 cursor-pointer tablet:text-xl tablet:px-4 tablet:py-2.5 ${
                         icon.id === button.active &&
                         "bg-[#f7f7ff] !text-[#7269ef] dark:bg-[#3e4a56]"
                      }`}
@@ -102,7 +112,7 @@ export const SideBar = () => {
          </div>
 
          {/* sidechange */}
-         <div className="sidechange w-96 bg-[#f5f7fb] tablet:w-full tablet:h-full">
+         <div className="sidechange w-96 bg-[#f5f7fb] h-full dark:bg-[#303841] box-shadow relative z-10 transition-colors duration-[350ms] tablet:w-full">
             {button.active === 2 && <Chats />}
             {button.active === 3 && <Contacts />}
          </div>

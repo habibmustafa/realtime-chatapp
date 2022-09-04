@@ -7,7 +7,7 @@ const Contacts = () => {
    const { allUsers } = useSelector((state) => state.user);
 
    return (
-      <div className="contact py-6 px-7 dark:bg-[#303841] box-shadow h-full transition-colors duration-[350ms]">
+      <div className="contact py-6 px-7">
          <div className="mb-12">
             <div className="flex justify-between items-start">
                <h4 className="h4-size  mb-6 dark:text-[#e1e9f1] transition-colors duration-300">Contacts</h4>

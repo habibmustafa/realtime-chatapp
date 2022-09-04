@@ -4,12 +4,15 @@ import { LogInput } from "../components/LogInput";
 import { auth, login } from "../firebaseCongif/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
+import { useDispatch } from "react-redux";
+import { setChatUser, setChatUserId } from "../store/userSlice";
 
 const Login = () => {
    const [email, setEmail] = useState("");
    const [password, setPassword] = useState("");
    const [user, loading] = useAuthState(auth);
    const navigate = useNavigate();
+   const dispatch = useDispatch()
 
    const handleSubmit = async (e) => {
       e.preventDefault();
@@ -19,6 +22,8 @@ const Login = () => {
    useEffect(() => {
       if(loading) return
       if (user) {
+         dispatch(setChatUserId(false))
+         dispatch(setChatUser(false))
          navigate("/");
       }
    }, [user, loading, navigate]);

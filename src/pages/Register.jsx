@@ -4,6 +4,8 @@ import { LogInput } from "../components/LogInput";
 import { auth, register } from "../firebaseCongif/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { addUser } from "../firebaseCongif/usersDB";
+import { useDispatch } from "react-redux";
+import { setChatUser, setChatUserId } from "../store/userSlice";
 
 const Register = () => {
    const [email, setEmail] = useState("");
@@ -11,6 +13,7 @@ const Register = () => {
    const [password, setPassword] = useState("");
    const [user, loading] = useAuthState(auth);
    const navigate = useNavigate()
+   const dispatch = useDispatch()
 
    const handleSubmit = async (e) => {
       e.preventDefault();
@@ -21,7 +24,9 @@ const Register = () => {
       if(loading) return
       if (user) {
          addUser(user.uid, user.email, username, user.metadata.createdAt)
-         navigate("/");
+         dispatch(setChatUserId(false))
+         dispatch(setChatUser(false))
+         navigate("/setAvatar");
       }
    }, [user, loading, navigate]);
 

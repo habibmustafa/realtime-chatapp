@@ -27,7 +27,7 @@ const ContactItem = ({ cUser, index }) => {
             </div>
          )}
          {index > 0 &&
-            allUsers[index - 1].username[0] !== cUser.username[0] && (
+            allUsers[index - 1].username[0].toLowerCase() !== cUser.username[0].toLowerCase() && (
                <div className="p-4 text-[15px] font-semibold text-[#7269ef] uppercase leading[22.5px] mt-5 underline">
                   {cUser.username[0]}
                </div>

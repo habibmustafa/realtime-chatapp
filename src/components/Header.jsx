@@ -21,7 +21,6 @@ export const Header = () => {
       };
    }, [backBtn]);
 
-
    return (
       <div className="header p-6 border-b border-[#f0eff5] dark:border-[#36404a] transition-colors duration-[350ms] text-[#495057] dark:text-[#e1e9f1] text-[15px] leading-[22.5px] flex justify-between tablet:py-4 tablet:px-1.5">
          {/* name */}
@@ -37,17 +36,20 @@ export const Header = () => {
                </div>
             )}
             <div className="rounded-full w-[35px] h-[35px] bg-cover text-left">
-               <img
-                  className="rounded-full "
-                  src="https://image.shutterstock.com/image-vector/profile-blank-icon-empty-photo-260nw-535853269.jpg"
-                  alt=""
-               />
+               <img className="rounded-full " src={chatUser?.avatar} alt="" />
             </div>
             <div className="flex flex-col">
                <p className="cursor-pointer font-semibold leading-5 tracking-wide">
-                  {chatUser.username}
+                  {chatUser?.username}
                </p>
-               {chatUser.isActive && <span className="text-sm text-green-500">Online</span>}
+               <span className={`text-sm text-green-500 ${!chatUser?.isActive.status && "!text-[#7a7f9a] dark:text-[#abb4d2]"}`}>
+                  {chatUser?.isActive.status
+                     ? chatUser?.isActive.content
+                     : chatUser?.isActive.content.substring(11, 22) ===
+                       new Date().toString().substring(4, 15)
+                     ? `Today, ${chatUser?.isActive.content.substring(23, 28)}`
+                     : chatUser?.isActive.content}
+               </span>
             </div>
          </div>
 

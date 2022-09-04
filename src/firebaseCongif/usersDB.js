@@ -9,11 +9,21 @@ export const addUser = (uid, email, username, createdAt) => {
       email,
       username,
       createdAt,
-      isActive: true,
+      isActive: {
+         status: true,
+         content: "Online"
+      },
       bio: "",
+      avatar:"",
    });
 };
 
-export const userOnlineCheck = (uid, check) => {
-   set(ref(usersDB, `users/${uid}/isActive`), check)
+export const userOnlineCheck = (uid, status, content) => {
+   set(ref(usersDB, `users/${uid}/isActive`), {
+      status,
+      content
+   })
+}
+export const userSetAvatar = (uid, avatar) => {
+   set(ref(usersDB, `users/${uid}/avatar`), avatar)
 }

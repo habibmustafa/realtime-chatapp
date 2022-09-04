@@ -38,7 +38,7 @@ export const Chats = () => {
    }, [messages, user, connectionId, allUsers]);
 
    return (
-      <div className="chats h-full dark:bg-[#303841] box-shadow relative z-10 transition-colors duration-[350ms]">
+      <div className="chats">
          <div className="py-6 px-7">
             <h4 className="h4-size mb-6 dark:text-[#e1e9f1] transition-colors duration-300">Chats</h4>
 
