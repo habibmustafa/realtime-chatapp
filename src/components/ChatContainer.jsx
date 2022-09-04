@@ -107,8 +107,7 @@ export const ChatContainer = () => {
                               )}
 
                               {/* message */}
-                           {
-                              (message.uuid === 'writing' && message.sender !== chatUser.uid ) || <div
+                           <div
                               className={`flex items-end justify-end gap-2.5 mt-7 tablet:gap-0 tablet:mt-5 ${
                                  message.sender === chatUser.uid &&
                                  "flex-row-reverse"
@@ -155,7 +154,7 @@ export const ChatContainer = () => {
                                        <p className="text-[15px] leading-6 font-medium break-all">
                                           {message.message.text}
                                        </p>
-                                       {message.time && <span
+                                       <span
                                           className={`w-full text-[#ffffff80] text-xs leading-[18px] flex items-center gap-1 ${
                                              message.sender === chatUser.uid &&
                                              "!text-[#7a7f9a] text-right"
@@ -163,7 +162,7 @@ export const ChatContainer = () => {
                                        >
                                           <i className="ri-time-line align-middle"></i>
                                           {message.time.substring(16,21)}
-                                       </span>}
+                                       </span>
                                     </div>
                                  </div>
                                  {(thisMessages.length-1 !== i && thisMessages[i+1].sender === message.sender) || <p className="text-[#495057] text-sm leading-5 font-medium tablet:mx-2 tablet:text-xs">
@@ -184,7 +183,6 @@ export const ChatContainer = () => {
                               </div>
                               {/* {messages.find((item) => item.connectionId === connectionId).options.writing && <p>yaziyor..</p>} */}
                            </div>
-                           }
                         </div>
                      ))}
                </div>

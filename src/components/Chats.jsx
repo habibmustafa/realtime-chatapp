@@ -20,7 +20,7 @@ export const Chats = () => {
                .map((item) => {
                   if(item.messages) {
                      return {
-                        writing: item.options.writing,
+                        typing: item.options.typing,
                         seen: item.options.seen,
                         ...User,
                         ...Object.values(item.messages).sort(

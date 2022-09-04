@@ -27,7 +27,7 @@ export const addMessage = (connectionId, uuid, value, userId, username, chatUser
    set(ref(messagesDB, `connection/${connectionId}/options`), {
       sender: userId,
       seen: false,
-      writing: false,
+      typing: false,
    });
 };
 
