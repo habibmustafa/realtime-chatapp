@@ -37,7 +37,7 @@ const Register = () => {
             {/* content */}
             <div className="flex flex-col items-center mb-6">
                <h4 className="text-lg font-semibold text-[#495057]">Sing up</h4>
-               <p className="text-[#7a7f9a]">Get your Chatvia account now.</p>
+               <p className="text-[#7a7f9a]">Get your ChatAPP account now.</p>
             </div>
 
             {/* card */}
@@ -86,7 +86,7 @@ const Register = () => {
                      Signin
                   </Link>
                </p>
-               <p>© 2022 ChatAPp. Crafted with by habibmustafa</p>
+               <p>© 2022 ChatAPP. Crafted with by habibmustafa</p>
             </div>
          </div>
       </div>

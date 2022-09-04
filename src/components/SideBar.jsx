@@ -77,7 +77,7 @@ export const SideBar = () => {
             </div>
 
             {/* bottom nav */}
-            <div className="tablet:hidden">
+            <div>
                <button
                   title="Dark / Light Mode"
                   onClick={handleChangeTheme}
