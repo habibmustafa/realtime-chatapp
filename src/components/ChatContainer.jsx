@@ -82,7 +82,7 @@ export const ChatContainer = () => {
                <Header />
 
                {/* messages container */}
-               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:px-4">
+               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:px-1.5">
                   {/* message */}
                   {thisMessages &&
                      thisMessages.map((message, i) => (

@@ -32,7 +32,7 @@ const Contacts = () => {
             </div>
          </div>
 
-         <div className="all-users max-h-[665px] h-full overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:max-h-[620px]">
+         <div className="all-users max-h-[665px] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:max-h-[620px]">
             {allUsers &&
                allUsers
                   .filter(

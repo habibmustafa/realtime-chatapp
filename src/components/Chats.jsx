@@ -64,7 +64,7 @@ export const Chats = () => {
             <h5 className="text-[#495057] dark:text-[#e1e9f1] transition-colors duration-300 font-semibold leading-5 mb-4">
                Recent
             </h5>
-            <div className="users max-h-[665px] h-full overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:max-h-[620px]">
+            <div className="users max-h-[665px] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:max-h-[620px]">
                {allUsers ? (
                   !recentUsers ? (
                      <div className="flex justify-center items-center font-semibold mt-28 dark:text-[#e1e9f1]">
