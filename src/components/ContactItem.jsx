@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setChatUser } from "../store/userSlice";
+import { setChatUserId } from "../store/userSlice";
 import { setConnectionId } from "../store/messageSlice";
 import { setShow } from "../store/animSlice";
 
@@ -10,7 +10,8 @@ const ContactItem = ({ cUser, index }) => {
 
    const handleClick = () => {
       dispatch(setShow(true));
-      dispatch(setChatUser(cUser));
+      dispatch(setChatUserId(cUser.uid))
+      
       if (user.uid < cUser.uid) {
          dispatch(setConnectionId(`${user.uid}${cUser.uid}`));
       } else {

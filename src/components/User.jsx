@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setChatUser } from "../store/userSlice";
+import { setChatUserId } from "../store/userSlice";
 import { setConnectionId } from "../store/messageSlice";
 import { setShow } from "../store/animSlice";
 import { ref, set } from "firebase/database";
@@ -14,7 +14,7 @@ export const User = ({ cUser }) => {
 
    const handleClick = () => {
       dispatch(setShow(true));
-      dispatch(setChatUser(cUser));
+      dispatch(setChatUserId(cUser.uid))
 
       let id = null;
       if (user.uid < cUser.uid) {
@@ -29,6 +29,8 @@ export const User = ({ cUser }) => {
          set(ref(messagesDB, `connection/${id}/options/seen`), true);
       }
    };
+
+
 
    // helelik
    // useEffect(() => {
