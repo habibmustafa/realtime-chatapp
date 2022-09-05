@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ContactItem from "./ContactItem";
-import { ThreeDots } from "react-loader-spinner";
+import Loading from "../layouts/Loading";
 
 const Contacts = () => {
    const [search, setSearch] = useState("");
@@ -37,101 +37,18 @@ const Contacts = () => {
 
          <div className="all-users pl-7 pr-6 mr-1 h-[calc(100%_-_164px)] overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
             {allUsers ? (
-               // allUsers
-               //    .filter(
-               //       (name) =>
-               //          !name.username
-               //             .toLowerCase()
-               //             .indexOf(search.toLowerCase()) || search === ""
-               //    )
-               //    .map((cUser, index) => (
-               //       <ContactItem key={cUser.uid} cUser={cUser} index={index} />
-               //    ))
-               <>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-               </>
+               allUsers
+                  .filter(
+                     (name) =>
+                        !name.username
+                           .toLowerCase()
+                           .indexOf(search.toLowerCase()) || search === ""
+                  )
+                  .map((cUser, index) => (
+                     <ContactItem key={cUser.uid} cUser={cUser} index={index} />
+                  ))
             ) : (
-               <div className="flex justify-center items-center h-full">
-                  <ThreeDots
-                     height="85"
-                     width="85"
-                     radius="10"
-                     color={
-                        localStorage.theme === "light" ? "#495057" : "#a6b0cf"
-                     }
-                     ariaLabel="three-dots-loading"
-                     visible={true}
-                  />
-               </div>
+               <Loading />
             )}
          </div>
       </div>

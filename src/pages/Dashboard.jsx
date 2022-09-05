@@ -54,7 +54,7 @@ const Dashboard = () => {
             // When I disconnect, remove this device
             onDisconnect(ref(usersDB, `users/${user.uid}/isActive`)).set({
                status: false,
-               content: `Last seen: ${new Date().toString().substring(4, 21)}`,
+               content: `${new Date().toString().substring(4, 21)}`,
             });
          }
       });

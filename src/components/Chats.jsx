@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { User } from "./User";
 import { useSelector } from "react-redux/es/exports";
-import { ThreeDots } from "react-loader-spinner";
+import Loading from "../layouts/Loading";
 
 export const Chats = () => {
    const [search, setSearch] = useState("");
@@ -73,102 +73,17 @@ export const Chats = () => {
                         Start a Chat
                      </div>
                   ) : (
-                     // recentUsers
-                     //    .filter(
-                        //    (name) =>
-                        //       !name.username
-                        //          .toLowerCase()
-                        //          .indexOf(search.toLowerCase()) || search === ""
-                        // )
-                        // .map((cUser) => <User key={cUser.uid} cUser={cUser} />)
-                     <>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-                  <div>ahsdee</div>
-               </>
+                     recentUsers
+                        .filter(
+                           (name) =>
+                              !name.username
+                                 .toLowerCase()
+                                 .indexOf(search.toLowerCase()) || search === ""
+                        )
+                        .map((cUser) => <User key={cUser.uid} cUser={cUser} />)
                   )
                ) : (
-                  <div className="flex justify-center items-center h-full">
-                     <ThreeDots
-                        height="85"
-                        width="85"
-                        radius="10"
-                        color={
-                           localStorage.theme === "light"
-                              ? "#495057"
-                              : "#a6b0cf"
-                        }
-                        ariaLabel="three-dots-loading"
-                        visible={true}
-                     />
-                  </div>
+                  <Loading />
                )}
             </div>
          </div>

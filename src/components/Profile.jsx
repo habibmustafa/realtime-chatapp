@@ -1,14 +1,14 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { ThreeDots } from "react-loader-spinner";
+import Loading from "../layouts/Loading";
 
 const Profile = () => {
    const { user } = useSelector((state) => state.user);
 
    return (
-      <div className="profile py-6 px-6 mx-1 h-full overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
+      <div className="profile pt-6 px-6 mx-1 h-full overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
          {/* my profile */}
-         <div className="flex justify-between items-start relative top-0">
+         <div className="flex justify-between items-start">
             <h4 className="h4-size dark:text-[#e1e9f1] transition-colors duration-300">
                My Profile
             </h4>
@@ -93,16 +93,7 @@ const Profile = () => {
                </div>
             </>
          ) : (
-            <div className="flex justify-center items-center mt-72">
-               <ThreeDots
-                  height="85"
-                  width="85"
-                  radius="10"
-                  color={localStorage.theme === "light" ? "#495057" : "#a6b0cf"}
-                  ariaLabel="three-dots-loading"
-                  visible={true}
-               />
-            </div>
+            <Loading />
          )}
       </div>
    );
