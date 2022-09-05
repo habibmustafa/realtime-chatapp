@@ -38,7 +38,7 @@ export const Chats = () => {
    }, [messages, user, connectionId, allUsers]);
 
    return (
-      <div className="chats">
+      <div className="chats h-full">
          <div className="py-6 px-7">
             <h4 className="h4-size mb-6 dark:text-[#e1e9f1] transition-colors duration-300">
                Chats
@@ -62,11 +62,11 @@ export const Chats = () => {
          </div>
 
          {/* recent */}
-         <div className="recent pl-3">
+         <div className="recent pl-3 h-[calc(100%-202px)]">
             <h5 className="text-[#495057] dark:text-[#e1e9f1] transition-colors duration-300 font-semibold leading-5 mb-4">
                Recent
             </h5>
-            <div className="users h-[calc(100vh_-_210px)] pr-2 mr-1 overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500 tablet:h-[calc(100vh_-_260px)]">
+            <div className="users pr-2 mr-1 h-full  overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
                {allUsers ? (
                   !recentUsers ? (
                      <div className="flex justify-center items-center h-full font-semibold dark:text-[#e1e9f1]">

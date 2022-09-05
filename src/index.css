@@ -27,8 +27,34 @@
       color: #7a7f9a;
    }
 
+   /* scrollbar */
    .scrollbar-border::-webkit-scrollbar-thumb {
       border-radius: 15px;
+   }
+   .scrollbar-current {
+      --scrollbar-track: initial;
+      --scrollbar-thumb: initial;
+      scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+      overflow: overlay;
+   }
+   .scrollbar-current.overflow-x-hidden {
+      overflow-x: hidden;
+   }
+   .scrollbar-thin.overflow-y-hidden {
+      overflow-y: hidden;
+   }
+   .scrollbar-current::-webkit-scrollbar-track {
+      background-color: var(--scrollbar-track);
+   }
+   .scrollbar-current::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-thumb);
+   }
+   .scrollbar-current {
+      scrollbar-width: current;
+   }
+   .scrollbar-current::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
    }
 
    .box-shadow {

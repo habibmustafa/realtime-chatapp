@@ -57,7 +57,7 @@ export const SideBar = () => {
    return (
       <div className="sidebar flex h-full tablet:flex-col-reverse tablet:w-full">
          {/* sidemenu */}
-         <div className="sidemenu bg-white dark:bg-[#36404A] box-shadow transition-colors duration-300 relative z-20 max-w-[75px] h-screen flex flex-col justify-between items-center p-4 tablet:max-w-full tablet:p-1 tablet:flex-1 tablet:flex-row">
+         <div className="sidemenu bg-white dark:bg-[#36404A] box-shadow transition-colors duration-300 relative z-20 w-[75px] h-full flex flex-col justify-between items-center p-4 tablet:w-full tablet:p-1 tablet:h-[61px] tablet:flex-row">
             {/* logo */}
             <div className="flex items-center gap-1 text-3xl text-[#7269ef] dark:text-[#6159cb] cursor-pointer tablet:hidden">
                <i className="ri-chat-smile-2-fill"></i>
@@ -113,7 +113,7 @@ export const SideBar = () => {
          </div>
 
          {/* sidechange */}
-         <div className="sidechange w-96 bg-[#f5f7fb] h-full dark:bg-[#303841] box-shadow relative z-10 transition-colors duration-[350ms] tablet:w-full">
+         <div className="sidechange w-96 bg-[#f5f7fb] h-full dark:bg-[#303841] box-shadow relative z-10 transition-colors duration-[350ms] tablet:w-full tablet:h-[calc(100%-61px)]">
             {button.active === 1 && <Profile />}
             {button.active === 2 && <Chats />}
             {button.active === 3 && <Contacts />}

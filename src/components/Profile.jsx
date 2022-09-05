@@ -6,7 +6,7 @@ const Profile = () => {
    const { user } = useSelector((state) => state.user);
 
    return (
-      <div className="profile py-5 px-6 mx-1 h-full tablet:h-[calc(100vh_-_59px)] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
+      <div className="profile py-6 px-6 mx-1 h-full overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
          {/* my profile */}
          <div className="flex justify-between items-start relative top-0">
             <h4 className="h4-size dark:text-[#e1e9f1] transition-colors duration-300">

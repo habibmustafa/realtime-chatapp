@@ -8,7 +8,7 @@ const Contacts = () => {
    const { allUsers } = useSelector((state) => state.user);
 
    return (
-      <div className="contact">
+      <div className="contact h-full">
          <div className="mb-12 pt-6 px-7">
             <div className="flex justify-between items-start">
                <h4 className="h4-size  mb-6 dark:text-[#e1e9f1] transition-colors duration-300">
@@ -35,7 +35,7 @@ const Contacts = () => {
             </div>
          </div>
 
-         <div className="all-users pl-7 pr-6 mr-1 h-[calc(100vh_-_180px)] tablet:h-[calc(100vh_-_224px)] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
+         <div className="all-users pl-7 pr-6 mr-1 h-[calc(100%_-_164px)] overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
             {allUsers ? (
                // allUsers
                //    .filter(
