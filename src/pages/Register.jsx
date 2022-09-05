@@ -23,7 +23,7 @@ const Register = () => {
    useEffect(() => {
       if(loading) return
       if (user) {
-         addUser(user.uid, user.email, username, user.metadata.createdAt)
+         addUser(user.uid, user.email, username, user.metadata.createdAt, user.metadata.lastSignInTime.substring(0,16))
          dispatch(setChatUserId(false))
          dispatch(setChatUser(false))
          navigate("/setAvatar");

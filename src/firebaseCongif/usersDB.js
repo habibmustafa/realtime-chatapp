@@ -3,7 +3,7 @@ import { getDatabase, ref, set } from "firebase/database";
 
 export const usersDB = getDatabase(app);
 
-export const addUser = (uid, email, username, createdAt) => {
+export const addUser = (uid, email, username, createdAt, lastSignInTime) => {
    set(ref(usersDB, "users/" + uid), {
       uid,
       email,
@@ -15,8 +15,13 @@ export const addUser = (uid, email, username, createdAt) => {
       },
       bio: "",
       avatar:"",
+      lastSignInTime
    });
 };
+
+export const lastSignIn = (uid, time) => {
+   set(ref(usersDB, `users/${uid}/lastSignInTime`), time)
+}
 
 export const userOnlineCheck = (uid, status, content) => {
    set(ref(usersDB, `users/${uid}/isActive`), {
@@ -24,6 +29,7 @@ export const userOnlineCheck = (uid, status, content) => {
       content
    })
 }
+
 export const userSetAvatar = (uid, avatar) => {
    set(ref(usersDB, `users/${uid}/avatar`), avatar)
 }

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
 const SetAvatar = () => {
-   const [user, loading, error] = useAuthState(auth);
+   const [user, loading] = useAuthState(auth);
    const api = `https://api.multiavatar.com`;
    const [activeAvatar, setActiveAvatar] = useState(false);
    const [avatars] = useState([
@@ -50,14 +50,13 @@ const SetAvatar = () => {
       if (user && activeAvatar !== false) {
          userSetAvatar(user.uid, avatars[activeAvatar]);
          navigate("/");
-      }
-      else {
-         toast.error("Select an Avatar!", {className:"bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]"})
+      } else {
+         toast.error("Select an Avatar!", {
+            className:
+               "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
+         });
       }
    };
-
-   console.log(avatars);
-   console.log(activeAvatar);
 
    return (
       <div className="setAvatar h-full flex flex-col px-6 justify-center items-center gap-10 dark:bg-[#262E35] mobile:gap-8">

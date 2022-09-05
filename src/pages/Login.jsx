@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch } from "react-redux";
 import { setChatUser, setChatUserId } from "../store/userSlice";
+import { lastSignIn } from "../firebaseCongif/usersDB";
 
 const Login = () => {
    const [email, setEmail] = useState("");
@@ -22,6 +23,7 @@ const Login = () => {
    useEffect(() => {
       if(loading) return
       if (user) {
+         lastSignIn(user.uid, user.metadata.lastSignInTime.substring(0,16))
          dispatch(setChatUserId(false))
          dispatch(setChatUser(false))
          navigate("/");

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { User } from "./User";
 import { useSelector } from "react-redux/es/exports";
+import { ThreeDots } from "react-loader-spinner";
 
 export const Chats = () => {
    const [search, setSearch] = useState("");
@@ -39,7 +40,9 @@ export const Chats = () => {
    return (
       <div className="chats">
          <div className="py-6 px-7">
-            <h4 className="h4-size mb-6 dark:text-[#e1e9f1] transition-colors duration-300">Chats</h4>
+            <h4 className="h4-size mb-6 dark:text-[#e1e9f1] transition-colors duration-300">
+               Chats
+            </h4>
 
             {/* search */}
             <div className="w-[333px] h-11 bg-[#e6ebf5] dark:bg-[#36404a] transition-colors duration-300 flex items-center rounded-[6.4px] mb-6 tablet:w-full">
@@ -66,7 +69,7 @@ export const Chats = () => {
             <div className="users max-h-[665px] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:max-h-[620px]">
                {allUsers ? (
                   !recentUsers ? (
-                     <div className="flex justify-center items-center font-semibold mt-28 dark:text-[#e1e9f1]">
+                     <div className="flex justify-center items-center font-semibold mt-44 dark:text-[#e1e9f1]">
                         Start a Chat
                      </div>
                   ) : (
@@ -80,8 +83,19 @@ export const Chats = () => {
                         .map((cUser) => <User key={cUser.uid} cUser={cUser} />)
                   )
                ) : (
-                  <div className="flex justify-center items-center mt-28 dark:text-[#e1e9f1]">
-                     Loading...
+                  <div className="flex justify-center items-center mt-44 dark:text-[#e1e9f1]">
+                     <ThreeDots
+                        height="85"
+                        width="85"
+                        radius="10"
+                        color={
+                           localStorage.theme === "light"
+                              ? "#495057"
+                              : "#a6b0cf"
+                        }
+                        ariaLabel="three-dots-loading"
+                        visible={true}
+                     />
                   </div>
                )}
             </div>
