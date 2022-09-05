@@ -21,7 +21,6 @@ export const Chats = () => {
                .map((item) => {
                   if (item.messages) {
                      return {
-                        typing: item.options.typing,
                         seen: item.options.seen,
                         ...User,
                         ...Object.values(item.messages).sort(

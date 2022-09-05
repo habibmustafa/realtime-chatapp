@@ -86,7 +86,9 @@ export const User = ({ cUser }) => {
                </span>
             ) : (
                cUser.isActive.status && (
-                  <span className="text-sm text-green-500">{cUser.isActive.content}</span>
+                  <span className="text-sm text-green-500">
+                     {cUser.isActive.content}
+                  </span>
                )
             )}
          </div>

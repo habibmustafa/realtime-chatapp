@@ -36,19 +36,19 @@ export const Header = () => {
                </div>
             )}
             <div className="rounded-full w-[35px] h-[35px] bg-cover text-left">
-               <img className="rounded-full " src={chatUser?.avatar} alt="" />
+               <img className="rounded-full " src={chatUser.avatar} alt="" />
             </div>
             <div className="flex flex-col">
                <p className="cursor-pointer font-semibold leading-5 tracking-wide">
                   {chatUser?.username}
                </p>
                <span className={`text-sm text-green-500 ${!chatUser?.isActive.status && "!text-[#7a7f9a] dark:text-[#abb4d2]"}`}>
-                  {chatUser?.isActive.status
-                     ? chatUser?.isActive.content
-                     : chatUser?.isActive.content.substring(11, 22) ===
+                  {chatUser.isActive.status
+                     ? chatUser.isActive.content
+                     : chatUser.isActive.content.substring(11, 22) ===
                        new Date().toString().substring(4, 15)
-                     ? `Today, ${chatUser?.isActive.content.substring(23, 28)}`
-                     : chatUser?.isActive.content}
+                     ? `Today, ${chatUser.isActive.content.substring(23, 28)}`
+                     : chatUser.isActive.content}
                </span>
             </div>
          </div>
