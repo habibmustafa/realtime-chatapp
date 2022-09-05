@@ -113,7 +113,7 @@ export const SideBar = () => {
          </div>
 
          {/* sidechange */}
-         <div className="sidechange w-96 bg-[#f5f7fb] h-full dark:bg-[#303841] box-shadow relative z-10 transition-colors duration-[350ms] tablet:w-full tablet:h-[calc(100vh_-_51px)]">
+         <div className="sidechange w-96 bg-[#f5f7fb] h-full dark:bg-[#303841] box-shadow relative z-10 transition-colors duration-[350ms] tablet:w-full">
             {button.active === 1 && <Profile />}
             {button.active === 2 && <Chats />}
             {button.active === 3 && <Contacts />}

@@ -62,11 +62,11 @@ export const Chats = () => {
          </div>
 
          {/* recent */}
-         <div className="recent px-3">
+         <div className="recent pl-3">
             <h5 className="text-[#495057] dark:text-[#e1e9f1] transition-colors duration-300 font-semibold leading-5 mb-4">
                Recent
             </h5>
-            <div className="users h-[calc(100vh_-_210px)] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500 tablet:h-[calc(100vh_-_260px)]">
+            <div className="users h-[calc(100vh_-_210px)] pr-2 mr-1 overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500 tablet:h-[calc(100vh_-_260px)]">
                {allUsers ? (
                   !recentUsers ? (
                      <div className="flex justify-center items-center h-full font-semibold dark:text-[#e1e9f1]">
@@ -75,12 +75,12 @@ export const Chats = () => {
                   ) : (
                      // recentUsers
                      //    .filter(
-                     //       (name) =>
-                     //          !name.username
-                     //             .toLowerCase()
-                     //             .indexOf(search.toLowerCase()) || search === ""
-                     //    )
-                     //    .map((cUser) => <User key={cUser.uid} cUser={cUser} />)
+                        //    (name) =>
+                        //       !name.username
+                        //          .toLowerCase()
+                        //          .indexOf(search.toLowerCase()) || search === ""
+                        // )
+                        // .map((cUser) => <User key={cUser.uid} cUser={cUser} />)
                      <>
                   <div>ahsdee</div>
                   <div>ahsdee</div>

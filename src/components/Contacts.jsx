@@ -35,7 +35,7 @@ const Contacts = () => {
             </div>
          </div>
 
-         <div className="all-users pl-7 pr-4 mr-3 h-[calc(100vh_-_180px)] tablet:h-[calc(100vh_-_224px)] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
+         <div className="all-users pl-7 pr-6 mr-1 h-[calc(100vh_-_180px)] tablet:h-[calc(100vh_-_224px)] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
             {allUsers ? (
                // allUsers
                //    .filter(
