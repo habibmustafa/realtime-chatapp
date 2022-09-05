@@ -9,6 +9,7 @@ import { messagesDB } from "../firebaseCongif/messagesDB";
 const AnimatedDropdown = ({ message, align }) => {
    const [open, setOpen] = useState(false);
    const animRef = useRef();
+   const buttonRef = useRef();
    const { connectionId } = useSelector((state) => state.message);
    const { user } = useSelector((state) => state.user);
 
@@ -29,7 +30,7 @@ const AnimatedDropdown = ({ message, align }) => {
 
    useEffect(() => {
       const checkIfClickedOutside = (e) => {
-         if (open && animRef.current && !animRef.current.contains(e.target)) {
+         if (open && animRef.current && !animRef.current.contains(e.target) && !buttonRef.current.contains(e.target)) {
             setOpen(false);
          }
       };
@@ -41,7 +42,7 @@ const AnimatedDropdown = ({ message, align }) => {
 
    return (
       <>
-         <button onClick={handler} className="w-4">
+         <button ref={buttonRef} onClick={handler} className="w-4">
             <i className="ri-more-2-fill"></i>
          </button>
          {open && (
