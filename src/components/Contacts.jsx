@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import ContactItem from "./ContactItem";
+import { ThreeDots } from "react-loader-spinner";
 
 const Contacts = () => {
    const [search, setSearch] = useState("");
    const { allUsers } = useSelector((state) => state.user);
 
    return (
-      <div className="contact py-6 px-7">
-         <div className="mb-12">
+      <div className="contact">
+         <div className="mb-12 pt-6 px-7">
             <div className="flex justify-between items-start">
-               <h4 className="h4-size  mb-6 dark:text-[#e1e9f1] transition-colors duration-300">Contacts</h4>
+               <h4 className="h4-size  mb-6 dark:text-[#e1e9f1] transition-colors duration-300">
+                  Contacts
+               </h4>
                <span className="flex items-center text-[#7a7f9a] text-[18px] leading-7 text-center px-4 dark:text-[#9aa1b9] transition-colors duration-150">
                   <i className="ri-user-add-line"></i>
                </span>
@@ -32,18 +35,104 @@ const Contacts = () => {
             </div>
          </div>
 
-         <div className="all-users max-h-[665px] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:max-h-[620px]">
-            {allUsers &&
-               allUsers
-                  .filter(
-                     (name) =>
-                        !name.username
-                           .toLowerCase()
-                           .indexOf(search.toLowerCase()) || search === ""
-                  )
-                  .map((cUser, index) => (
-                     <ContactItem key={cUser.uid} cUser={cUser} index={index} />
-                  ))}
+         <div className="all-users pl-7 pr-4 mr-3 h-[calc(100vh_-_180px)] tablet:h-[calc(100vh_-_224px)] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
+            {allUsers ? (
+               // allUsers
+               //    .filter(
+               //       (name) =>
+               //          !name.username
+               //             .toLowerCase()
+               //             .indexOf(search.toLowerCase()) || search === ""
+               //    )
+               //    .map((cUser, index) => (
+               //       <ContactItem key={cUser.uid} cUser={cUser} index={index} />
+               //    ))
+               <>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+               </>
+            ) : (
+               <div className="flex justify-center items-center h-full">
+                  <ThreeDots
+                     height="85"
+                     width="85"
+                     radius="10"
+                     color={
+                        localStorage.theme === "light" ? "#495057" : "#a6b0cf"
+                     }
+                     ariaLabel="three-dots-loading"
+                     visible={true}
+                  />
+               </div>
+            )}
          </div>
       </div>
    );

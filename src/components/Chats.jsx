@@ -66,24 +66,96 @@ export const Chats = () => {
             <h5 className="text-[#495057] dark:text-[#e1e9f1] transition-colors duration-300 font-semibold leading-5 mb-4">
                Recent
             </h5>
-            <div className="users max-h-[665px] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:max-h-[620px]">
+            <div className="users h-[calc(100vh_-_210px)] overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500 tablet:h-[calc(100vh_-_260px)]">
                {allUsers ? (
                   !recentUsers ? (
-                     <div className="flex justify-center items-center font-semibold mt-44 dark:text-[#e1e9f1]">
+                     <div className="flex justify-center items-center h-full font-semibold dark:text-[#e1e9f1]">
                         Start a Chat
                      </div>
                   ) : (
-                     recentUsers
-                        .filter(
-                           (name) =>
-                              !name.username
-                                 .toLowerCase()
-                                 .indexOf(search.toLowerCase()) || search === ""
-                        )
-                        .map((cUser) => <User key={cUser.uid} cUser={cUser} />)
+                     // recentUsers
+                     //    .filter(
+                     //       (name) =>
+                     //          !name.username
+                     //             .toLowerCase()
+                     //             .indexOf(search.toLowerCase()) || search === ""
+                     //    )
+                     //    .map((cUser) => <User key={cUser.uid} cUser={cUser} />)
+                     <>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+                  <div>ahsdee</div>
+               </>
                   )
                ) : (
-                  <div className="flex justify-center items-center mt-44">
+                  <div className="flex justify-center items-center h-full">
                      <ThreeDots
                         height="85"
                         width="85"
