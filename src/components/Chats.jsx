@@ -83,7 +83,7 @@ export const Chats = () => {
                         .map((cUser) => <User key={cUser.uid} cUser={cUser} />)
                   )
                ) : (
-                  <div className="flex justify-center items-center mt-44 dark:text-[#e1e9f1]">
+                  <div className="flex justify-center items-center mt-44">
                      <ThreeDots
                         height="85"
                         width="85"
