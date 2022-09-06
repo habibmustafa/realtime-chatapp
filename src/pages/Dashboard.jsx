@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { ChatContainer } from "../components/ChatContainer";
 import { SideBar } from "../components/SideBar";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { auth } from "../firebaseCongif/auth";
 import { ref, onValue, onDisconnect } from "firebase/database";
@@ -13,14 +12,11 @@ import { setMessages } from "../store/messageSlice";
 const Dashboard = () => {
    const [user, loading] = useAuthState(auth);
    const { chatUserId, allUsers } = useSelector((state) => state.user);
-   const navigate = useNavigate();
    const dispatch = useDispatch();
 
    useEffect(() => {
       if (loading) return;
-      else if (!user) {
-         navigate("/login");
-      } else {
+      else if (user) {
          onValue(ref(usersDB, `users/`), (snapshot) => {
             const data = snapshot.val();
             if (data !== null) {
@@ -46,18 +42,18 @@ const Dashboard = () => {
    }, [chatUserId, allUsers]);
 
    useEffect(() => {
-      onValue(ref(usersDB, ".info/connected"), (snap) => {
-         if (snap.val() === true && user) {
-            // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
-            userOnlineCheck(user.uid, true, "Online");
-
-            // When I disconnect, remove this device
-            onDisconnect(ref(usersDB, `users/${user.uid}/isActive`)).set({
-               status: false,
-               content: `${new Date().toString().substring(4, 21)}`,
-            });
-         }
-      });
+         onValue(ref(usersDB, ".info/connected"), (snap) => {
+            if (snap.val() === true && user && user.photoURL) {
+               // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
+               userOnlineCheck(user.uid, true, "Online");
+   
+               // When I disconnect, remove this device
+               onDisconnect(ref(usersDB, `users/${user.uid}/isActive`)).set({
+                  status: false,
+                  content: `${new Date().toString().substring(4, 21)}`,
+               });
+            }
+         });
       return () => {
          dispatch(setMessages([]));
       };

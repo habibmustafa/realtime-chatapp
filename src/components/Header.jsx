@@ -40,6 +40,7 @@ export const Header = ({searchMessage}) => {
    }, [open]);
 
    // search value change
+   // useCallback a al
    useEffect(() => {
       searchMessage(value)
    }, [value])
@@ -95,7 +96,7 @@ export const Header = ({searchMessage}) => {
 
             {/* search */}
             {open && (
-               <div ref={animRef} className={`absolute z-10 w-60 mobile:w-44 right-3/4 top-full p-2 rounded box-shadow border-[1px] border-[#f0eff5] dark:bg-[#313a43] dark:border-[#36404a] ${open ? "openAnimation" : " closeAnimation"}`}>
+               <div ref={animRef} className={`absolute z-10 w-60 mobile:w-48 right-3/4 top-full p-2 rounded box-shadow border-[1px] border-[#f0eff5] dark:bg-[#313a43] dark:border-[#36404a] ${open ? "openAnimation" : " closeAnimation"}`}>
                   <input value={value} onChange={(e) => {setValue(e.target.value)}} type="text" placeholder="Search.." className="bg-[#E6EBF5] w-full rounded text-sm leading-[21px] px-4 py-2 border-none outline-none text-[#495057] dark:bg-[#36404A] dark:text-[#a6b0cf]" />
                </div>
             )}

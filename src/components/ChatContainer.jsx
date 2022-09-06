@@ -114,7 +114,7 @@ export const ChatContainer = () => {
 
                               {/* message */}
                            <div
-                              className={`flex items-end justify-end gap-2.5 mt-7 tablet:gap-0 tablet:mt-5 ${
+                              className={`flex items-end justify-end gap-2.5 mt-7 tablet:gap-0 tablet:mt-3.5 ${
                                  message.sender === chatUser.uid &&
                                  "flex-row-reverse"
                               }`}

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 // import axios from "axios";
 // import { Buffer } from "buffer";
 import { userSetAvatar } from "../firebaseCongif/usersDB";
-import { auth } from "../firebaseCongif/auth";
+import { addAvatar, auth } from "../firebaseCongif/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -45,9 +45,10 @@ const SetAvatar = () => {
       setActiveAvatar(i);
    };
 
-   const handleClick = () => {
+   const handleClick = async () => {
       if (loading) return;
       if (user && activeAvatar !== false) {
+         await addAvatar(avatars[activeAvatar])
          userSetAvatar(user.uid, avatars[activeAvatar]);
          navigate("/");
       } else {

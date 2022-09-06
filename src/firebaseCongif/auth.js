@@ -26,6 +26,16 @@ export const register = async (email, password, username) => {
       toast.error(err.message);
    }
 };
+// setAvatar
+export const addAvatar = async (avatar) => {
+   try {
+      await updateProfile(auth.currentUser, {
+         photoURL: avatar
+      })
+   } catch (err) {
+      toast.error(err.message);
+   }
+}
 
 // login
 export const login = async (email, password) => {
