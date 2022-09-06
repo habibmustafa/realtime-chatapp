@@ -11,6 +11,7 @@ import AnimatedDropdown from "./AnimatedDropdown";
 
 export const ChatContainer = () => {
    const [thisMessages, setThisMessages] = useState([]);
+   const [search, setSearch] = useState('')
    const { user, chatUser } = useSelector((state) => state.user);
    const { messages, connectionId } = useSelector((state) => state.message);
    const { show } = useSelector((state) => state.anim);
@@ -70,6 +71,11 @@ export const ChatContainer = () => {
       scrollRef.current?.scrollIntoView();
    }, [thisMessages, chatUser]);
 
+   const searchMessage = (value) => {
+      console.log(value);
+      setSearch(value)
+   }
+
    // receive messages
    return (
       <div
@@ -79,13 +85,14 @@ export const ChatContainer = () => {
       >
          {chatUser ? (
             <div className="flex h-full flex-col">
-               <Header />
+               <Header searchMessage={searchMessage} />
 
                {/* messages container */}
                <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:px-1.5">
                   {/* message */}
                   {thisMessages &&
-                     thisMessages.map((message, i) => (
+                     thisMessages.filter(name => !name.message.text.toLowerCase().indexOf(search.toLowerCase()) || search === "")
+                     .map((message, i) => (
                         <div ref={scrollRef} key={i}>
                            
                            {/* timer */}

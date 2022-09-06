@@ -13,10 +13,6 @@ const AnimatedDropdown = ({ message, align }) => {
    const { connectionId } = useSelector((state) => state.message);
    const { user } = useSelector((state) => state.user);
 
-   const handler = () => {
-      setOpen(!open);
-   };
-
    const handleDelete = () => {
       setOpen(false);
       message.sender === user.uid &&
@@ -42,7 +38,7 @@ const AnimatedDropdown = ({ message, align }) => {
 
    return (
       <>
-         <button ref={buttonRef} onClick={handler} className="w-4">
+         <button ref={buttonRef} onClick={() => {setOpen(!open)}} className="w-4">
             <i className="ri-more-2-fill"></i>
          </button>
          {open && (
