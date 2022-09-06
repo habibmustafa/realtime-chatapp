@@ -7,7 +7,7 @@ import { Welcome } from "../components/Welcome";
 import { uid } from "uid";
 import { useEffect, useState, useRef } from "react";
 import { setMessages } from "../store/messageSlice";
-import AnimatedDropdown from "./AnimatedDropdown";
+import {MessageSettings} from "./AnimatedDropdown";
 
 export const ChatContainer = () => {
    const [thisMessages, setThisMessages] = useState([]);
@@ -114,7 +114,7 @@ export const ChatContainer = () => {
 
                               {/* message */}
                            <div
-                              className={`flex items-end justify-end gap-2.5 mt-7 tablet:gap-0 tablet:mt-3.5 ${
+                              className={`flex items-end justify-end gap-2.5 mt-6 tablet:gap-0 tablet:mt-3.5 ${
                                  message.sender === chatUser.uid &&
                                  "flex-row-reverse"
                               }`}
@@ -138,7 +138,7 @@ export const ChatContainer = () => {
 
                                     {/* icon */}
                                     <div className="w-4 h-[15px] text-[#6159cb] relative text-[15px] leading-6 text-right inline-block">
-                                       <AnimatedDropdown
+                                       <MessageSettings
                                           message={message}
                                           align={
                                              message.sender === chatUser.uid

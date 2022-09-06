@@ -75,7 +75,7 @@ const SetAvatar = () => {
                      <img
                         src={`${avatar}`}
                         alt="avatar"
-                        className={`w-full transition duration-[350ms] rounded-full p-1 ${
+                        className={`w-full box-shadow transition duration-[350ms] rounded-full p-1 ${
                            activeAvatar === i &&
                            " scale-110 border-4 border-blue-600"
                         }`}

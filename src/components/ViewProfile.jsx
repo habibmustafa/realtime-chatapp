@@ -29,7 +29,7 @@ const ViewProfile = () => {
    return (
       <div
          ref={ref}
-         className="view-profile w-96 h-full p-6 pb-0 absview:absolute absview:right-0 absview:z-30 mobile:w-full tablet:h-max tablet:border-l-2 tablet:border-b-2 mobile:h-full mobile:border-none tablet:pt-4 bg-white dark:bg-[#262E35] border-l-4 border-[#F0EFF5] dark:border-[#36404A] transition-colors duration-[400ms] overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500"
+         className="view-profile w-96 h-full p-6 pb-0 absview:absolute absview:right-0 absview:z-30 mobile:w-full tablet:h-[calc(100%-77px)] tablet:border-l-2 mobile:h-full mobile:border-none tablet:px-5 tablet:pt-4 bg-white dark:bg-[#262E35] border-l-4 border-[#F0EFF5] dark:border-[#36404A] transition-colors duration-[400ms] overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500"
       >
          {/* Cancel */}
          {chatUser ? (

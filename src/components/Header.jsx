@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setShow, setViewProfile } from "../store/animSlice";
+import { UserSettings } from "./AnimatedDropdown";
 
 export const Header = ({ searchMessage }) => {
    const [backBtn, setBackBtn] = useState(
@@ -122,13 +123,14 @@ export const Header = ({ searchMessage }) => {
                onClick={() => {
                   dispatch(setViewProfile(true));
                }}
-               className="w-10 h-10 leading-10 hover:scale-110"
+               className="w-10 h-10 leading-10 hover:scale-110 tablet:hidden"
             >
                <i className="ri-user-2-line"></i>
             </button>
-            <button className="w-10 h-10 leading-10 hover:scale-110">
+            {/* <button className="w-10 h-10 leading-10 hover:scale-110">
                <i className="ri-more-fill"></i>
-            </button>
+            </button> */}
+            <UserSettings />
          </div>
       </div>
    );
