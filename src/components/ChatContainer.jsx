@@ -72,7 +72,6 @@ export const ChatContainer = () => {
    }, [thisMessages, chatUser]);
 
    const searchMessage = (value) => {
-      console.log(value);
       setSearch(value)
    }
 
