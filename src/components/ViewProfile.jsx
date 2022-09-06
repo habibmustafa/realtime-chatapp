@@ -1,57 +1,85 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import { useRef, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Loading from "../layouts/Loading";
+import { setViewProfile } from "../store/animSlice";
 
-const Profile = () => {
-   const { user } = useSelector((state) => state.user);
+const ViewProfile = () => {
+   const { chatUser } = useSelector((state) => state.user);
+   const { viewProfile } = useSelector((state) => state.anim);
+   const dispatch = useDispatch();
+   const ref = useRef();
+
+   useEffect(() => {
+      const checkIfClickedOutside = (e) => {
+         if (
+            viewProfile &&
+            ref.current &&
+            !ref.current.contains(e.target) &&
+            window.innerWidth <= 991
+         ) {
+            dispatch(setViewProfile(false));
+         }
+      };
+      document.addEventListener("mousedown", checkIfClickedOutside);
+      return () => {
+         document.removeEventListener("mousedown", checkIfClickedOutside);
+      };
+   }, [viewProfile]);
 
    return (
-      <div className="profile pt-6 px-6 mx-1 h-full overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
-         {/* my profile */}
-         <div className="flex justify-between items-start">
-            <h4 className="h4-size dark:text-[#e1e9f1] transition-colors duration-300">
-               My Profile
-            </h4>
-            <span className="flex items-center text-[#7a7f9a] text-[18px] leading-7 text-center dark:text-[#9aa1b9] transition-colors duration-150">
-               <i className="ri-more-2-fill"></i>
-            </span>
-         </div>
-
-         {user ? (
+      <div
+         ref={ref}
+         className="view-profile w-96 h-full p-6 pb-0 absview:absolute absview:right-0 absview:z-30 mobile:w-full tablet:h-max tablet:border-l-2 tablet:border-b-2 mobile:h-full mobile:border-none tablet:pt-4 bg-white dark:bg-[#262E35] border-l-4 border-[#F0EFF5] dark:border-[#36404A] transition-colors duration-[400ms]"
+      >
+         {/* Cancel */}
+         {chatUser ? (
             <>
+               <div className="text-[#7a7f9a] text-xl text-right">
+                  <i
+                     onClick={() => {
+                        dispatch(setViewProfile(false));
+                     }}
+                     tabIndex="15"
+                     className="ri-close-line w-10 h-10 text-center leading-10 inline-block cursor-pointer tablet:text-right focus:scale-90"
+                  ></i>
+               </div>
+
                {/* profile photo & status */}
-               <div className="text-[#495057] text-[15px] leading-[22.5px] p-6 text-center">
+               <div className="text-[#495057] text-[15px] leading-[22.5px] p-6 text-center border-[#f0eff5] dark:border-[#36404a] transition-colors duration-[350ms] border-b-[1px]">
                   <div className="avatar rounded-full mb-6">
                      <img
-                        src={user.avatar}
+                        src={chatUser.avatar}
                         className="rounded-full p-1 w-24 h-24 mx-auto border-[#f0eff5] dark:border-[#36404a] transition-colors duration-300 border-[1px]"
                         alt="my-avatar"
                      />
                   </div>
                   <h5 className="font-semibold leading-5 mb-1 tracking-wider dark:text-[#e1e9f1] transition-colors duration-300">
-                     {user.username}
+                     {chatUser.username}
                   </h5>
                   <p className="flex items-center justify-center gap-1 text-[#7a7f9a] dark:text-[#9aa1b9] font-medium">
-                     <i className="ri-record-circle-fill text-[10px] leading-4 text-[#06d6a0]"></i>
-                     {user.isActive.content}
+                     <i
+                        className={`ri-record-circle-fill text-[10px] leading-4 ${
+                           chatUser.isActive.status
+                              ? "text-[#06d6a0]"
+                              : "text-red-500"
+                        }`}
+                     ></i>
+                     {chatUser.isActive?.content}
                   </p>
                </div>
 
                {/* profile content */}
                <div className="text-[#495057] leading-[22.5px] my-6">
-                  <div className="flex justify-between items-start text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6 gap-1.5 transition-colors duration-300">
+                  <div className="text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6  transition-colors duration-300">
                      <p className="tracking-normal">
                         lorem ipsum haha drer kcekt Lorem ipsum dolor sit amet
                         consectetur adipisicing elit. Quam non ducimus dolore,
                         voluptatum odio voluptas. Hic odit sapiente.
                      </p>
-                     <span className="cursor-pointer text-[15px]">
-                        <i className="ri-pencil-line"></i>
-                     </span>
                   </div>
                   {/* card */}
-                  <div className="card bg-white dark:bg-[#262E35] dark:text-[#e1e9f1] border-[#f0eff5] border-[1px] dark:border-[#36404a] transition-colors duration-[350ms] rounded text-[15px]">
-                     <h5 className="text-[#212529] dark:text-[#eff2f7] dark:bg-[#36404a] flex items-center gap-2 font-semibold py-3 px-5 transition-colors duration-[400ms]">
+                  <div className="card bg-white dark:bg-[#262E35] dark:text-[#e1e9f1] border-[#f0eff5] dark:border-[#36404a] border-[1px] transition-colors duration-[350ms] rounded text-[15px]">
+                     <h5 className="text-[#212529] dark:text-[#eff2f7] dark:bg-[#36404a] flex items-center gap-2 font-semibold py-3 transition-colors duration-[400ms] px-5">
                         <i className="ri-user-2-line text-sm leading-4"></i>
                         About
                      </h5>
@@ -61,7 +89,7 @@ const Profile = () => {
                               Name
                            </p>
                            <h5 className="text-sm mb-2 font-semibold tracking-wide">
-                              {user.username}
+                              {chatUser.username}
                            </h5>
                         </div>
                         <div className="break-words overflow-hidden whitespace-normal text-ellipsis">
@@ -69,7 +97,7 @@ const Profile = () => {
                               Email
                            </p>
                            <h5 className="text-sm mb-2 font-semibold tracking-wide">
-                              {user.email}
+                              {chatUser.email}
                            </h5>
                         </div>
                         <div>
@@ -77,7 +105,7 @@ const Profile = () => {
                               Last Sign In
                            </p>
                            <h5 className="text-sm mb-2 font-semibold tracking-wide">
-                              {user.lastSignInTime}
+                              {chatUser.lastSignInTime}
                            </h5>
                         </div>
                         <div>
@@ -99,4 +127,4 @@ const Profile = () => {
    );
 };
 
-export default Profile;
+export default ViewProfile;

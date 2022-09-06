@@ -2,6 +2,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
    show: false,
+   viewProfile: false
 };
 
 const animSlice = createSlice({
@@ -10,9 +11,12 @@ const animSlice = createSlice({
    reducers: {
       setShow: (state, action) => {
          state.show = action.payload;
+      },
+      setViewProfile: (state, action) => {
+         state.viewProfile = action.payload;
       }
    },
 });
 
-export const { setShow } = animSlice.actions;
+export const { setShow, setViewProfile } = animSlice.actions;
 export default animSlice.reducer;

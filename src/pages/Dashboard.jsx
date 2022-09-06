@@ -8,11 +8,29 @@ import { ref, onValue, onDisconnect } from "firebase/database";
 import { usersDB, userOnlineCheck } from "../firebaseCongif/usersDB";
 import { setAllUsers, setChatUser, setUser } from "../store/userSlice";
 import { setMessages } from "../store/messageSlice";
+import { setShow, setViewProfile } from "../store/animSlice";
+import ViewProfile from "../components/ViewProfile";
 
 const Dashboard = () => {
    const [user, loading] = useAuthState(auth);
    const { chatUserId, allUsers } = useSelector((state) => state.user);
+   const {viewProfile} = useSelector(state => state.anim)
    const dispatch = useDispatch();
+
+   useEffect(() => {
+      window.history.pushState(null, null, window.location.href);
+      window.onpopstate = function () {
+         window.history.go(1);
+         if (window.innerWidth <= 991) {
+            if(viewProfile) {
+               dispatch(setViewProfile(false));
+            }
+            else {
+               dispatch(setShow(false));
+            }
+         }
+      };
+   }, [viewProfile]);
 
    useEffect(() => {
       if (loading) return;
@@ -42,27 +60,28 @@ const Dashboard = () => {
    }, [chatUserId, allUsers]);
 
    useEffect(() => {
-         onValue(ref(usersDB, ".info/connected"), (snap) => {
-            if (snap.val() === true && user && user.photoURL) {
-               // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
-               userOnlineCheck(user.uid, true, "Online");
-   
-               // When I disconnect, remove this device
-               onDisconnect(ref(usersDB, `users/${user.uid}/isActive`)).set({
-                  status: false,
-                  content: `${new Date().toString().substring(4, 21)}`,
-               });
-            }
-         });
+      onValue(ref(usersDB, ".info/connected"), (snap) => {
+         if (snap.val() === true && user && user.photoURL) {
+            // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
+            userOnlineCheck(user.uid, true, "Online");
+
+            // When I disconnect, remove this device
+            onDisconnect(ref(usersDB, `users/${user.uid}/isActive`)).set({
+               status: false,
+               content: `${new Date().toString().substring(4, 21)}`,
+            });
+         }
+      });
       return () => {
          dispatch(setMessages([]));
       };
    }, [user]);
 
    return (
-      <div className="chat flex h-full min-w-[280px] tablet:w-full ">
+      <div className="chat flex h-full min-w-[280px] relative tablet:w-full">
          <SideBar />
          <ChatContainer />
+         {viewProfile && <ViewProfile />}
       </div>
    );
 };

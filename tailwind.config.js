@@ -8,6 +8,7 @@ module.exports = {
   theme: {
     extend: {},
     screens: {
+      'absview': {'max': '1250px'},
       'tablet': {'max': '991px'},
       'mobile': {'max': '680px'},
     },
