@@ -69,8 +69,9 @@ export const Chats = () => {
             <div className="users pr-2 mr-1 h-full  overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
                {allUsers ? (
                   !recentUsers ? (
-                     <div className="flex justify-center items-center h-full font-semibold dark:text-[#e1e9f1]">
-                        Start a Chat
+                     <div className="flex justify-center items-center relative -top-8 h-full font-semibold">
+                        <i className="ri-chat-new-line text-[#e6ebf5] dark:text-[#36404a] text-8xl duration-[350ms]"></i>
+                        {/* <p className="text-[#495057] dark:text-[#e1e9f1]">Start a Chat..</p> */}
                      </div>
                   ) : (
                      recentUsers

@@ -1,5 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import Loading from "../layouts/Loading";
 
 const Profile = () => {
@@ -20,13 +21,16 @@ const Profile = () => {
          {user ? (
             <>
                {/* profile photo & status */}
-               <div className="text-[#495057] text-[15px] leading-[22.5px] p-6 text-center">
-                  <div className="avatar rounded-full mb-6">
+               <div className="text-[#495057] text-[15px] leading-[22.5px] p-6 text-center border-[#f0eff5] dark:border-[#36404a] border-b-[1px] transition-colors duration-[350ms]">
+                  <div className="avatar rounded-full mb-6 relative w-24 h-24 mx-auto">
                      <img
                         src={user.avatar}
-                        className="rounded-full p-1 w-24 h-24 mx-auto border-[#f0eff5] dark:border-[#36404a] transition-colors duration-300 border-[1px]"
+                        className="rounded-full p-1  border-[#f0eff5] dark:border-[#36404a] transition-colors duration-300 border-[1px]"
                         alt="my-avatar"
                      />
+                     <Link to="/setAvatar" className="absolute flex items-center justify-center right-0 w-[35px] h-[35px] transition-colors duration-300 box-shadow bg-[#e6ebf5] rounded-full text-[#212529] dark:bg-[#36404a] dark:text-[#e6ebf5] text-[15px] leadi-[22.5px] text-center bottom-0">
+                        <i className="ri-pencil-fill"></i>
+                     </Link>
                   </div>
                   <h5 className="font-semibold leading-5 mb-1 tracking-wider dark:text-[#e1e9f1] transition-colors duration-300">
                      {user.username}

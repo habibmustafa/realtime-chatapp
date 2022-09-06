@@ -29,7 +29,7 @@ const ViewProfile = () => {
    return (
       <div
          ref={ref}
-         className="view-profile w-96 h-full p-6 pb-0 absview:absolute absview:right-0 absview:z-30 mobile:w-full tablet:h-max tablet:border-l-2 tablet:border-b-2 mobile:h-full mobile:border-none tablet:pt-4 bg-white dark:bg-[#262E35] border-l-4 border-[#F0EFF5] dark:border-[#36404A] transition-colors duration-[400ms]"
+         className="view-profile w-96 h-full p-6 pb-0 absview:absolute absview:right-0 absview:z-30 mobile:w-full tablet:h-max tablet:border-l-2 tablet:border-b-2 mobile:h-full mobile:border-none tablet:pt-4 bg-white dark:bg-[#262E35] border-l-4 border-[#F0EFF5] dark:border-[#36404A] transition-colors duration-[400ms] overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500"
       >
          {/* Cancel */}
          {chatUser ? (
@@ -45,7 +45,7 @@ const ViewProfile = () => {
                </div>
 
                {/* profile photo & status */}
-               <div className="text-[#495057] text-[15px] leading-[22.5px] p-6 text-center border-[#f0eff5] dark:border-[#36404a] transition-colors duration-[350ms] border-b-[1px]">
+               <div className="text-[#495057] text-[15px] leading-[22.5px] p-6 tablet:pt-1 text-center border-[#f0eff5] dark:border-[#36404a] transition-colors duration-[350ms] border-b-[1px]">
                   <div className="avatar rounded-full mb-6">
                      <img
                         src={chatUser.avatar}
@@ -70,7 +70,7 @@ const ViewProfile = () => {
 
                {/* profile content */}
                <div className="text-[#495057] leading-[22.5px] my-6">
-                  <div className="text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6  transition-colors duration-300">
+                  <div className="text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6 transition-colors duration-300">
                      <p className="tracking-normal">
                         lorem ipsum haha drer kcekt Lorem ipsum dolor sit amet
                         consectetur adipisicing elit. Quam non ducimus dolore,

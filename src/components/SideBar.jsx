@@ -7,6 +7,7 @@ import { set, ref } from "firebase/database";
 import { usersDB } from "../firebaseCongif/usersDB";
 import { useSelector } from "react-redux";
 import Profile from "./Profile";
+import Settings from "./Settings";
 
 export const SideBar = () => {
    const [darkMode, setDarkMode] = useState(localStorage.theme === "dark" ? true : false)
@@ -117,6 +118,7 @@ export const SideBar = () => {
             {button.active === 1 && <Profile />}
             {button.active === 2 && <Chats />}
             {button.active === 3 && <Contacts />}
+            {button.active === 4 && <Settings />}
          </div>
       </div>
    );
