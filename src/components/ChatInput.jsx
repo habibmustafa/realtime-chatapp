@@ -60,7 +60,6 @@ export const ChatInput = ({ sendMessage }) => {
                <button
                   onClick={() => {
                      setShowEmoji(!showEmoji);
-                     inputRef.current.focus()
                   }}
                   ref={buttonRef}
                   type="button"
