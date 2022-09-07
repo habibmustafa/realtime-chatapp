@@ -4,22 +4,67 @@ import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { updateDisplayName } from "../firebaseCongif/auth";
-import { updateUsername } from "../firebaseCongif/usersDB";
+import { updateBioq, updateUsername } from "../firebaseCongif/usersDB";
 import Loading from "../layouts/Loading";
 
 const Profile = () => {
-   const [edit, setEdit] = useState(false);
+   const [editName, setEditName] = useState(false);
+   const [editBio, setEditBio] = useState(false);
    const { user } = useSelector((state) => state.user);
    const [nameValue, setNameValue] = useState(user.username);
+   const [bioValue, setBioValue] = useState(user.bio);
 
    const updateName = async () => {
-      setEdit(false)
+      if (nameValue.length < 3) {
+         toast.error("Minimum of 3 characters!", {
+            className:
+               "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
+         });
+         return false;
+      }
+      if (nameValue === user.username) {
+         toast.error("Change your name!", {
+            className:
+               "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
+         });
+         return false;
+      }
       await updateDisplayName(nameValue);
       updateUsername(user.uid, nameValue);
       toast.success("Your name has been updated!", {
          className:
             "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
       });
+      setEditName(false);
+   };
+
+   const updateBio = () => {
+      if (!editBio) {
+         setEditBio(true);
+         return false;
+      }
+
+      if (!bioValue) {
+         toast.error("The bio was not changed!", {
+            className:
+               "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
+         });
+         setEditBio(false);
+         return false;
+      }
+      if (bioValue === user.bio) {
+         toast.error("Change your bio!", {
+            className:
+               "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
+         });
+         return false;
+      }
+      updateBioq(user.uid, bioValue);
+      toast.success("Your bio has been updated!", {
+         className:
+            "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
+      });
+      setEditBio(false);
    };
 
    return (
@@ -63,12 +108,21 @@ const Profile = () => {
                {/* profile content */}
                <div className="text-[#495057] leading-[22.5px] my-6">
                   <div className="flex justify-between items-start text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6 gap-1.5 transition-colors duration-300">
-                     <p className="tracking-normal">
-                        lorem ipsum haha drer kcekt Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Quam non ducimus dolore,
-                        voluptatum odio voluptas. Hic odit sapiente.
-                     </p>
-                     <span className="cursor-pointer text-lg inline-block active:scale-95">
+                     {!editBio ? (
+                        <p className="tracking-normal px-2 py-1">{user.bio}</p>
+                     ) : (
+                        <textarea
+                           value={bioValue}
+                           onChange={(e) => {
+                              setBioValue(e.target.value);
+                           }}
+                           className="bg-white dark:bg-[#262E35] px-2 py-1 rounded scrollbar-current outline-none resize-none w-full h-[90px] scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500"
+                        ></textarea>
+                     )}
+                     <span
+                        onClick={updateBio}
+                        className="cursor-pointer text-lg inline-block active:scale-95"
+                     >
                         <i className="ri-pencil-line"></i>
                      </span>
                   </div>
@@ -84,10 +138,10 @@ const Profile = () => {
                               <p className="text-[#7a7f9a] dark:text-[#9aa1b9] mb-1">
                                  Name
                               </p>
-                              {edit || (
+                              {editName || (
                                  <button
                                     onClick={() => {
-                                       setEdit(true);
+                                       setEditName(true);
                                     }}
                                     className="flex items-center justify-center gap-1 select-none bg-[#e6ebf5] hover:bg-[#e6eef9] rounded text-[#212529] text-[13px] leading-5 w-16 h-[30px] dark:bg-[#36404a] dark:hover:bg-[#313a43] dark:text-[#eff2f7] active:scale-[0.98] transition-colors duration-[350ms]"
                                  >
@@ -98,7 +152,7 @@ const Profile = () => {
                            </div>
 
                            {/* edit name */}
-                           {!edit ? (
+                           {!editName ? (
                               <h5 className="text-sm mb-2 font-semibold tracking-wide">
                                  {user.username}
                               </h5>
@@ -113,14 +167,16 @@ const Profile = () => {
                                     className="bg-inherit outline-none w-full h-full px-2 py-1.5"
                                  />
                                  <button
-                                    onClick={() => {setEdit(false)}}
-                                    className="w-9 h-[30px] flex justify-center items-center text-lg bg-transparent transition-colors duration-300"
+                                    onClick={() => {
+                                       setEditName(false);
+                                    }}
+                                    className="w-12 h-[30px] flex justify-center items-center text-lg bg-transparent transition-colors duration-300"
                                  >
                                     <i className="ri-close-line"></i>
                                  </button>
                                  <button
                                     onClick={updateName}
-                                    className="w-9 h-[30px] flex justify-center items-center bg-[#F5F7FB] dark:bg-[#303841] transition-colors duration-300"
+                                    className="w-12 h-[30px] flex justify-center items-center bg-[#F5F7FB] dark:bg-[#303841] transition-colors duration-300"
                                  >
                                     <i className="ri-send-plane-line"></i>
                                  </button>

@@ -72,9 +72,7 @@ const ViewProfile = () => {
                <div className="text-[#495057] leading-[22.5px] my-6">
                   <div className="text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6 transition-colors duration-300">
                      <p className="tracking-normal">
-                        lorem ipsum haha drer kcekt Lorem ipsum dolor sit amet
-                        consectetur adipisicing elit. Quam non ducimus dolore,
-                        voluptatum odio voluptas. Hic odit sapiente.
+                        {chatUser.bio}
                      </p>
                   </div>
                   {/* card */}
