@@ -4,7 +4,7 @@ import { setChatUserId } from "../store/userSlice";
 import { setConnectionId } from "../store/messageSlice";
 import { setShow } from "../store/animSlice";
 
-const ContactItem = ({ cUser, index }) => {
+const ContactItem = ({ cUser, index, search }) => {
    const { user, allUsers } = useSelector((state) => state.user);
    const dispatch = useDispatch();
 
@@ -26,7 +26,7 @@ const ContactItem = ({ cUser, index }) => {
                {cUser.username[0]}
             </div>
          )}
-         {index > 0 &&
+         {index > 0 && 
             allUsers[index - 1].username[0].toLowerCase() !== cUser.username[0].toLowerCase() && (
                <div className="p-4 text-[15px] font-semibold text-[#7269ef] uppercase leading[22.5px] mt-5 underline">
                   {cUser.username[0]}
@@ -36,8 +36,9 @@ const ContactItem = ({ cUser, index }) => {
             onClick={handleClick}
             className="flex justify-between items-center py-2.5 px-5 opacity-90 dark:opacity-100 cursor-pointer"
          >
-            <p className="text-sm font-semibold text-left text-[#495057] dark:text-[#e1e9f1] tracking-wide transition-colors duration-300">
+            <p className="text-sm font-semibold relative text-left text-[#495057] dark:text-[#e1e9f1] tracking-wide transition-colors duration-300">
                {cUser.username}
+               {cUser?.admin && <span className="text-[9px] text-[#06d6a0] absolute -top-1 ml-[1px]">admin</span>}
             </p>
             <span className="text-[#7a7f9a] dark:text-[#9aa1b9] transition-colors duration-150">
                <i className="ri-more-2-fill"></i>

@@ -11,6 +11,7 @@ export const ChatInput = ({ sendMessage }) => {
    const emojiRef = useRef()
    const buttonRef = useRef()
    const inputRef = useRef()
+   const sendRef = useRef()
 
    const handleSubmit = (e) => {
       e.preventDefault();
@@ -31,7 +32,8 @@ export const ChatInput = ({ sendMessage }) => {
             showEmoji &&
             emojiRef.current &&
             !emojiRef.current.contains(e.target) &&
-            !buttonRef.current.contains(e.target)
+            !buttonRef.current.contains(e.target)&&
+            !sendRef.current.contains(e.target)
          ) {
             dispatch(setShowEmoji(false));
          }
@@ -73,6 +75,7 @@ export const ChatInput = ({ sendMessage }) => {
                   <i className="ri-emotion-happy-line block scale-125"></i>
                </button>
                <button
+                  ref={sendRef}
                   type="submit"
                   className="send w-[50px] h-[45px] rounded-[6.4px] bg-[#7269ef] text-white leading-6 py-2 px-4 tablet:px-3 tablet:py-2 tablet:w-11 tablet:h-10"
                >

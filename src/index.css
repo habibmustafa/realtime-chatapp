@@ -53,8 +53,8 @@
       scrollbar-width: current;
    }
    .scrollbar-current::-webkit-scrollbar {
-      width: 5px;
-      height: 5px;
+      width: 4px;
+      height: 4px;
    }
 
    .box-shadow {

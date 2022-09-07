@@ -12,6 +12,7 @@ import {MessageSettings} from "./AnimatedDropdown";
 export const ChatContainer = () => {
    const [thisMessages, setThisMessages] = useState([]);
    const [search, setSearch] = useState('')
+   // const [touchShow, setTouchshow] = useState(false)
    const { user, chatUser } = useSelector((state) => state.user);
    const { messages, connectionId } = useSelector((state) => state.message);
    const { show } = useSelector((state) => state.anim);
@@ -71,6 +72,23 @@ export const ChatContainer = () => {
       scrollRef.current?.scrollIntoView();
    }, [thisMessages, chatUser]);
 
+   // touch event
+   // let touchTimer=null;
+   // const touchStart = () => {
+   //    if(!touchTimer) {
+   //       touchTimer = setTimeout(() => {
+   //          setTouchshow(true)
+   //       }, 1000);
+   //    }
+   // }
+   // const touchEnd = () => {
+   //    if(touchTimer) {
+   //       clearTimeout(touchTimer)
+   //       touchTimer = null;
+   //       console.log(1);
+   //    }
+   // }
+
    const searchMessage = (value) => {
       setSearch(value)
    }
@@ -87,7 +105,7 @@ export const ChatContainer = () => {
                <Header searchMessage={searchMessage} />
 
                {/* messages container */}
-               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-auto scrollbar-border scrollbar-thin scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:px-1.5">
+               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500 tablet:px-1.5">
                   {/* message */}
                   {thisMessages &&
                      thisMessages.filter(name => !name.message.text.toLowerCase().indexOf(search.toLowerCase()) || search === "")
@@ -121,7 +139,7 @@ export const ChatContainer = () => {
                            >
                               {/*  flex-row-reverse */}
                               <div
-                                 className={`flex flex-col gap-4 ${
+                                 className={`flex flex-col gap-4 tablet:max-w-[80%] ${
                                     message.sender === chatUser.uid
                                        ? "items-start"
                                        : "items-end"
@@ -150,6 +168,9 @@ export const ChatContainer = () => {
 
                                     {/* content */}
                                     <div
+                                       // onTouchStart={touchStart}
+                                       // onTouchCancel={touchCancel}
+                                       // onTouchEnd={touchEnd}
                                        className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col transition-colors duration-[350ms] ${
                                           message.sender === chatUser.uid ?
                                           "items-end bg-[#f5f7fb] text-[#212529] dark:bg-[#36404a] dark:text-[#eff2f7] rounded-bl-none" : 

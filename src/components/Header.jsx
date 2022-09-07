@@ -69,8 +69,9 @@ export const Header = ({ searchMessage }) => {
                <img className="rounded-full " src={chatUser.avatar} alt="" />
             </div>
             <div className="flex flex-col w-full">
-               <p className="cursor-pointer font-semibold leading-5 tracking-wide">
+               <p className="cursor-pointer relative font-semibold leading-5 tracking-wide">
                   {chatUser?.username}
+                  {chatUser?.admin && <span className="text-[9px] text-[#06d6a0] absolute -top-1 ml-[1px]">admin</span>}
                </p>
                <span
                   className={`text-sm w-full text-green-500 ${

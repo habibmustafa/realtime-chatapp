@@ -13,7 +13,7 @@ export const addUser = (uid, email, username, createdAt, lastSignInTime) => {
          status: true,
          content: "Online"
       },
-      bio: "",
+      bio: "Bio is empty..",
       avatar:"",
       lastSignInTime
    });

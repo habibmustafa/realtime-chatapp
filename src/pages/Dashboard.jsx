@@ -46,7 +46,7 @@ const Dashboard = () => {
                   setAllUsers(
                      Object.values(data)
                         ?.filter((item) => item.uid !== user.uid)
-                        .sort((a, b) => a.createdAt - b.createdAt)
+                        .sort((a, b) => a.username?.localeCompare(b.username))
                   )
                );
                localStorage.setItem("user", JSON.stringify(data[user.uid]));

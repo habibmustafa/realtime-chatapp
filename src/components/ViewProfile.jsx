@@ -53,8 +53,10 @@ const ViewProfile = () => {
                         alt="my-avatar"
                      />
                   </div>
-                  <h5 className="font-semibold leading-5 mb-1 tracking-wider dark:text-[#e1e9f1] transition-colors duration-300">
+                  <h5 className="font-semibold relative leading-5 mb-1 tracking-wider dark:text-[#e1e9f1] transition-colors duration-300">
                      {chatUser.username}
+                     {chatUser?.admin && <span className="text-[9px] text-[#06d6a0] absolute -top-1 ml-[1px]">admin</span>}
+
                   </h5>
                   <p className="flex items-center justify-center gap-1 text-[#7a7f9a] dark:text-[#9aa1b9] font-medium">
                      <i

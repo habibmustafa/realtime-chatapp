@@ -44,7 +44,7 @@ const Contacts = () => {
                            .toLowerCase()
                            .indexOf(search.toLowerCase()) || search === ""
                   )
-                  .map((cUser, index) => (
+                  .map((cUser, index, search) => (
                      <ContactItem key={cUser.uid} cUser={cUser} index={index} />
                   ))
             ) : (

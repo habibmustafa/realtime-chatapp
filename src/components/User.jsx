@@ -58,8 +58,9 @@ export const User = ({ cUser }) => {
             />
          </div>
          <div className="flex-1 w-10">
-            <h5 className="font-semibold text-[15px] text-[#495057] dark:text-[#e1e9f1] transition-colors duration-300 tracking-wide leading-[18px] mb-1">
+            <h5 className="font-semibold relative text-[15px] text-[#495057] dark:text-[#e1e9f1] transition-colors duration-300 tracking-wide leading-[18px] mb-1">
                {cUser.username}
+               {cUser?.admin && <span className="text-[9px] text-[#06d6a0] absolute -top-1 ml-[1px]">admin</span>}
             </h5>
 
             {/* text */}

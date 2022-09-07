@@ -50,6 +50,7 @@ const Profile = () => {
                "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
          });
          setEditBio(false);
+         setBioValue(user.bio);
          return false;
       }
       if (bioValue === user.bio) {
@@ -107,7 +108,7 @@ const Profile = () => {
 
                {/* profile content */}
                <div className="text-[#495057] leading-[22.5px] my-6">
-                  <div className="flex justify-between items-start text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6 gap-1.5 transition-colors duration-300">
+                  <div className="flex justify-between items-start relative text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6 gap-1.5 transition-colors duration-300">
                      {!editBio ? (
                         <p className="tracking-normal px-2 py-1">{user.bio}</p>
                      ) : (
@@ -116,12 +117,25 @@ const Profile = () => {
                            onChange={(e) => {
                               setBioValue(e.target.value);
                            }}
-                           className="bg-white dark:bg-[#262E35] px-2 py-1 rounded scrollbar-current outline-none resize-none w-full h-[90px] scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500"
+                           className="bg-white dark:bg-[#262E35] pl-2 py-1 pr-8 rounded scrollbar-current outline-none resize-none w-full h-[90px] scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500"
                         ></textarea>
+                     )}
+                     {editBio && (
+                        <span
+                           onClick={() => {
+                              setEditBio(false);
+                              setBioValue(user.bio);
+                           }}
+                           className={`cursor-pointer text-2xl inline-block active:scale-95 absolute right-1`}
+                        >
+                           <i className="ri-close-line"></i>
+                        </span>
                      )}
                      <span
                         onClick={updateBio}
-                        className="cursor-pointer text-lg inline-block active:scale-95"
+                        className={`cursor-pointer text-xl inline-block active:scale-95 ${
+                           editBio && "absolute right-1.5 top-8"
+                        }`}
                      >
                         <i className="ri-pencil-line"></i>
                      </span>
@@ -169,6 +183,7 @@ const Profile = () => {
                                  <button
                                     onClick={() => {
                                        setEditName(false);
+                                       setNameValue(user.username);
                                     }}
                                     className="w-12 h-[30px] flex justify-center items-center text-lg bg-transparent transition-colors duration-300"
                                  >
