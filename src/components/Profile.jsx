@@ -1,10 +1,26 @@
 import React from "react";
+import { useState } from "react";
+import toast from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { updateDisplayName } from "../firebaseCongif/auth";
+import { updateUsername } from "../firebaseCongif/usersDB";
 import Loading from "../layouts/Loading";
 
 const Profile = () => {
+   const [edit, setEdit] = useState(false);
    const { user } = useSelector((state) => state.user);
+   const [nameValue, setNameValue] = useState(user.username);
+
+   const updateName = async () => {
+      setEdit(false)
+      await updateDisplayName(nameValue);
+      updateUsername(user.uid, nameValue);
+      toast.success("Your name has been updated!", {
+         className:
+            "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
+      });
+   };
 
    return (
       <div className="profile pt-6 px-6 mx-1 h-full overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
@@ -28,7 +44,10 @@ const Profile = () => {
                         className="rounded-full p-1  border-[#f0eff5] dark:border-[#36404a] transition-colors duration-300 border-[1px]"
                         alt="my-avatar"
                      />
-                     <Link to="/setAvatar" className="absolute flex items-center justify-center right-0 w-[35px] h-[35px] transition-colors duration-300 box-shadow bg-[#e6ebf5] rounded-full text-[#212529] dark:bg-[#36404a] dark:text-[#e6ebf5] text-[15px] leadi-[22.5px] text-center bottom-0">
+                     <Link
+                        to="/setAvatar"
+                        className="absolute flex items-center justify-center right-0 w-[35px] h-[35px] transition-colors duration-300 box-shadow bg-[#e6ebf5] rounded-full text-[#212529] dark:bg-[#36404a] dark:text-[#e6ebf5] text-[15px] leadi-[22.5px] text-center bottom-0"
+                     >
                         <i className="ri-pencil-fill"></i>
                      </Link>
                   </div>
@@ -49,24 +68,64 @@ const Profile = () => {
                         consectetur adipisicing elit. Quam non ducimus dolore,
                         voluptatum odio voluptas. Hic odit sapiente.
                      </p>
-                     <span className="cursor-pointer text-[15px]">
+                     <span className="cursor-pointer text-lg inline-block active:scale-95">
                         <i className="ri-pencil-line"></i>
                      </span>
                   </div>
                   {/* card */}
-                  <div className="card bg-white dark:bg-[#262E35] dark:text-[#e1e9f1] border-[#f0eff5] border-[1px] dark:border-[#36404a] transition-colors duration-[350ms] rounded text-[15px]">
-                     <h5 className="text-[#212529] dark:text-[#eff2f7] dark:bg-[#36404a] flex items-center gap-2 font-semibold py-3 px-5 transition-colors duration-[400ms]">
+                  <div className="card bg-white dark:bg-[#262E35] dark:text-[#e1e9f1] border border-[#f0eff5] dark:border-[#36404a] transition-colors duration-[350ms] rounded text-[15px]">
+                     <h5 className="text-[#212529] dark:text-[#eff2f7] dark:bg-[#36404a] flex items-center gap-2 font-semibold py-3 px-5 transition-colors duration-[350ms]">
                         <i className="ri-user-2-line text-sm leading-4"></i>
                         About
                      </h5>
                      <div className="card-body p-5 flex flex-col gap-3">
                         <div>
-                           <p className="text-[#7a7f9a] dark:text-[#9aa1b9] mb-1">
-                              Name
-                           </p>
-                           <h5 className="text-sm mb-2 font-semibold tracking-wide">
-                              {user.username}
-                           </h5>
+                           <div className="flex justify-between items-center">
+                              <p className="text-[#7a7f9a] dark:text-[#9aa1b9] mb-1">
+                                 Name
+                              </p>
+                              {edit || (
+                                 <button
+                                    onClick={() => {
+                                       setEdit(true);
+                                    }}
+                                    className="flex items-center justify-center gap-1 select-none bg-[#e6ebf5] hover:bg-[#e6eef9] rounded text-[#212529] text-[13px] leading-5 w-16 h-[30px] dark:bg-[#36404a] dark:hover:bg-[#313a43] dark:text-[#eff2f7] active:scale-[0.98] transition-colors duration-[350ms]"
+                                 >
+                                    <i className="ri-edit-fill"></i>
+                                    <span>Edit</span>
+                                 </button>
+                              )}
+                           </div>
+
+                           {/* edit name */}
+                           {!edit ? (
+                              <h5 className="text-sm mb-2 font-semibold tracking-wide">
+                                 {user.username}
+                              </h5>
+                           ) : (
+                              <div className="flex justify-between text-sm font-semibold tracking-wide transition-colors duration-[350ms] bg-transparent border border-[#f0eff5] dark:border-[#36404a] rounded w-full">
+                                 <input
+                                    value={nameValue}
+                                    onChange={(e) => {
+                                       setNameValue(e.target.value);
+                                    }}
+                                    type="text"
+                                    className="bg-inherit outline-none w-full h-full px-2 py-1.5"
+                                 />
+                                 <button
+                                    onClick={() => {setEdit(false)}}
+                                    className="w-9 h-[30px] flex justify-center items-center text-lg bg-transparent transition-colors duration-300"
+                                 >
+                                    <i className="ri-close-line"></i>
+                                 </button>
+                                 <button
+                                    onClick={updateName}
+                                    className="w-9 h-[30px] flex justify-center items-center bg-[#F5F7FB] dark:bg-[#303841] transition-colors duration-300"
+                                 >
+                                    <i className="ri-send-plane-line"></i>
+                                 </button>
+                              </div>
+                           )}
                         </div>
                         <div className="break-words overflow-hidden whitespace-normal text-ellipsis">
                            <p className="text-[#7a7f9a] dark:text-[#9aa1b9] mb-1">

@@ -36,6 +36,16 @@ export const addAvatar = async (avatar) => {
       toast.error(err.message);
    }
 }
+// update username
+export const updateDisplayName = async (username) => {
+   try {
+      await updateProfile(auth.currentUser, {
+         displayName: username
+      })
+   } catch (err) {
+      toast.error(err.message);
+   }
+}
 
 // login
 export const login = async (email, password) => {

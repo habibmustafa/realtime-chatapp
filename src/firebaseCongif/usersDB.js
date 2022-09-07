@@ -33,3 +33,7 @@ export const userOnlineCheck = (uid, status, content) => {
 export const userSetAvatar = (uid, avatar) => {
    set(ref(usersDB, `users/${uid}/avatar`), avatar)
 }
+
+export const updateUsername = (uid, username) => {
+   set(ref(usersDB, `users/${uid}/username`), username)
+}

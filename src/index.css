@@ -120,47 +120,12 @@
       background-color: #313a43;
    }
 
-   .emoji-picker-react input.emoji-search {
-      padding: 6px;
-      margin-top: 5px;
-      color: #495057;
-      background-color: #E6EBF5;
-      border: none;
-      outline: none;
-      
-   }
-   .dark .emoji-picker-react input.emoji-search {
-      background-color: #36404A;
-      color: #a6b0cf;
-      border: none;
-      outline: none;
-   }
-   .emoji-picker-react input.emoji-search:focus {
-      border: none;
-      outline: none;
-      
-   }
-   .dark .emoji-picker-react input.emoji-search:focus {
-      border: none;
-      outline: none;
-   }
-   
-   .emoji-picker-react div.skin-tones-list {
-      top: 18px;
-   }
-
    @media (max-width: 991px) {
       aside.emoji-picker-react {
          width: 100%;
       }
       .dark aside.emoji-picker-react {
          width: 100%;
-      }
-      .emoji-picker-react input.emoji-search {
-         display: none;
-      }
-      .emoji-picker-react div.skin-tones-list {
-         display: none;
       }
    }
 

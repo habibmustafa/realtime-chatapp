@@ -8,13 +8,13 @@ import { ref, onValue, onDisconnect } from "firebase/database";
 import { usersDB, userOnlineCheck } from "../firebaseCongif/usersDB";
 import { setAllUsers, setChatUser, setUser } from "../store/userSlice";
 import { setMessages } from "../store/messageSlice";
-import { setShow, setViewProfile } from "../store/animSlice";
+import { setShow, setShowEmoji, setViewProfile } from "../store/animSlice";
 import ViewProfile from "../components/ViewProfile";
 
 const Dashboard = () => {
    const [user, loading] = useAuthState(auth);
    const { chatUserId, allUsers } = useSelector((state) => state.user);
-   const {viewProfile} = useSelector(state => state.anim)
+   const {viewProfile, showEmoji} = useSelector(state => state.anim)
    const dispatch = useDispatch();
 
    useEffect(() => {
@@ -25,12 +25,15 @@ const Dashboard = () => {
             if(viewProfile) {
                dispatch(setViewProfile(false));
             }
+            else if(showEmoji) {
+               dispatch(setShowEmoji(false))
+            }
             else {
                dispatch(setShow(false));
             }
          }
       };
-   }, [viewProfile]);
+   }, [viewProfile, showEmoji]);
 
    useEffect(() => {
       if (loading) return;

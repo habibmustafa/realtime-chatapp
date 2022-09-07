@@ -1,15 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 import Picker from "emoji-picker-react";
+import { useDispatch, useSelector } from "react-redux";
+import { setShowEmoji } from "../store/animSlice";
 
 export const ChatInput = ({ sendMessage }) => {
    const [value, setValue] = useState("");
-   const [showEmoji, setShowEmoji] = useState(false);
+   // const [showEmoji, setShowEmoji] = useState(false);
+   const {showEmoji} = useSelector(state => state.anim)
+   const dispatch = useDispatch()
    const emojiRef = useRef()
    const buttonRef = useRef()
    const inputRef = useRef()
 
    const handleSubmit = (e) => {
       e.preventDefault();
+      inputRef.current.focus()
       if (value) {
          sendMessage(value);
          setValue("");
@@ -28,7 +33,7 @@ export const ChatInput = ({ sendMessage }) => {
             !emojiRef.current.contains(e.target) &&
             !buttonRef.current.contains(e.target)
          ) {
-            setShowEmoji(false);
+            dispatch(setShowEmoji(false));
          }
       };
       document.addEventListener("mousedown", checkIfClickedOutside);
@@ -59,7 +64,7 @@ export const ChatInput = ({ sendMessage }) => {
             <div className="flex items-center gap-1 ml-1">
                <button
                   onClick={() => {
-                     setShowEmoji(!showEmoji);
+                     dispatch(setShowEmoji(!showEmoji));
                   }}
                   ref={buttonRef}
                   type="button"
@@ -79,6 +84,7 @@ export const ChatInput = ({ sendMessage }) => {
             <div ref={emojiRef} className="absolute bottom-14 right-36 box-shadow rounded-xl tablet:relative tablet:w-full tablet:bottom-0 tablet:left-0">
                <Picker
                   onEmojiClick={onEmojiClick}
+                  disableSearchBar={true}
                />
             </div>
          )}
