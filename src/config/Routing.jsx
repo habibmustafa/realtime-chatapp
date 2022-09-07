@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useRoutes } from "react-router-dom";
 import SetAvatar from "../pages/SetAvatar";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login";
@@ -7,16 +7,44 @@ import Register from "../pages/Register";
 import PrivateRoute from "./PrivateRoute";
 
 const Routing = () => {
-   return (
-      <>
-         <Routes>
-            <Route path="/" element={<PrivateRoute><Dashboard /></PrivateRoute>} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/setAvatar" element={<SetAvatar />} />
-         </Routes>
-      </>
-   );
-};
+   const routes = useRoutes([
+      {
+         path: '/',
+         element: <PrivateRoute><Dashboard /></PrivateRoute>,
+         // children: [
+         //    {
+         //       path: 'profile',
+         //       element: <Profile />
+         //    },
+         //    {
+         //       path: 'chats',
+         //       element: <Chats />
+         //    },
+         //    {
+         //       path: 'contacts',
+         //       element: <Contacts />
+         //    },
+         //    {
+         //       path: 'settings',
+         //       element: <Settings />
+         //    },
+         // ]
+      },
+      {
+         path: '/login',
+         element: <Login />,
+      },
+      {
+         path: '/register',
+         element: <Register />,
+      },
+      {
+         path: '/setAvatar',
+         element: <SetAvatar />,
+      },
+   ])
+
+   return routes
+}
 
 export default Routing;

@@ -127,9 +127,6 @@ export const Header = ({ searchMessage }) => {
             >
                <i className="ri-user-2-line"></i>
             </button>
-            {/* <button className="w-10 h-10 leading-10 hover:scale-110">
-               <i className="ri-more-fill"></i>
-            </button> */}
             <UserSettings />
          </div>
       </div>

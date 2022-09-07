@@ -156,7 +156,7 @@ export const UserSettings = () => {
                   onClick={() => {
                      dispatch(setViewProfile(true));
                   }}
-                  className="hidden tablet:flex justify-between items-center gap-2 px-6 py-1.5 cursor-pointer hover:bg-[#f7f7ff] dark:hover:bg-[#36404a] dark:hover:text-[#DFE1E2]"
+                  className="hidden tablet:flex justify-between items-center px-6 py-1.5 cursor-pointer hover:bg-[#f7f7ff] dark:hover:bg-[#36404a] dark:hover:text-[#DFE1E2]"
                >
                   View profile <i className="ri-user-2-line text-[#7a7f9a]"></i>
                </li>

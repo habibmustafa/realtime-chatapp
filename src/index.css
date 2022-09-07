@@ -27,7 +27,7 @@
       color: #7a7f9a;
    }
 
-   /* scrollbar */
+   /* !scrollbar */
    .scrollbar-border::-webkit-scrollbar-thumb {
       border-radius: 15px;
    }
@@ -69,7 +69,7 @@
       height: calc(100% - 200px);
    }
 
-   /* animation */
+   /* !animation */
    .openAnimation {
       animation: AnimatedDropdownappear 0.3s forwards;
    }
@@ -100,4 +100,85 @@
          margin-top: 13px;
       }
    }
+
+   /* !emoji picker reset */
+   aside.emoji-picker-react {
+      box-shadow: inherit;
+      background-color: white;
+      border-color: #f0eff5;
+   }
+   .dark aside.emoji-picker-react {
+      box-shadow: inherit;
+      border-color: #36404a;
+      background-color: #303841;
+   }
+
+   .emoji-picker-react .emoji-group:before {
+      background-color: white;
+   }
+   .dark .emoji-picker-react .emoji-group:before {
+      background-color: #313a43;
+   }
+
+   .emoji-picker-react input.emoji-search {
+      padding: 6px;
+      margin-top: 5px;
+      color: #495057;
+      background-color: #E6EBF5;
+      border: none;
+      outline: none;
+      
+   }
+   .dark .emoji-picker-react input.emoji-search {
+      background-color: #36404A;
+      color: #a6b0cf;
+      border: none;
+      outline: none;
+   }
+   .emoji-picker-react input.emoji-search:focus {
+      border: none;
+      outline: none;
+      
+   }
+   .dark .emoji-picker-react input.emoji-search:focus {
+      border: none;
+      outline: none;
+   }
+   
+   .emoji-picker-react div.skin-tones-list {
+      top: 18px;
+   }
+
+   @media (max-width: 991px) {
+      aside.emoji-picker-react {
+         width: 100%;
+         height: 300px;
+      }
+      .emoji-picker-react input.emoji-search {
+         display: none;
+      }
+      .emoji-picker-react div.skin-tones-list {
+         display: none;
+      }
+   }
+
+   .emoji-picker-react .emoji-categories {
+      background-color: #f0eff5;
+   }
+   
+   .emoji-picker-react .emoji-scroll-wrapper::-webkit-scrollbar {
+      width: 4px;
+      height: 4px;
+   }
+   .emoji-picker-react .emoji-scroll-wrapper::-webkit-scrollbar-track {
+      background-color: transparent;
+   }
+   .emoji-picker-react .emoji-scroll-wrapper::-webkit-scrollbar-thumb {
+      background-color: #64748b;
+      border-radius: 15px;
+   }
+   .dark .emoji-picker-react .emoji-scroll-wrapper::-webkit-scrollbar-thumb {
+      background-color: #cbd5e1;
+   }
+
 }
