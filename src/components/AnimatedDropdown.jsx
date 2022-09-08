@@ -8,8 +8,8 @@ import { messagesDB } from "../firebaseCongif/messagesDB";
 import { setViewProfile } from "../store/animSlice";
 
 // !message settings
-export const MessageSettings = ({ message, align }) => {
-   const [open, setOpen] = useState(false);
+export const MessageSettings = ({ message, align, touch=false, setTouch }) => {
+   const [open, setOpen] = useState(touch ? true : false);
    const animRef = useRef();
    const buttonRef = useRef();
    const { connectionId } = useSelector((state) => state.message);
@@ -17,7 +17,7 @@ export const MessageSettings = ({ message, align }) => {
 
    // !delete message
    const handleDelete = () => {
-      setOpen(false);
+      setOpen(touch ? true : false);
       if (message.sender === user.uid) {
          remove(
             ref(
@@ -36,19 +36,20 @@ export const MessageSettings = ({ message, align }) => {
    useEffect(() => {
       const checkIfClickedOutside = (e) => {
          if (
-            open &&
+            open && 
             animRef.current &&
             !animRef.current.contains(e.target) &&
             !buttonRef.current.contains(e.target)
          ) {
-            setOpen(false);
+            setTouch(false)
+            setOpen(false)
          }
       };
       document.addEventListener("mousedown", checkIfClickedOutside);
       return () => {
          document.removeEventListener("mousedown", checkIfClickedOutside);
       };
-   }, [open]);
+   }, [open, touch, setTouch]);
 
    return (
       <>
@@ -58,23 +59,24 @@ export const MessageSettings = ({ message, align }) => {
             onClick={() => {
                setOpen(!open);
             }}
-            className="w-4"
+            className="w-4 tablet:hidden"
          >
             <i className="ri-more-2-fill"></i>
          </button>
 
          {/* dropdown menu */}
-         {open && (
+         {(open) && (
             <ul
                ref={animRef}
                className={`w-[150px] select-none absolute z-10 bg-white dark:bg-[#313a43] text-[15px] rounded py-2 mt-1 mx-1.5 box-shadow text-[#212529] dark:text-[#939BB1] clear-both font-medium ${align}
-             ${open ? "openAnimation" : " closeAnimation"}
+             ${(open) ? "openAnimation" : " closeAnimation"}
          `}
             >
                <li
                   onClick={() => {
                      navigator.clipboard.writeText(message.message.text);
                      setOpen(false);
+                     setTouch(false)
                      toast.success("Successfully Copied!", {
                         className:
                            "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
@@ -104,6 +106,8 @@ export const MessageSettings = ({ message, align }) => {
       </>
    );
 };
+
+// !<-------------------------------User---------------------------------------->
 
 // !user settings
 export const UserSettings = () => {

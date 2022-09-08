@@ -68,23 +68,6 @@ const ChatContainer = () => {
       };
    }, [connectionId, messages]);
 
-   // !touch event
-   // let touchTimer=null;
-   // const touchStart = () => {
-   //    if(!touchTimer) {
-   //       touchTimer = setTimeout(() => {
-   //          setTouchshow(true)
-   //       }, 1000);
-   //    }
-   // }
-   // const touchEnd = () => {
-   //    if(touchTimer) {
-   //       clearTimeout(touchTimer)
-   //       touchTimer = null;
-   //       console.log(1);
-   //    }
-   // }
-
    // !search message
    const searchMessage = (value) => {
       setSearch(value);
@@ -102,7 +85,7 @@ const ChatContainer = () => {
                <Header searchMessage={searchMessage} />
 
                {/* messages container */}
-               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500 tablet:px-1.5">
+               <div className="messages flex-1 flex flex-col p-6 pb-1 overflow-x-hidden overflow-y-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500 tablet:px-1.5">
 
                   {/* message */}
                   {thisMessages &&

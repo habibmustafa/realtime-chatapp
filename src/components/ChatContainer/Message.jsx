@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import { MessageSettings } from "../AnimatedDropdown";
@@ -5,6 +6,7 @@ import TimeSeperate from "./TimeSeperate";
 
 const Message = (props) => {
    const { message, i, thisMessages } = props;
+   const [touchShow, setTouchshow] = useState(false);
    const { user, chatUser } = useSelector((state) => state.user);
    const scrollRef = useRef();
 
@@ -13,33 +15,47 @@ const Message = (props) => {
       scrollRef.current?.scrollIntoView();
    }, [thisMessages, chatUser]);
 
+   // !touch event
+   let touchTimer = null;
+   const touchStart = () => {
+      touchTimer = setTimeout(() => {
+         setTouchshow(true);
+         console.log("timeOut");
+      }, 600);
+      console.log("start");
+   };
+   const touchEnd = () => {
+      clearTimeout(touchTimer);
+      touchTimer = null;
+      console.log("end");
+   };
+
    return (
       <div ref={scrollRef}>
-         
          {/* time seperate */}
          <TimeSeperate {...props} />
 
          {/* message */}
          <div
-            className={`flex items-end justify-end gap-2.5 mt-6 tablet:gap-0 tablet:mt-3.5 ${
+            className={`flex items-end justify-end relative gap-2.5 mt-6 tablet:gap-0 tablet:mt-3.5 ${
                message.sender === chatUser.uid && "flex-row-reverse"
-            }`}
+            } ${touchShow && "before:absolute before:w-full before:h-[108%] before:-top-[4%] before:rounded-lg before:bg-blue-300 before:opacity-70"} `}
          >
             <div
-               className={`flex flex-col gap-4 tablet:max-w-[80%] ${
+               className={`flex flex-col gap-4 tablet:max-w-[82%] absview:max-w-[70%] ${
                   message.sender === chatUser.uid ? "items-start" : "items-end"
                }`}
             >
                <div
-                  className={`flex ${
+                  className={`flex relative ${
                      message.sender === chatUser.uid && "flex-row-reverse"
                   }`}
                >
-
                   {/* more icon */}
                   <div className="w-4 h-[15px] text-[#6159cb] relative text-[15px] leading-6 text-right inline-block">
                      <MessageSettings
                         message={message}
+                        setTouch={setTouchshow}
                         align={
                            message.sender === chatUser.uid
                               ? "left-0"
@@ -50,14 +66,13 @@ const Message = (props) => {
 
                   {/* text content */}
                   <div
-                     // onTouchStart={touchStart}
-                     // onTouchCancel={touchCancel}
-                     // onTouchEnd={touchEnd}
-                     className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col transition-colors duration-[350ms] ${
+                     onTouchStart={touchStart}
+                     onTouchEnd={touchEnd}
+                     className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col transition-colors duration-[350ms] select-none ${
                         message.sender === chatUser.uid
                            ? "items-end bg-[#f5f7fb] text-[#212529] dark:bg-[#36404a] dark:text-[#eff2f7] rounded-bl-none"
                            : "bg-[#7269ef] text-white items-start rounded-br-none"
-                     }`}
+                     } ${touchShow && "opacity-70"}`}
                   >
                      <p className="text-[15px] leading-6 font-medium break-all">
                         {message.message.text}
@@ -71,6 +86,14 @@ const Message = (props) => {
                         {message.time.substring(16, 21)}
                      </span>
                   </div>
+
+                  {/* touch dropdown show-hidden */}
+                     {touchShow && <MessageSettings
+                        touch={touchShow}
+                        setTouch={setTouchshow}
+                        message={message}
+                        align="top-full"
+                     />}
                </div>
 
                {/* last message user about */}

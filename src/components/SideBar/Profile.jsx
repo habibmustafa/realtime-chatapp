@@ -13,6 +13,7 @@ const Profile = () => {
    const [nameValue, setNameValue] = useState(user.username);
    const [bioValue, setBioValue] = useState(user.bio);
 
+   // !update name
    const updateName = async () => {
       if (nameValue.length < 3) {
          toast.error("Minimum of 3 characters!", {
@@ -37,6 +38,7 @@ const Profile = () => {
       setEditName(false);
    };
 
+   // !update bio
    const updateBio = () => {
       if (!editBio) {
          setEditBio(true);
@@ -139,6 +141,7 @@ const Profile = () => {
                         <i className="ri-pencil-line"></i>
                      </span>
                   </div>
+
                   {/* card */}
                   <div className="card bg-white dark:bg-[#262E35] dark:text-[#e1e9f1] border border-[#f0eff5] dark:border-[#36404a] transition-colors duration-[350ms] rounded text-[15px]">
                      <h5 className="text-[#212529] dark:text-[#eff2f7] dark:bg-[#36404a] flex items-center gap-2 font-semibold py-3 px-5 transition-colors duration-[350ms]">
@@ -197,6 +200,8 @@ const Profile = () => {
                               </div>
                            )}
                         </div>
+
+                        {/* stable */}
                         <div className="break-words overflow-hidden whitespace-normal text-ellipsis">
                            <p className="text-[#7a7f9a] dark:text-[#9aa1b9] mb-1">
                               Email

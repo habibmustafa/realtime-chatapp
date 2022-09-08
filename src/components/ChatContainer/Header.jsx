@@ -54,10 +54,8 @@ const Header = ({ searchMessage }) => {
 
    return (
       <div className="header p-6 border-b border-[#f0eff5] dark:border-[#36404a] transition-colors duration-[350ms] text-[#495057] dark:text-[#e1e9f1] text-[15px] leading-[22.5px] flex justify-between tablet:py-4 tablet:px-1.5">
-         
          {/* name */}
          <div className="flex items-center gap-3.5 w-full">
-
             {/* back button */}
             {backBtn && (
                <div
@@ -77,7 +75,11 @@ const Header = ({ searchMessage }) => {
             <div className="flex flex-col w-full">
                <p className="cursor-pointer relative font-semibold leading-5 tracking-wide">
                   {chatUser?.username}
-                  {chatUser?.admin && <span className="text-[9px] text-[#06d6a0] absolute -top-1 ml-[1px]">admin</span>}
+                  {chatUser?.admin && (
+                     <span className="text-[9px] text-[#06d6a0] absolute -top-1 ml-[1px]">
+                        admin
+                     </span>
+                  )}
                </p>
                <span
                   className={`text-sm w-full text-green-500 ${
@@ -97,7 +99,7 @@ const Header = ({ searchMessage }) => {
 
          {/* right icons */}
          <div className="text-xl relative text-[#7a7f9a] dark:text-[#abb4d2] transition-colors duration-[350ms] text-center flex items-end gap-2">
-
+            
             {/* search button */}
             <button
                ref={buttonRef}
