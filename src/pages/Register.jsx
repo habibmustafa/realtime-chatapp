@@ -58,13 +58,13 @@ const Register = () => {
             {/* logo */}
             <div className="flex items-center gap-1 text-2xl text-[#7269ef] mb-12">
                <i className="ri-chat-smile-2-fill"></i>
-               <span className="text-slate-700 font-semibold">ChatAPP</span>
+               <span className="text-slate-700 font-semibold">MoreChat</span>
             </div>
 
             {/* content */}
             <div className="flex flex-col items-center mb-6">
                <h4 className="text-lg font-semibold text-[#495057]">Sing up</h4>
-               <p className="text-[#7a7f9a]">Get your ChatAPP account now.</p>
+               <p className="text-[#7a7f9a]">Get your MoreChat account now.</p>
             </div>
 
             {/* form card */}
@@ -115,7 +115,7 @@ const Register = () => {
                      Signin
                   </Link>
                </p>
-               <p>© 2022 ChatAPP. Crafted with by habibmustafa</p>
+               <p>© 2022 MoreChat. Crafted with by habibmustafa</p>
             </div>
          </div>
       </div>

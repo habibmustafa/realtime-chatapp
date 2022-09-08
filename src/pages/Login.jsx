@@ -40,7 +40,7 @@ const Login = () => {
                {/* logo */}
                <div className="flex items-center gap-1 text-2xl text-[#7269ef] mb-12">
                   <i className="ri-chat-smile-2-fill"></i>
-                  <span className="text-slate-700 font-semibold">ChatAPP</span>
+                  <span className="text-slate-700 font-semibold">MoreChat</span>
                </div>
 
                {/* content */}
@@ -49,7 +49,7 @@ const Login = () => {
                      Sign in
                   </h4>
                   <p className="text-[#7a7f9a]">
-                     Sing in to coutinue to ChatAPP
+                     Sing in to coutinue to MoreChat
                   </p>
                </div>
 
@@ -94,7 +94,7 @@ const Login = () => {
                         Signup now
                      </Link>
                   </p>
-                  <p>© 2022 ChatAPP. Crafted with by habibmustafa</p>
+                  <p>© 2022 MoreChat. Crafted with by habibmustafa</p>
                </div>
             </div>
          </div>
