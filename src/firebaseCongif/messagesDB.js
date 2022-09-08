@@ -3,12 +3,15 @@ import { getDatabase, ref, set } from "firebase/database";
 
 export const messagesDB = getDatabase(app);
 
-// dataWrite
+// !dataWrite
 export const addMessage = (connectionId, uuid, value, userId, username, chatUserId, chatUserUsername, time=new Date().toString()) => {
+   
+   // !add connection
    set(ref(messagesDB, `connection/${connectionId}/connectionId`),
       connectionId
    );
 
+   // !users
    set(ref(messagesDB, `connection/${connectionId}/users`), {
       user1Id: userId,
       user2Id: chatUserId,
@@ -16,6 +19,7 @@ export const addMessage = (connectionId, uuid, value, userId, username, chatUser
       user2Name: chatUserUsername
    });
 
+   // !message
    set(ref(messagesDB, `connection/${connectionId}/messages/${uuid}`), {
       uuid,
       sender: userId,
@@ -24,13 +28,14 @@ export const addMessage = (connectionId, uuid, value, userId, username, chatUser
       time: time
    });
    
+   // !options
    set(ref(messagesDB, `connection/${connectionId}/options`), {
       sender: userId,
       seen: false,
    });
 };
 
-// dataRead
+// !dataRead
 export const dataRead = () => {
    // onValue(ref(db, "messages/habib/"), (snapshot) => {
    //    const data = snapshot.val();

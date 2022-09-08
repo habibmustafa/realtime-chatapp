@@ -10,7 +10,9 @@ import toast from "react-hot-toast";
 
 export const auth = getAuth(app);
 
-// register
+// !<--------------------signIn-signUp------------------------>
+
+// !register
 export const register = async (email, password, username) => {
    try {
       const { data } = await createUserWithEmailAndPassword(
@@ -23,48 +25,52 @@ export const register = async (email, password, username) => {
       })
       return data;
    } catch (err) {
-      toast.error(err.message);
+      toast.error(err.code);
    }
 };
-// setAvatar
+
+// !login
+export const login = async (email, password) => {
+   try {
+      const { data } = await signInWithEmailAndPassword(auth, email, password);
+      return data;
+   } catch (err) {
+      toast.error(err.code);
+   }
+};
+
+// !logOut
+export const logOut = async () => {
+   try {
+      return await signOut(auth);
+   } catch (err) {
+      toast.error(err.code);
+   }
+};
+
+// !<-----------------------update------------------------------->
+
+// !update avatar
 export const addAvatar = async (avatar) => {
    try {
       await updateProfile(auth.currentUser, {
          photoURL: avatar
       })
    } catch (err) {
-      toast.error(err.message);
+      toast.error(err.code);
    }
 }
-// update username
+// !update username
 export const updateDisplayName = async (username) => {
    try {
       await updateProfile(auth.currentUser, {
          displayName: username
       })
    } catch (err) {
-      toast.error(err.message);
+      toast.error(err.code);
    }
 }
 
-// login
-export const login = async (email, password) => {
-   try {
-      const { data } = await signInWithEmailAndPassword(auth, email, password);
-      return data;
-   } catch (err) {
-      toast.error(err.message);
-   }
-};
-
-// logOut
-export const logOut = async () => {
-   try {
-      return await signOut(auth);
-   } catch (err) {
-      toast.error(err.message);
-   }
-};
 
 // active user
 // export const activeUser = () => {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { LogInput } from "../components/LogInput";
+import LogInput from "../components/LogInput";
 import { auth, login } from "../firebaseCongif/auth";
 import { useNavigate } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -13,19 +13,21 @@ const Login = () => {
    const [password, setPassword] = useState("");
    const [user, loading] = useAuthState(auth);
    const navigate = useNavigate();
-   const dispatch = useDispatch()
+   const dispatch = useDispatch();
 
+   // !login check
    const handleSubmit = async (e) => {
       e.preventDefault();
       await login(email, password);
    };
 
+   // !login success?go main page
    useEffect(() => {
-      if(loading) return
+      if (loading) return;
       if (user) {
-         lastSignIn(user.uid, user.metadata.lastSignInTime.substring(0,16))
-         dispatch(setChatUserId(false))
-         dispatch(setChatUser(false))
+         lastSignIn(user.uid, user.metadata.lastSignInTime.substring(0, 16));
+         dispatch(setChatUserId(false));
+         dispatch(setChatUser(false));
          navigate("/");
       }
    }, [user, loading, navigate]);
@@ -34,6 +36,7 @@ const Login = () => {
       <div className="login h-full bg-[#f7f7ff]">
          <div className="wrapper h-full">
             <div className="flex justify-center flex-col items-center h-full">
+
                {/* logo */}
                <div className="flex items-center gap-1 text-2xl text-[#7269ef] mb-12">
                   <i className="ri-chat-smile-2-fill"></i>
@@ -50,8 +53,8 @@ const Login = () => {
                   </p>
                </div>
 
+               {/* form card */}
                <div className="flex flex-col break-words bg-white rounded-lg p-9 mb-6 w-full max-w-[450px]">
-                  {/* card */}
                   <form onSubmit={handleSubmit}>
                      <LogInput
                         label="email"
@@ -71,6 +74,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                      />
 
+                     {/* send */}
                      <div className="mb-4 mt-6">
                         <button
                            className="w-full flex justify-center items-center p-2 rounded-[4px] transition-all bg-[#7269ef] text-white hover:bg-[#6159cb]"

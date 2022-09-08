@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { messagesDB } from "../firebaseCongif/messagesDB";
 import { setViewProfile } from "../store/animSlice";
 
+// !message settings
 export const MessageSettings = ({ message, align }) => {
    const [open, setOpen] = useState(false);
    const animRef = useRef();
@@ -14,6 +15,7 @@ export const MessageSettings = ({ message, align }) => {
    const { connectionId } = useSelector((state) => state.message);
    const { user } = useSelector((state) => state.user);
 
+   // !delete message
    const handleDelete = () => {
       setOpen(false);
       if (message.sender === user.uid) {
@@ -30,6 +32,7 @@ export const MessageSettings = ({ message, align }) => {
       }
    };
 
+   // !outside click close
    useEffect(() => {
       const checkIfClickedOutside = (e) => {
          if (
@@ -49,6 +52,7 @@ export const MessageSettings = ({ message, align }) => {
 
    return (
       <>
+         {/* trigger button */}
          <button
             ref={buttonRef}
             onClick={() => {
@@ -58,6 +62,8 @@ export const MessageSettings = ({ message, align }) => {
          >
             <i className="ri-more-2-fill"></i>
          </button>
+
+         {/* dropdown menu */}
          {open && (
             <ul
                ref={animRef}
@@ -99,7 +105,7 @@ export const MessageSettings = ({ message, align }) => {
    );
 };
 
-// user settings
+// !user settings
 export const UserSettings = () => {
    const [open, setOpen] = useState(false);
    // const { connectionId } = useSelector((state) => state.message);
@@ -107,6 +113,7 @@ export const UserSettings = () => {
    const animRef = useRef();
    const dispatch = useDispatch();
 
+   // !user message delete - deaktiv
    const handleDelete = () => {
       setOpen(false);
       toast.error("Disabled for Now!", {
@@ -116,6 +123,7 @@ export const UserSettings = () => {
       // remove(ref(messagesDB, `connection/${connectionId}/messages`));
    };
 
+   // !outside click close
    useEffect(() => {
       const checkIfClickedOutside = (e) => {
          if (
@@ -135,6 +143,7 @@ export const UserSettings = () => {
 
    return (
       <>
+         {/* trigger button */}
          <button
             ref={buttonRef}
             onClick={() => {
@@ -145,6 +154,7 @@ export const UserSettings = () => {
             <i className="ri-more-fill"></i>
          </button>
 
+         {/* dropdown menu */}
          {open && (
             <ul
                ref={animRef}
@@ -155,6 +165,7 @@ export const UserSettings = () => {
                <li
                   onClick={() => {
                      dispatch(setViewProfile(true));
+                     setOpen(false)
                   }}
                   className="hidden tablet:flex justify-between items-center px-6 py-1.5 cursor-pointer hover:bg-[#f7f7ff] dark:hover:bg-[#36404a] dark:hover:text-[#DFE1E2]"
                >

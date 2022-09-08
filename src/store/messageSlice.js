@@ -2,7 +2,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 
 const initialState = {
    messages: [],
-   connectionId: '',
+   connectionId: "",
 };
 
 const messageSlice = createSlice({

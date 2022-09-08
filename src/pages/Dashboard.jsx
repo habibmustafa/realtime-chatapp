@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
-import { ChatContainer } from "../components/ChatContainer";
-import { SideBar } from "../components/SideBar";
+import ChatContainer from "../components/ChatContainer";
+import SideBar from "../components/SideBar";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useDispatch, useSelector } from "react-redux/es/exports";
 import { auth } from "../firebaseCongif/auth";
@@ -14,27 +14,27 @@ import ViewProfile from "../components/ViewProfile";
 const Dashboard = () => {
    const [user, loading] = useAuthState(auth);
    const { chatUserId, allUsers } = useSelector((state) => state.user);
-   const {viewProfile, showEmoji} = useSelector(state => state.anim)
+   const { viewProfile, showEmoji } = useSelector((state) => state.anim);
    const dispatch = useDispatch();
 
+   // !pushState transactions (back event)
    useEffect(() => {
       window.history.pushState(null, null, window.location.href);
       window.onpopstate = function () {
          window.history.go(1);
          if (window.innerWidth <= 991) {
-            if(viewProfile) {
+            if (viewProfile) {
                dispatch(setViewProfile(false));
-            }
-            else if(showEmoji) {
-               dispatch(setShowEmoji(false))
-            }
-            else {
+            } else if (showEmoji) {
+               dispatch(setShowEmoji(false));
+            } else {
                dispatch(setShow(false));
             }
          }
       };
    }, [viewProfile, showEmoji]);
 
+   // !active user and other allUsers detected
    useEffect(() => {
       if (loading) return;
       else if (user) {
@@ -55,6 +55,7 @@ const Dashboard = () => {
       }
    }, [user]);
 
+   // !chatUser detected
    useEffect(() => {
       chatUserId &&
          dispatch(
@@ -62,19 +63,22 @@ const Dashboard = () => {
          );
    }, [chatUserId, allUsers]);
 
+   // !Connect - Disconnect
    useEffect(() => {
-      onValue(ref(usersDB, ".info/connected"), (snap) => {
-         if (snap.val() === true && user && user.photoURL) {
-            // We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
-            userOnlineCheck(user.uid, true, "Online");
+      if (user && user.photoURL) {
+         onValue(ref(usersDB, ".info/connected"), (snap) => {
+            if (snap.val() === true) {
+               // ?We're connected (or reconnected)! Do anything here that should happen only if online (or on reconnect)
+               userOnlineCheck(user.uid, true, "Online");
 
-            // When I disconnect, remove this device
-            onDisconnect(ref(usersDB, `users/${user.uid}/isActive`)).set({
-               status: false,
-               content: `${new Date().toString().substring(4, 21)}`,
-            });
-         }
-      });
+               // ?When I disconnect, remove this device
+               onDisconnect(ref(usersDB, `users/${user.uid}/isActive`)).set({
+                  status: false,
+                  content: `${new Date().toString().substring(4, 21)}`,
+               });
+            }
+         });
+      }
       return () => {
          dispatch(setMessages([]));
       };

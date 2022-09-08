@@ -22,6 +22,7 @@ const SetAvatar = () => {
       `${api}/48297.svg`,
    ]);
 
+   // !on hold
    // useEffect(() => {
    //    for (let i = 0; i < 8; i++) {
    // const image = await axios.get(`${api}${Math.round(Math.random() * 100000)}`)
@@ -41,14 +42,16 @@ const SetAvatar = () => {
    // }, []);
    const navigate = useNavigate();
 
+   // !set avatar
    const setImage = (i) => {
       setActiveAvatar(i);
    };
 
+   // !selected avatar send db and go main page
    const handleClick = async () => {
       if (loading) return;
       if (user && activeAvatar !== false) {
-         await addAvatar(avatars[activeAvatar])
+         await addAvatar(avatars[activeAvatar]);
          userSetAvatar(user.uid, avatars[activeAvatar]);
          navigate("/");
       } else {

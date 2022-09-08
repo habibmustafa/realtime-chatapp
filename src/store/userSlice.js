@@ -26,5 +26,6 @@ export const userSlice = createSlice({
    },
 });
 
-export const { setUser, setAllUsers, setChatUser, setChatUserId } = userSlice.actions;
+export const { setUser, setAllUsers, setChatUser, setChatUserId } =
+   userSlice.actions;
 export default userSlice.reducer;

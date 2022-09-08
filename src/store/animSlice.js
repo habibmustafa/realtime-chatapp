@@ -18,7 +18,7 @@ const animSlice = createSlice({
       },
       setShowEmoji: (state, action) => {
          state.showEmoji = action.payload;
-      }
+      },
    },
 });
 

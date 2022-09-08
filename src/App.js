@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { BrowserRouter } from "react-router-dom";
-import Routing from "./config/Routing";
+import Routing from "./Routing";
 import { Toaster } from "react-hot-toast";
 import { Provider } from "react-redux";
 import { store } from "./store";

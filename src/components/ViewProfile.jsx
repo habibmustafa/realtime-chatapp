@@ -9,6 +9,7 @@ const ViewProfile = () => {
    const dispatch = useDispatch();
    const ref = useRef();
 
+   // !chatUser profile active-deactive
    useEffect(() => {
       const checkIfClickedOutside = (e) => {
          if (
@@ -34,6 +35,7 @@ const ViewProfile = () => {
          {/* Cancel */}
          {chatUser ? (
             <>
+               {/* close view profile */}
                <div className="text-[#7a7f9a] text-xl text-right">
                   <i
                      onClick={() => {
@@ -44,7 +46,7 @@ const ViewProfile = () => {
                   ></i>
                </div>
 
-               {/* profile photo & status */}
+               {/* profile photo & active status */}
                <div className="text-[#495057] text-[15px] leading-[22.5px] p-6 tablet:pt-1 text-center border-[#f0eff5] dark:border-[#36404a] transition-colors duration-[350ms] border-b-[1px]">
                   <div className="avatar rounded-full mb-6">
                      <img
@@ -55,8 +57,11 @@ const ViewProfile = () => {
                   </div>
                   <h5 className="font-semibold relative leading-5 mb-1 tracking-wider dark:text-[#e1e9f1] transition-colors duration-300">
                      {chatUser.username}
-                     {chatUser?.admin && <span className="text-[9px] text-[#06d6a0] absolute -top-1 ml-[1px]">admin</span>}
-
+                     {chatUser?.admin && (
+                        <span className="text-[9px] text-[#06d6a0] absolute -top-1 ml-[1px]">
+                           admin
+                        </span>
+                     )}
                   </h5>
                   <p className="flex items-center justify-center gap-1 text-[#7a7f9a] dark:text-[#9aa1b9] font-medium">
                      <i
@@ -72,11 +77,11 @@ const ViewProfile = () => {
 
                {/* profile content */}
                <div className="text-[#495057] leading-[22.5px] my-6">
+                  {/* bio */}
                   <div className="text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6 transition-colors duration-300">
-                     <p className="tracking-normal">
-                        {chatUser.bio}
-                     </p>
+                     <p className="tracking-normal">{chatUser.bio}</p>
                   </div>
+
                   {/* card */}
                   <div className="card bg-white dark:bg-[#262E35] dark:text-[#e1e9f1] border-[#f0eff5] dark:border-[#36404a] border-[1px] transition-colors duration-[350ms] rounded text-[15px]">
                      <h5 className="text-[#212529] dark:text-[#eff2f7] dark:bg-[#36404a] flex items-center gap-2 font-semibold py-3 transition-colors duration-[400ms] px-5">
