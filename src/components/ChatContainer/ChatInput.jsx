@@ -5,7 +5,6 @@ import { setShowEmoji } from "../../store/animSlice";
 
 const ChatInput = ({ sendMessage }) => {
    const [value, setValue] = useState("");
-   // const [showEmoji, setShowEmoji] = useState(false);
    const { showEmoji } = useSelector((state) => state.anim);
    const dispatch = useDispatch();
    const emojiRef = useRef();

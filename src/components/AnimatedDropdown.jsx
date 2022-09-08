@@ -17,7 +17,8 @@ export const MessageSettings = ({ message, align, touch=false, setTouch }) => {
 
    // !delete message
    const handleDelete = () => {
-      setOpen(touch ? true : false);
+      setOpen(false);
+      setTouch(false)
       if (message.sender === user.uid) {
          remove(
             ref(

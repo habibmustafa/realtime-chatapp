@@ -41,7 +41,7 @@ const Message = (props) => {
                message.sender === chatUser.uid && "flex-row-reverse"
             } ${
                touchShow &&
-               "before:absolute before:openBeforeAnimation before:w-full before:h-[108%] before:-top-[4%] before:rounded-lg before:bg-blue-300 before:opacity-70"
+               "before:absolute before:openBeforeAnimation before:w-[108%] before:h-[108%] before:-top-[4%] before:-left-[4%] before:bg-blue-300 before:bg-opacity-60"
             } `}
          >
             <div
@@ -94,6 +94,7 @@ const Message = (props) => {
                      <MessageSettings
                         touch={touchShow}
                         setTouch={setTouchshow}
+                        scrollRef={scrollRef}
                         message={message}
                         align={
                            message.sender === chatUser.uid
@@ -107,7 +108,7 @@ const Message = (props) => {
                {/* last message user about */}
                {(thisMessages.length - 1 !== i &&
                   thisMessages[i + 1].sender === message.sender) || (
-                  <p className="text-[#495057] dark:text-[#a6b0cf] transition-colors duration-[350ms] text-sm leading-5 font-medium tablet:mx-2 tablet:text-xs">
+                  <p className="text-[#495057] dark:text-[#a6b0cf] transition-colors duration-[350ms] select-none text-sm leading-5 font-medium tablet:mx-2 tablet:text-xs">
                      {message.sender === user.uid
                         ? user.username
                         : chatUser.username}
