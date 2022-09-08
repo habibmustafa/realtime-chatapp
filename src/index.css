@@ -103,6 +103,21 @@
       }
    }
 
+
+   /* !before animation */
+   .openBeforeAnimation {
+      animation: AnimatedBefore 0.2s forwards;
+   }
+
+   @keyframes AnimatedBefore {
+      0% {
+         opacity: 0;
+      }
+      100% {
+         opacity: 1;
+      }
+   }
+
    /* !emoji picker reset */
    aside.emoji-picker-react {
       box-shadow: inherit;

@@ -21,7 +21,7 @@ const Message = (props) => {
       touchTimer = setTimeout(() => {
          setTouchshow(true);
          console.log("timeOut");
-      }, 600);
+      }, 550);
       console.log("start");
    };
    const touchEnd = () => {
@@ -31,7 +31,7 @@ const Message = (props) => {
    };
 
    return (
-      <div ref={scrollRef}>
+      <div ref={scrollRef} onTouchStart={touchStart} onTouchEnd={touchEnd}>
          {/* time seperate */}
          <TimeSeperate {...props} />
 
@@ -39,7 +39,10 @@ const Message = (props) => {
          <div
             className={`flex items-end justify-end relative gap-2.5 mt-6 tablet:gap-0 tablet:mt-3.5 ${
                message.sender === chatUser.uid && "flex-row-reverse"
-            } ${touchShow && "before:absolute before:w-full before:h-[108%] before:-top-[4%] before:rounded-lg before:bg-blue-300 before:opacity-70"} `}
+            } ${
+               touchShow &&
+               "before:absolute before:openBeforeAnimation before:w-full before:h-[108%] before:-top-[4%] before:rounded-lg before:bg-blue-300 before:opacity-70"
+            } `}
          >
             <div
                className={`flex flex-col gap-4 tablet:max-w-[82%] absview:max-w-[70%] ${
@@ -66,12 +69,11 @@ const Message = (props) => {
 
                   {/* text content */}
                   <div
-                     onTouchStart={touchStart}
-                     onTouchEnd={touchEnd}
-                     className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col transition-colors duration-[350ms] select-none ${
+                     tabIndex="14"
+                     className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col transition-colors duration-300 select-none ${
                         message.sender === chatUser.uid
-                           ? "items-end bg-[#f5f7fb] text-[#212529] dark:bg-[#36404a] dark:text-[#eff2f7] rounded-bl-none"
-                           : "bg-[#7269ef] text-white items-start rounded-br-none"
+                           ? "items-end bg-[#f5f7fb] text-[#212529] dark:bg-[#36404a] dark:text-[#eff2f7] rounded-bl-none active:bg-[#d9dee2] dark:active:bg-[#212529]"
+                           : "bg-[#7269ef] text-white items-start rounded-br-none active:bg-[#383199]"
                      } ${touchShow && "opacity-70"}`}
                   >
                      <p className="text-[15px] leading-6 font-medium break-all">
@@ -88,12 +90,18 @@ const Message = (props) => {
                   </div>
 
                   {/* touch dropdown show-hidden */}
-                     {touchShow && <MessageSettings
+                  {touchShow && (
+                     <MessageSettings
                         touch={touchShow}
                         setTouch={setTouchshow}
                         message={message}
-                        align="top-full"
-                     />}
+                        align={
+                           message.sender === chatUser.uid
+                              ? "top-full left-3"
+                              : "top-full right-3"
+                        }
+                     />
+                  )}
                </div>
 
                {/* last message user about */}
