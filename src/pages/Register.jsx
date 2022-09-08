@@ -6,6 +6,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { addUser } from "../firebaseCongif/usersDB";
 import { useDispatch } from "react-redux";
 import { setChatUser, setChatUserId } from "../store/userSlice";
+import { toast } from "react-hot-toast";
 
 const Register = () => {
    const [email, setEmail] = useState("");
@@ -18,6 +19,18 @@ const Register = () => {
    // !register check
    const handleSubmit = async (e) => {
       e.preventDefault();
+      // !characters length
+      if (username.length < 3 || username.length > 16) {
+         toast.error("min 3, max 16 characters!");
+         return false;
+      }
+
+      // !space check
+      if(username.indexOf("  ") !== -1) {
+         toast.error("Only 1 space!");
+         return false;
+      }
+
       await register(email, password, username);
    };
 

@@ -3,7 +3,7 @@ import { getDatabase, ref, set } from "firebase/database";
 
 export const messagesDB = getDatabase(app);
 
-// !dataWrite
+// !dataWrite 
 export const addMessage = (
    connectionId,
    uuid,
@@ -41,6 +41,7 @@ export const addMessage = (
    set(ref(messagesDB, `connection/${connectionId}/options`), {
       sender: userId,
       seen: false,
+      counter: 1 
    });
 };
 

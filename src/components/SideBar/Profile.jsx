@@ -15,13 +15,16 @@ const Profile = () => {
 
    // !update name
    const updateName = async () => {
-      if (nameValue.length < 3) {
-         toast.error("Minimum of 3 characters!", {
+      // !characters length
+      if (nameValue.length < 3 || nameValue.length > 16) {
+         toast.error("min 3, max 16 characters!", {
             className:
                "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
          });
          return false;
       }
+
+      // !=== name
       if (nameValue === user.username) {
          toast.error("Change your name!", {
             className:
@@ -29,6 +32,16 @@ const Profile = () => {
          });
          return false;
       }
+
+      // !space check
+      if(nameValue.indexOf("  ") !== -1) {
+         toast.error("Only 1 space!", {
+            className:
+               "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
+         });
+         return false;
+      }
+
       await updateDisplayName(nameValue);
       updateUsername(user.uid, nameValue);
       toast.success("Your name has been updated!", {
@@ -42,6 +55,14 @@ const Profile = () => {
    const updateBio = () => {
       if (!editBio) {
          setEditBio(true);
+         return false;
+      }
+
+      if(bioValue.length > 300) {
+         toast.error("Max 300 characters!", {
+            className:
+               "bg-white text-[#212529] dark:bg-[#313a43] dark:text-[#f7f7ff]",
+         });
          return false;
       }
 

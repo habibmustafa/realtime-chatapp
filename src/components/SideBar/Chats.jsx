@@ -24,6 +24,7 @@ const Chats = () => {
                   if (item.messages) {
                      return {
                         seen: item.options.seen,
+                        counter: item.options.counter,
                         ...User,
                         ...Object.values(item.messages).sort(
                            (a, b) => a.createdAt - b.createdAt
