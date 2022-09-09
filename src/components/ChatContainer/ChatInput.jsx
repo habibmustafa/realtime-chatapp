@@ -15,7 +15,7 @@ const ChatInput = ({ sendMessage }) => {
    const handleSubmit = (e) => {
       e.preventDefault();
       inputRef.current.focus();
-      if (value) {
+      if (value && value.indexOf(" ") === -1) {
          sendMessage(value);
          setValue("");
       }
