@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 import { updateDisplayName } from "../../firebaseCongif/auth";
 import { updateBioq, updateUsername } from "../../firebaseCongif/usersDB";
 import Loading from "../../layouts/Loading";
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 const Profile = () => {
+   const [animationParent] = useAutoAnimate()
    const [editName, setEditName] = useState(false);
    const [editBio, setEditBio] = useState(false);
    const { user } = useSelector((state) => state.user);
@@ -130,7 +132,7 @@ const Profile = () => {
 
                {/* profile content */}
                <div className="text-[#495057] leading-[22.5px] my-6">
-                  <div className="flex justify-between items-start relative text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6 gap-1.5 transition-colors duration-300">
+                  <div ref={animationParent} className="flex justify-between items-start relative text-[#7a7f9a] dark:text-[#9aa1b9] text-[15px] mb-6 gap-1.5 transition-colors duration-300">
                      {!editBio ? (
                         <p className="tracking-normal px-2 py-1">{user.bio}</p>
                      ) : (

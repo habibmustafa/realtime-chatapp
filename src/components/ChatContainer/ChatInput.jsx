@@ -3,11 +3,10 @@ import Picker from "emoji-picker-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setReply, setShowEmoji } from "../../store/animSlice";
 import Reply from "./Reply";
-import { replyMessage } from "../../firebaseCongif/messagesDB";
 
 const ChatInput = ({ sendMessage }) => {
    const [value, setValue] = useState("");
-   const { showEmoji, reply } = useSelector((state) => state.anim);
+   const { showEmoji } = useSelector((state) => state.anim);
    const dispatch = useDispatch();
    const emojiRef = useRef();
    const buttonRef = useRef();
@@ -23,7 +22,7 @@ const ChatInput = ({ sendMessage }) => {
          setValue("");
 
          // !reply reset
-         replyMessage(reply.connectionId, reply.uuid)
+         // replyMessage(reply.connectionId, reply.uuid)
          dispatch(setReply(false))
       }
    };

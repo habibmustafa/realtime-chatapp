@@ -4,7 +4,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { messagesDB, replyMessage } from "../firebaseCongif/messagesDB";
+import { messagesDB } from "../firebaseCongif/messagesDB";
 import { setReply, setViewProfile } from "../store/animSlice";
 
 // !message settings
@@ -36,7 +36,7 @@ export const MessageSettings = ({ message, align, touch=false, setTouch }) => {
 
    // !reply message
    const handleReply = () => {
-      replyMessage(connectionId, message.uuid, message.message.text)
+      // replyMessage(connectionId, message.uuid, message.message.text)
       dispatch(setReply({connectionId, message: message.message.text, uuid: message.uuid}))
    }
 

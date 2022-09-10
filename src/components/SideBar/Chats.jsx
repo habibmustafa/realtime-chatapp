@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
 import User from "./User";
-import { useSelector } from "react-redux/es/exports";
+import { useDispatch, useSelector } from "react-redux/es/exports";
 import Loading from "../../layouts/Loading";
+import { setRecentUsers } from "../../store/userSlice";
+import { useAutoAnimate } from '@formkit/auto-animate/react'
 
 const Chats = () => {
    const [search, setSearch] = useState("");
-   const [recentUsers, setRecentUsers] = useState([]);
-   const { user, allUsers } = useSelector((state) => state.user);
+   // const [recentUsers, setRecentUsers] = useState([]);
+   const { user, allUsers, recentUsers } = useSelector((state) => state.user);
    const { messages, connectionId } = useSelector((state) => state.message);
-
+   const dispatch = useDispatch()
+   const [animationParent] = useAutoAnimate()
    // !recent messages list
+   
    useEffect(() => {
       const newArray = [];
       allUsers &&
@@ -36,7 +40,7 @@ const Chats = () => {
             aa && newArray.push(aa);
          });
       const bb = newArray.sort((a, b) => b.createdAt - a.createdAt);
-      setRecentUsers(bb.length ? bb : false);
+      dispatch(setRecentUsers(bb.length ? bb : false));
    }, [messages, user, connectionId, allUsers]);
 
    return (
@@ -68,7 +72,7 @@ const Chats = () => {
             <h5 className="text-[#495057] dark:text-[#e1e9f1] transition-colors duration-300 font-semibold leading-5 mb-4">
                Recent
             </h5>
-            <div className="users pr-2 mr-1 h-full  overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
+            <div ref={animationParent} className="users pr-2 mr-1 h-full  overflow-auto scrollbar-border scrollbar-current scrollbar-thumb-transparent hover:scrollbar-thumb-slate-300 dark:hover:scrollbar-thumb-slate-500 tablet:scrollbar-thumb-slate-300 tablet:dark:scrollbar-thumb-slate-500">
                {allUsers ? (
                   !recentUsers ? (
                      <div className="flex justify-center items-center relative -top-8 h-full font-semibold">
