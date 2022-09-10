@@ -35,6 +35,7 @@ export const addMessage = (
       message: { text: value },
       createdAt: new Date().getTime(),
       time: time,
+      reply: false
    });
 
    // !options
@@ -44,6 +45,11 @@ export const addMessage = (
       counter: 1 
    });
 };
+
+// !reply
+export const replyMessage = (connectionId, uuid, message=false) => {
+   set(ref(messagesDB, `connection/${connectionId}/messages/${uuid}/reply`), message)
+}
 
 // !typing - deactive
 export const typing = (connectionId, userId) => {

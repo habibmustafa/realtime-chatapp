@@ -74,7 +74,7 @@ const SideBar = () => {
                      onClick={() => {
                         setButton({ ...button, active: icon.id });
                      }}
-                     className={`text-2xl text-[#878a82] dark:text-[#a6b0cf] transition-colors duration-[250ms] px-4 inline-block rounded-lg py-3 cursor-pointer tablet:text-xl tablet:px-5 tablet:py-2.5 ${
+                     className={`text-2xl text-[#878a82] dark:text-[#a6b0cf] transition-colors duration-[250ms] px-4 inline-block rounded-lg py-3 cursor-pointer tablet:text-xl tablet:px-4 tablet:py-2.5 ${
                         icon.id === button.active &&
                         "bg-[#f7f7ff] !text-[#7269ef] dark:bg-[#3e4a56]"
                      } ${icon.id === 4 && "tablet:hidden"}`}
@@ -85,7 +85,7 @@ const SideBar = () => {
                <button
                   title="Dark / Light Mode"
                   onClick={handleChangeTheme}
-                  className="text-2xl px-4 hidden rounded-lg py-2 my-2 text-[#878a82] dark:text-[#a6b0cf] cursor-pointer tablet:text-xl tablet:px-5 tablet:my-0 tablet:py-2.5 tablet:inline-block"
+                  className="text-2xl px-4 hidden rounded-lg py-2 my-2 text-[#878a82] dark:text-[#a6b0cf] cursor-pointer tablet:text-xl tablet:px-4 tablet:my-0 tablet:py-2.5 tablet:inline-block"
                >
                   <i
                      className={`${darkMode ? "ri-sun-line" : "ri-moon-line"}`}

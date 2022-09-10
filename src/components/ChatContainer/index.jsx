@@ -81,7 +81,7 @@ const ChatContainer = () => {
          }`}
       >
          {chatUser ? (
-            <div className="flex h-full flex-col">
+            <div className="flex h-full flex-col relative">
                <Header searchMessage={searchMessage} />
 
                {/* messages container */}

@@ -70,12 +70,13 @@ const Message = (props) => {
                   {/* text content */}
                   <div
                      tabIndex="14"
-                     className={`px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col transition-colors duration-300 select-none ${
+                     className={`relative px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col transition-colors duration-300 select-none ${
                         message.sender === chatUser.uid
                            ? "items-end bg-[#f5f7fb] text-[#212529] dark:bg-[#36404a] dark:text-[#eff2f7] rounded-bl-none active:bg-[#d9dee2] dark:active:bg-[#212529]"
                            : "bg-[#7269ef] text-white items-start rounded-br-none active:bg-[#383199]"
                      } ${touchShow && "opacity-70"}`}
                   >
+                     {/* <p className="bg-red-200 text-[15px] leading-6 font-medium break-all mb-2">aa</p> */}
                      <p className="text-[15px] leading-6 font-medium break-all">
                         {message.message.text}
                      </p>

@@ -4,6 +4,7 @@ const initialState = {
    show: false,
    viewProfile: false,
    showEmoji: false,
+   reply: false,
 };
 
 const animSlice = createSlice({
@@ -19,8 +20,11 @@ const animSlice = createSlice({
       setShowEmoji: (state, action) => {
          state.showEmoji = action.payload;
       },
+      setReply: (state, action) => {
+         state.reply = action.payload;
+      },
    },
 });
 
-export const { setShow, setViewProfile, setShowEmoji } = animSlice.actions;
+export const { setShow, setViewProfile, setShowEmoji, setReply } = animSlice.actions;
 export default animSlice.reducer;

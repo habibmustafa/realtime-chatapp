@@ -4,16 +4,17 @@ import { useRef } from "react";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { messagesDB } from "../firebaseCongif/messagesDB";
-import { setViewProfile } from "../store/animSlice";
+import { messagesDB, replyMessage } from "../firebaseCongif/messagesDB";
+import { setReply, setViewProfile } from "../store/animSlice";
 
 // !message settings
 export const MessageSettings = ({ message, align, touch=false, setTouch }) => {
    const [open, setOpen] = useState(touch ? true : false);
-   const animRef = useRef();
-   const buttonRef = useRef();
    const { connectionId } = useSelector((state) => state.message);
    const { user } = useSelector((state) => state.user);
+   const dispatch = useDispatch()
+   const animRef = useRef();
+   const buttonRef = useRef();
 
    // !delete message
    const handleDelete = () => {
@@ -32,6 +33,12 @@ export const MessageSettings = ({ message, align, touch=false, setTouch }) => {
          });
       }
    };
+
+   // !reply message
+   const handleReply = () => {
+      replyMessage(connectionId, message.uuid, message.message.text)
+      dispatch(setReply({connectionId, message: message.message.text, uuid: message.uuid}))
+   }
 
    // !outside click close
    useEffect(() => {
@@ -90,9 +97,9 @@ export const MessageSettings = ({ message, align, touch=false, setTouch }) => {
                <li className="flex justify-between items-center px-6 py-1.5 cursor-pointer hover:bg-[#f7f7ff] dark:hover:bg-[#36404a] dark:hover:text-[#DFE1E2]">
                   Save <i className="ri-save-line text-[#7a7f9a]"></i>
                </li>
-               <li className="flex justify-between items-center px-6 py-1.5 cursor-pointer hover:bg-[#f7f7ff] dark:hover:bg-[#36404a] dark:hover:text-[#DFE1E2]">
-                  Forward{" "}
-                  <i className="ri-chat-forward-line text-[#7a7f9a]"></i>
+               <li onClick={handleReply} className="flex justify-between items-center px-6 py-1.5 cursor-pointer hover:bg-[#f7f7ff] dark:hover:bg-[#36404a] dark:hover:text-[#DFE1E2]">
+                  Reply{" "}
+                  <i className="ri-reply-line text-[#7a7f9a]"></i>
                </li>
                <li
                   onClick={handleDelete}
