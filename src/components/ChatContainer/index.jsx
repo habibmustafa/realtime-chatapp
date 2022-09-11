@@ -76,8 +76,8 @@ const ChatContainer = () => {
    // receive messages
    return (
       <div
-         className={`chatcontainer flex-1 bg-white dark:bg-[#262E35] transition-all duration-[400ms] pr-0.5 h-full tablet:absolute tablet:z-20 tablet:w-full ${
-            !show ? "tablet:-left-full" : "tablet:left-0"
+         className={`chatcontainer flex-1 bg-white dark:bg-[#262E35] transition-all duration-[400ms] pr-0.5 h-full tablet:absolute tablet:z-20 tablet:w-full will-change-transform ${
+            !show ? "tablet:-translate-x-full" : "tablet:translate-x-0"
          }`}
       >
          {chatUser ? (
