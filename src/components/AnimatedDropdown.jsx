@@ -36,6 +36,8 @@ export const MessageSettings = ({ message, align, touch=false, setTouch }) => {
 
    // !reply message
    const handleReply = () => {
+      setOpen(false);
+      setTouch(false)
       dispatch(setReply({user: message.sender === user.uid ? user.uid : message.sender, message: message.message.text}))
    }
 
