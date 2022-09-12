@@ -78,7 +78,7 @@ const Message = (props) => {
                   >
                      {/* reply message */}
                      {message.reply && (
-                        <div className={`flex flex-col max-w-[240px] break-words px-5 py-1.5 text-[13px] transition-colors duration-[350ms] rounded-tl-xl rounded-tr-xl m-1 ${
+                        <div className={`flex flex-col break-words px-5 py-1.5 text-[13px] transition-colors duration-[350ms] rounded-tl-xl rounded-tr-xl m-1 ${
                            message.sender === chatUser.uid
                            ? "bg-[#e6e7e9] text-[#212529] dark:bg-[#2f373f] dark:text-[#eff2f7]"
                            : "bg-[#574de2] text-white"
