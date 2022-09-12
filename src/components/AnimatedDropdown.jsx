@@ -36,8 +36,7 @@ export const MessageSettings = ({ message, align, touch=false, setTouch }) => {
 
    // !reply message
    const handleReply = () => {
-      // replyMessage(connectionId, message.uuid, message.message.text)
-      dispatch(setReply({connectionId, message: message.message.text, uuid: message.uuid}))
+      dispatch(setReply({user: message.sender === user.uid ? user.uid : message.sender, message: message.message.text}))
    }
 
    // !outside click close

@@ -8,6 +8,7 @@ import Welcome from "../Welcome";
 import { uid } from "uid";
 import { setMessages } from "../../store/messageSlice";
 import Message from "./Message";
+import { setReply } from "../../store/animSlice";
 
 const ChatContainer = () => {
    const [thisMessages, setThisMessages] = useState([]);
@@ -15,7 +16,7 @@ const ChatContainer = () => {
    // const [touchShow, setTouchshow] = useState(false)
    const { user, chatUser } = useSelector((state) => state.user);
    const { messages, connectionId } = useSelector((state) => state.message);
-   const { show } = useSelector((state) => state.anim);
+   const { show, reply } = useSelector((state) => state.anim);
    const dispatch = useDispatch();
 
    // !send message
@@ -25,6 +26,7 @@ const ChatContainer = () => {
       }
       const uuid = uid();
 
+
       if (connectionId) {
          addMessage(
             connectionId,
@@ -33,9 +35,11 @@ const ChatContainer = () => {
             user.uid,
             user.username,
             chatUser.uid,
-            chatUser.username
+            chatUser.username,
+            reply
          );
       }
+      dispatch(setReply(false))
    };
 
    // !getConnection

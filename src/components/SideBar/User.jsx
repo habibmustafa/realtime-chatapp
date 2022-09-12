@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setChatUserId } from "../../store/userSlice";
 import { setConnectionId } from "../../store/messageSlice";
-import { setShow } from "../../store/animSlice";
+import { setReply, setShow } from "../../store/animSlice";
 import { ref, set } from "firebase/database";
 import { messagesDB } from "../../firebaseCongif/messagesDB";
 
@@ -16,6 +16,7 @@ const User = ({ cUser }) => {
    const handleClick = () => {
       dispatch(setShow(true));
       dispatch(setChatUserId(cUser.uid));
+      dispatch(setReply(false))
 
       let id = null;
       if (user.uid < cUser.uid) {

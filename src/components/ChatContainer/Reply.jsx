@@ -5,6 +5,10 @@ const Reply = () => {
    const { reply } = useSelector((state) => state.anim);
    const dispatch = useDispatch();
 
+   const handleReply = () => {
+      dispatch(setReply(false));
+   }
+
    return (
       <div
          className={`w-full px-6 py-3 tablet:px-2.5 tablet:py-2 bg-[#E6EBF5] dark:bg-[#36404A] text-[#212529] dark:text-[#eff2f7] flex items-center justify-between transition-all duration-300 relative ${
@@ -20,10 +24,7 @@ const Reply = () => {
             <div className="">{reply.message}</div>
          </div>
          <div
-            onClick={() => {
-               // replyMessage(reply.connectionId, reply.uuid);
-               dispatch(setReply(false));
-            }}
+            onClick={handleReply}
             className="text-xl cursor-pointer mr-4 tablet:mr-2.5"
          >
             <i className="ri-close-line"></i>

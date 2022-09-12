@@ -70,24 +70,40 @@ const Message = (props) => {
                   {/* text content */}
                   <div
                      tabIndex="14"
-                     className={`relative px-5 py-1.5 rounded-xl min-w-[90px] max-w-lg flex flex-col transition-colors duration-300 select-none ${
+                     className={`relative rounded-xl min-w-[90px] max-w-lg flex flex-col transition-colors duration-300 select-none ${
                         message.sender === chatUser.uid
-                           ? "items-end bg-[#f5f7fb] text-[#212529] dark:bg-[#36404a] dark:text-[#eff2f7] rounded-bl-none active:bg-[#d9dee2] dark:active:bg-[#212529]"
-                           : "bg-[#7269ef] text-white items-start rounded-br-none active:bg-[#383199]"
+                           ? "bg-[#f5f7fb] text-[#212529] dark:bg-[#36404a] dark:text-[#eff2f7] rounded-bl-none active:bg-[#d9dee2] dark:active:bg-[#212529]"
+                           : "bg-[#7269ef] text-white rounded-br-none active:bg-[#383199]"
                      } ${touchShow && "opacity-70"}`}
                   >
-                     {/* <p className="bg-red-200 text-[15px] leading-6 font-medium break-all mb-2">aa</p> */}
-                     <p className="text-[15px] leading-6 font-medium break-all">
-                        {message.message.text}
-                     </p>
-                     <span
-                        className={`w-full text-[#ffffff80] dark:text-[#B9B4F7] text-xs leading-[18px] ${
-                           message.sender === chatUser.uid &&
-                           "!text-[#7a7f9a] dark:text-[#abb4d2] text-right"
-                        }`}
+                     {/* reply message */}
+                     {message.reply && (
+                        <div className={`flex flex-col max-w-[240px] break-words px-5 py-1.5 text-[13px] transition-colors duration-[350ms] rounded-tl-xl rounded-tr-xl m-1 ${
+                           message.sender === chatUser.uid
+                           ? "bg-[#e6e7e9] text-[#212529] dark:bg-[#2f373f] dark:text-[#eff2f7]"
+                           : "bg-[#574de2] text-white"
+                        }`}>
+                           <p className={`text-green-500 font-semibold ${message.reply.user === chatUser.uid && "!text-orange-500"}`}>{message.reply.user === chatUser.uid ? chatUser.username : "You"}</p>
+                           <p>{message.reply.message}</p>
+                        </div>
+                     )}
+
+                     {/* message text */}
+                     <div
+                        className={`px-5 py-1.5 w-full flex flex-col`}
                      >
-                        {message.time.substring(16, 21)}
-                     </span>
+                        <p className={`text-[15px] leading-6 font-medium break-all`}>
+                           {message.message.text}
+                        </p>
+                        <span
+                           className={`w-full text-left text-[#ffffff80] dark:text-[#B9B4F7] text-xs inline-block leading-[18px] ${
+                              message.sender === chatUser.uid &&
+                              "!text-[#7a7f9a] dark:text-[#abb4d2] text-right"
+                           }`}
+                        >
+                           {message.time.substring(16, 21)}
+                        </span>
+                     </div>
                   </div>
 
                   {/* touch dropdown show-hidden */}

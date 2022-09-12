@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import Picker from "emoji-picker-react";
 import { useDispatch, useSelector } from "react-redux";
-import { setReply, setShowEmoji } from "../../store/animSlice";
+import { setShowEmoji } from "../../store/animSlice";
 import Reply from "./Reply";
 
 const ChatInput = ({ sendMessage }) => {
@@ -20,10 +20,6 @@ const ChatInput = ({ sendMessage }) => {
       if (sendValue) {
          sendMessage(value);
          setValue("");
-
-         // !reply reset
-         // replyMessage(reply.connectionId, reply.uuid)
-         dispatch(setReply(false))
       }
    };
 
@@ -52,7 +48,10 @@ const ChatInput = ({ sendMessage }) => {
 
    return (
       <>
+         {/* Reply message */}
          <Reply />
+
+         {/* Chat input */}
          <div className="relative bg-white dark:bg-[#262E35] transition-colors duration-[400ms]">
             <form
                onSubmit={handleSubmit}
