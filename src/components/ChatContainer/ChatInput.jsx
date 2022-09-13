@@ -3,14 +3,17 @@ import Picker from "emoji-picker-react";
 import { useDispatch, useSelector } from "react-redux";
 import { setShowEmoji } from "../../store/animSlice";
 import Reply from "./Reply";
+import { setImage } from "../../store/messageSlice";
 
 const ChatInput = ({ sendMessage }) => {
    const [value, setValue] = useState("");
    const { showEmoji } = useSelector((state) => state.anim);
+   const { image } = useSelector((state) => state.message);
    const dispatch = useDispatch();
    const emojiRef = useRef();
    const buttonRef = useRef();
    const inputRef = useRef();
+   const inputFile = useRef(null);
 
    // !send message
    const handleSubmit = (e) => {
@@ -27,6 +30,20 @@ const ChatInput = ({ sendMessage }) => {
    const onEmojiClick = (event, emojiObject) => {
       setValue((prev) => prev + emojiObject.emoji);
    };
+
+   // !file upload
+   const handleFileUpload = (e) => {
+      const { files } = e.target;
+      if (files && files.length) {
+         const filename = files[0].name;
+
+         var parts = filename.split(".");
+         const fileType = parts[parts.length - 1];
+         console.log("fileType", fileType); //ex: zip, rar, jpg, svg etc.
+         dispatch(setImage(files[0]))
+      }
+   };
+   console.log(image)
 
    // !outside close emoji
    useEffect(() => {
@@ -77,11 +94,29 @@ const ChatInput = ({ sendMessage }) => {
                      }}
                      ref={buttonRef}
                      type="button"
-                     className={`send w-[55px] h-[45px] rounded-[6.4px] bg-transparent overflow-hidden text-[#6159cb] leading-6 py-2 px-4 tablet:px-3 tablet:py-2 tablet:w-11 tablet:h-10 ${
+                     className={`send w-[55px] h-[45px] rounded-[6.4px] bg-transparent overflow-hidden text-[#6159cb] leading-6  tablet:w-9 tablet:h-10 ${
                         showEmoji && "border-2 border-[#7269ef]"
                      }`}
                   >
-                     <i className="ri-emotion-happy-line block scale-125"></i>
+                     <i className="ri-emotion-happy-line block scale-125 tablet:scale-100"></i>
+                  </button>
+
+                  {/* not show */}
+                  <input
+                     style={{ display: "none" }}
+                     accept=".img,.jpg, .jpeg"
+                     ref={inputFile}
+                     onChange={handleFileUpload}
+                     type="file"
+                  />
+                  <button
+                     onClick={() => {
+                        inputFile.current.click();
+                     }}
+                     type="button"
+                     className={`send w-[45px] h-[40px] rounded-[6.4px] bg-transparent overflow-hidden text-[#6159cb] leading-6 mr-2 tablet:w-9 tablet:h-10`}
+                  >
+                     <i className="ri-image-fill block scale-125 tablet:scale-100"></i>
                   </button>
                   <button
                      type="submit"
@@ -96,7 +131,7 @@ const ChatInput = ({ sendMessage }) => {
             {showEmoji && (
                <div
                   ref={emojiRef}
-                  className="absolute bottom-14 right-36 box-shadow rounded-xl tablet:relative tablet:w-full tablet:bottom-0 tablet:left-0"
+                  className="absolute bottom-20 right-40 box-shadow rounded-xl tablet:relative tablet:w-full tablet:bottom-0 tablet:left-0"
                >
                   <Picker onEmojiClick={onEmojiClick} disableSearchBar={true} />
                </div>

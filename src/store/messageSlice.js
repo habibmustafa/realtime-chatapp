@@ -3,6 +3,7 @@ const { createSlice } = require("@reduxjs/toolkit");
 const initialState = {
    messages: [],
    connectionId: "",
+   image: "",
 };
 
 const messageSlice = createSlice({
@@ -15,8 +16,11 @@ const messageSlice = createSlice({
       setConnectionId: (state, action) => {
          state.connectionId = action.payload;
       },
+      setImage: (state, action) => {
+         state.image = action.payload;
+      },
    },
 });
 
-export const { setMessages, setConnectionId } = messageSlice.actions;
+export const { setMessages, setConnectionId, setImage } = messageSlice.actions;
 export default messageSlice.reducer;
