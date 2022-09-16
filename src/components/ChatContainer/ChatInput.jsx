@@ -8,7 +8,7 @@ import { setImage } from "../../store/messageSlice";
 const ChatInput = ({ sendMessage }) => {
    const [value, setValue] = useState("");
    const { showEmoji } = useSelector((state) => state.anim);
-   const { image } = useSelector((state) => state.message);
+   // const { image } = useSelector((state) => state.message);
    const dispatch = useDispatch();
    const emojiRef = useRef();
    const buttonRef = useRef();
@@ -43,7 +43,6 @@ const ChatInput = ({ sendMessage }) => {
          dispatch(setImage(files[0]))
       }
    };
-   console.log(image)
 
    // !outside close emoji
    useEffect(() => {
