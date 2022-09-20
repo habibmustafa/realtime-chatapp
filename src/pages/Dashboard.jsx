@@ -84,6 +84,21 @@ const Dashboard = () => {
       };
    }, [user]);
 
+   // !geolocation
+   useEffect(() => {
+      if (navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(successFunction, (err) => {
+            console.log(err);
+         });
+      }
+      //Get latitude and longitude;
+      function successFunction(position) {
+         let lat = position.coords.latitude;
+         let long = position.coords.longitude;
+         console.log(lat, long);
+      }
+   }, []);
+
    return (
       <div className="chat flex h-full min-w-[280px] relative tablet:w-full">
          <SideBar />

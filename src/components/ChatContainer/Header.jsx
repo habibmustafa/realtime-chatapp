@@ -73,7 +73,12 @@ const Header = ({ searchMessage }) => {
 
             {/* username and status */}
             <div className="flex flex-col w-full">
-               <p className="cursor-pointer relative font-semibold leading-5 tracking-wide">
+               <p
+                  onClick={() => {
+                     dispatch(setViewProfile(true));
+                  }}
+                  className="cursor-pointer relative font-semibold leading-5 w-max tracking-wide"
+               >
                   {chatUser?.username}
                   {chatUser?.admin && (
                      <span className="text-[9px] text-[#06d6a0] absolute -top-1 ml-[1px]">
@@ -99,7 +104,6 @@ const Header = ({ searchMessage }) => {
 
          {/* right icons */}
          <div className="text-xl relative text-[#7a7f9a] dark:text-[#abb4d2] transition-colors duration-[350ms] text-center flex items-end gap-2">
-            
             {/* search button */}
             <button
                ref={buttonRef}
