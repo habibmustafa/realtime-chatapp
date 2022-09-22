@@ -80,9 +80,11 @@ const User = ({ cUser }) => {
                </p>
             </div>
          </div>
-         <div className="text-[11px] leading-4 h-full flex flex-col  justify-start items-center gap-0.5 w-10">
+         <div className="text-[11px] leading-4 h-full flex flex-col justify-start items-center gap-0.5 w-18">
             <span className="dark:text-[#abb4d2] transition-colors duration-300">
-               {cUser.time.substring(16, 21)}
+               {/* {cUser.time.substring(16, 21)} */}
+               {new Date().toString().substring(4, 15) ===
+                  cUser.time.substring(4, 15) ? cUser.time.substring(16, 21) : cUser.time.substring(4, 15)}
             </span>
             {!cUser.seen && cUser.sender !== user.uid ? (
                <span className="w-[18px] h-[21px] bg-[#ef476f2e] text-[#ef476f] text-[10px] rounded-[800px] font-semibold leading-4 py-[2.5px] px-1.5 text-center">
